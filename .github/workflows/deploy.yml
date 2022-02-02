@@ -1,4 +1,4 @@
-name: Unit Test
+name: Deploy
 
 on:
   workflow_call:
@@ -7,12 +7,22 @@ on:
         default: "16"
         required: false
         type: string
+    secrets:
+      aws_access_key_id:
+        required: true
+      aws_secret_access_key:
+        required: true
 
 jobs:
-  test:
+  deploy:
     runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.aws_access_key_id }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.aws_secret_access_key }}
     steps:
       - uses: actions/checkout@v2
+
+      - uses: hashicorp/setup-terraform@v1
 
       - name: Set up Node.JS
         uses: actions/setup-node@v2
@@ -29,5 +39,9 @@ jobs:
           name: packages
           path: packages
 
-      - name: Test packages
-        run: npm t
+      - name: Apply terraform
+        working-directory: packages/terraform/production
+        run: |
+          terraform init
+          terraform apply \
+            -auto-approve

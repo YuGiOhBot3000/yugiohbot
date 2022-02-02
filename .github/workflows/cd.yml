@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: Continuous Deployment
 
 on:
   push:
@@ -17,3 +17,9 @@ jobs:
   unit:
     needs: build
     uses: YuGiOhBot3000/yugiohbot/.github/workflows/unit-test.yml@main
+  deploy:
+    needs: [lint, unit]
+    uses: YuGiOhBot3000/yugiohbot/.github/workflows/deploy.yml@main
+    secrets:
+      aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
