@@ -1,0 +1,31 @@
+{
+  "name": "yugiohbot",
+  "version": "1.0.0",
+  "description": "Posts randomly generated cards to Facebook every hour",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "npm t --workspaces --if-present"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YuGiOhBot3000/yugiohbot.git"
+  },
+  "keywords": [
+    "yugioh",
+    "facebook",
+    "bot",
+    "card",
+    "AI"
+  ],
+  "author": "Miles Bardon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YuGiOhBot3000/yugiohbot/issues"
+  },
+  "homepage": "https://github.com/YuGiOhBot3000/yugiohbot#readme",
+  "devDependencies": {
+    "@tsconfig/node14": "^1.0.1"
+  }
+}
