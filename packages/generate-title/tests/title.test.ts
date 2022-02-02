@@ -1,35 +1,13 @@
-import { createTitle, parseTitles } from "../src/title";
+import { createTitle } from "../src/title";
 
 const warnSpy = jest.spyOn(console, "warn").mockImplementation(jest.fn());
 
 describe("Title", () => {
-  const mockTitles = [
-    "dark magician",
-    "blue eyes white dragon",
-    "pot of greed",
-    "dark magician 2",
-  ];
+  const nouns = ["magician", "eyes", "dragon", "pot"];
+  const adjectives = ["dark", "blue", "white"];
 
   beforeEach(() => {
     jest.clearAllMocks();
-  });
-
-  describe("parseTitles", () => {
-    it("should return lists of nouns and adjectives", () => {
-      const { nouns, adjectives } = parseTitles(mockTitles);
-
-      expect(nouns).toEqual(["magician", "eyes", "dragon", "pot"]);
-      expect(adjectives).toEqual(["dark", "blue", "white"]);
-    });
-
-    describe("given the titles list is empty", () => {
-      it("should return empty lists of nouns and adjectives", () => {
-        const { nouns, adjectives } = parseTitles([]);
-
-        expect(nouns).toEqual([]);
-        expect(adjectives).toEqual([]);
-      });
-    });
   });
 
   describe("createTitle", () => {
@@ -43,9 +21,6 @@ describe("Title", () => {
       });
 
       it("should return a random title", () => {
-        const nouns = ["magician", "eyes", "dragon", "pot"];
-        const adjectives = ["dark", "blue", "white"];
-
         const result = createTitle({ nouns, adjectives });
 
         expect(result).toEqual("eyes");
@@ -66,9 +41,6 @@ describe("Title", () => {
       });
 
       it("should return a random title with a connecting word", () => {
-        const nouns = ["magician", "eyes", "dragon", "pot"];
-        const adjectives = ["dark", "blue", "white"];
-
         const result = createTitle({ nouns, adjectives });
 
         expect(result).toEqual("blue magician of dragon");
