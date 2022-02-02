@@ -10,10 +10,10 @@ on:
 
 jobs:
   build:
-    uses: yugiohbot3000/yugiohbot/.github/workflows/build.yml@main
+    uses: YuGiOhBot3000/yugiohbot/.github/workflows/build.yml@main
   lint:
     needs: build
-    uses: yugiohbot3000/yugiohbot/.github/workflows/lint.yml@main
+    uses: YuGiOhBot3000/yugiohbot/.github/workflows/lint.yml@main
   unit:
     needs: build
-    uses: yugiohbot3000/yugiohbot/.github/workflows/unit-test.yml@main
+    uses: YuGiOhBot3000/yugiohbot/.github/workflows/unit-test.yml@main
