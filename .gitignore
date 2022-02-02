@@ -2,3 +2,7 @@ node_modules
 dist
 
 *.csv
+
+.terraform
+*.tfstate*
+*.zip

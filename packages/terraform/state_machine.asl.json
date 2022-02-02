@@ -1,0 +1,20 @@
+{
+  "StartAt": "Generate Title",
+  "States": {
+    "Generate Title": {
+      "Type": "Task",
+      "Resource": "${generateTitleArn}",
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "Failure"
+        }
+      ],
+      "End": true
+    },
+    "Failure": {
+      "Type": "Fail",
+      "Cause": "An invalid command was entered"
+    }
+  }
+}
