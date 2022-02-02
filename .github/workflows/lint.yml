@@ -1,0 +1,27 @@
+name: Lint
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        default: "16"
+        required: false
+        type: string
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.JS
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: npm
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Lint packages
+        run: npm run lint

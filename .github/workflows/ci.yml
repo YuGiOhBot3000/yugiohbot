@@ -1,0 +1,19 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "packages/**"
+      - ".github/workflows/**"
+
+jobs:
+  build:
+    uses: yugiohbot3000/yugiohbot/.github/workflows/build.yml@main
+  lint:
+    needs: build
+    uses: yugiohbot3000/yugiohbot/.github/workflows/lint.yml@main
+  unit:
+    needs: build
+    uses: yugiohbot3000/yugiohbot/.github/workflows/unit-test.yml@main
