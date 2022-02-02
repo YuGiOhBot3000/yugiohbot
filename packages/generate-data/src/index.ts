@@ -8,8 +8,9 @@ const generate = async (arg: string) => {
     const names = (await sendRequest()).map(({ name }) => name);
     const { nouns, adjectives } = parseTitles(names);
 
-    fs.writeFileSync("nouns.csv", nouns.join(",\n"));
-    fs.writeFileSync("adjectives.csv", adjectives.join(",\n"));
+    fs.mkdirSync("../../data", { recursive: true });
+    fs.writeFileSync("../../data/nouns.csv", nouns.join(",\n"));
+    fs.writeFileSync("../../data/adjectives.csv", adjectives.join(",\n"));
   }
 };
 
