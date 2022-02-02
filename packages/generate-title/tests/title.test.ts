@@ -5,6 +5,7 @@ describe("Title", () => {
     "dark magician",
     "blue eyes white dragon",
     "pot of greed",
+    "dark magician 2",
   ];
 
   describe("parseTitles", () => {

@@ -4,6 +4,8 @@
   "description": "Generates a random card title",
   "main": "dist/index.js",
   "scripts": {
+    "build": "webpack",
+    "lint": "eslint ./src/**/*",
     "test": "jest"
   },
   "repository": {

@@ -13,7 +13,7 @@ export const parseTitles = (titles: string[]): TitleParts => {
   const ruleSet = new RuleSet(LANGUAGE);
   const tagger = new BrillPOSTagger(lexicon, ruleSet);
 
-  return titles.reduce(
+  const titleParts = titles.reduce(
     ({ nouns, adjectives }, current) => {
       const { taggedWords } = tagger.tag(current.split(" "));
 
@@ -31,4 +31,9 @@ export const parseTitles = (titles: string[]): TitleParts => {
     },
     { nouns: [], adjectives: [] } as TitleParts
   );
+
+  return {
+    nouns: [...new Set(titleParts.nouns)],
+    adjectives: [...new Set(titleParts.adjectives)],
+  };
 };
