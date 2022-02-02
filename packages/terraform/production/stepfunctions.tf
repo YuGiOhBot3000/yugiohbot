@@ -1,5 +1,5 @@
 resource "aws_iam_role" "iam_for_sfn" {
-  name = "iam_for_sfn"
+  name = "${var.app_name}-sfn-iam"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",

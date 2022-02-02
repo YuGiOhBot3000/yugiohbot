@@ -2,6 +2,7 @@ import fs from "fs";
 
 import { createTitle } from "../src/title";
 import { handler } from "../src/index";
+import { Context } from "aws-lambda";
 
 jest.mock("fs");
 jest.mock("../src/title");
@@ -33,7 +34,10 @@ describe("Handler", () => {
   });
 
   it("should return a created title", () => {
-    expect(handler()).toEqual("mockTitle");
+    const callback = jest.fn();
+    handler({}, {} as Context, callback);
+
+    expect(callback).toBeCalledWith(null, "mockTitle");
     expect(mockCreateTitle).toBeCalledWith({
       nouns: ["noun1", "noun2", "noun3"],
       adjectives: ["adj1", "adj2", "adj3"],
