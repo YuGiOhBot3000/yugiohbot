@@ -12,6 +12,8 @@ on:
         required: true
       aws_secret_access_key:
         required: true
+      openai_api_key:
+        required: true
 
 jobs:
   deploy:
@@ -44,4 +46,5 @@ jobs:
         run: |
           terraform init
           terraform apply \
+            -var="openai_api_key=${{ secrets.openai_api_key }}" \
             -auto-approve
