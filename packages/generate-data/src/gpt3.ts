@@ -26,6 +26,7 @@ export const generateDescriptions = async (
     cards[i].forEach(({ desc }) =>
       stream.write(
         `{"prompt":"${type} ->","completion":" ${desc
+          .replace(/\\/gm, "\\\\")
           .replace(/(\r\n|\n|\r)/gm, "")
           .replace(/"/gm, "'")}\\n"}\n`
       )
