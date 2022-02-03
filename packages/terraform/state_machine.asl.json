@@ -1,15 +1,46 @@
 {
-  "StartAt": "Generate Title",
+  "StartAt": "Generate Data",
   "States": {
-    "Generate Title": {
-      "Type": "Task",
-      "Resource": "${generateTitleArn}",
+    "Generate Data": {
+      "Type": "Parallel",
+      "Branches": [
+        {
+          "StartAt": "Generate Title",
+          "States": {
+            "Generate Title": {
+              "Type": "Task",
+              "Resource": "${generateTitleArn}",
+              "ResultPath": "$.title",
+              "End": true
+            }
+          }
+        },
+        {
+          "StartAt": "Generate Text",
+          "States": {
+            "Generate Text": {
+              "Type": "Task",
+              "Resource": "${generateTextArn}",
+              "End": true
+            }
+          }
+        }
+      ],
+      "Next": "Combine Data",
       "Catch": [
         {
           "ErrorEquals": ["States.ALL"],
           "Next": "Failure"
         }
-      ],
+      ]
+    },
+    "Combine Data": {
+      "Type": "Pass",
+      "Parameters": {
+        "title.$": "$[0].title",
+        "text.$": "$[1].text",
+        "cardType.$": "$[1].cardType"
+      },
       "End": true
     },
     "Failure": {

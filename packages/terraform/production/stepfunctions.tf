@@ -26,7 +26,8 @@ resource "aws_iam_role" "iam_for_sfn" {
           ]
           Effect = "Allow"
           Resource = [
-            "${module.generate_title_lambda.lambda_arn}"
+            "${module.generate_title_lambda.lambda_arn}",
+            "${module.generate_text_lambda.lambda_arn}"
           ]
         },
       ]
@@ -38,6 +39,7 @@ data "template_file" "definition" {
   template = file("${path.module}/../state_machine.asl.json")
   vars = {
     generateTitleArn = module.generate_title_lambda.lambda_arn
+    generateTextArn  = module.generate_text_lambda.lambda_arn
   }
 }
 
