@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "One-time functions for generating bot data",
   "main": "dist/index.js",
-  "type": "module",
   "dependencies": {
     "axios": "^0.25.0",
-    "natural": "^5.1.13"
+    "natural": "^5.1.13",
+    "openai": "^2.0.2"
   },
   "devDependencies": {
     "@babel/preset-env": "7.16.11",
@@ -27,6 +27,7 @@
   },
   "scripts": {
     "build": "tsc",
+    "generate:gpt3": "node . gpt3",
     "generate:title": "node . title",
     "lint": "eslint ./src/**/*",
     "test": "jest"
