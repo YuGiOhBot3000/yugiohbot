@@ -45,7 +45,7 @@ export const createFineTune = async (uploadFilename: string) => {
   const {
     data: { filename },
   } = await openai.createFile(
-    `../../data/${uploadFilename}.jsonl`,
+    fs.createReadStream(`../../data/${uploadFilename}.jsonl`),
     "fine-tune"
   );
 

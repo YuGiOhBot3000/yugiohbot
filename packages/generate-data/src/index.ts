@@ -31,11 +31,11 @@ const generate = async (arg: string) => {
       generateDescriptions(CARDS, "card", "cards"),
     ]);
 
-    // await Promise.all([
-    //   createFineTune("monsters"),
-    //   // createFineTune("effects"),
-    //   // createFineTune("cards"),
-    // ]);
+    await Promise.all([
+      createFineTune("monsters"),
+      createFineTune("effects"),
+      createFineTune("cards"),
+    ]);
   }
 };
 
