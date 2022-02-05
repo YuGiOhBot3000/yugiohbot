@@ -1,0 +1,13 @@
+name: PR Checks
+
+on: pull_request
+
+jobs:
+  build:
+    uses: YuGiOhBot3000/yugiohbot/.github/workflows/build.yml@main
+  lint:
+    needs: build
+    uses: YuGiOhBot3000/yugiohbot/.github/workflows/lint.yml@main
+  unit:
+    needs: build
+    uses: YuGiOhBot3000/yugiohbot/.github/workflows/unit-test.yml@main
