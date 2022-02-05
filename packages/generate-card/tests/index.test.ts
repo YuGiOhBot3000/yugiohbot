@@ -7,11 +7,12 @@ import { Attribute, Event, Layout, Rarities } from "../src/types";
 describe("Handler", () => {
   const event = {
     name: "Cardy McCardface",
+    level: 12,
     image:
       "https://static.wikia.nocookie.net/vsbattles/images/d/d4/Blue_Eyes.png",
-    layout: Layout.DARK_SYNCHRO,
+    layout: Layout.NORMAL,
     pendulum: { enabled: false },
-    rarity: Rarities.RARE,
+    rarity: Rarities.COMMON,
     attribute: Attribute.LIGHT,
   } as Event;
   const context = {} as Context;

@@ -24,6 +24,27 @@ export const ATTRIBUTE_STYLE = {
   height: 40,
 };
 
+export const MAX_LEVEL = 12;
+
+export const STAR_STYLES = {
+  level1: {
+    left: 43, // (420 - width) / 2
+    top: 73, // Measured from the image.
+
+    width: 28, // Width of a star.
+    height: 28, // Height of a star.
+    maxWidth: 334, // Max width of the total number of stars.
+  },
+  level12: {
+    left: 35, // (420 - width) / 2
+    top: 73, // Measured from the image.
+
+    width: 28, // Width of a star.
+    height: 28, // Height of a star.
+    maxWidth: 350, // Max width of the total number of stars.
+  },
+};
+
 export const CARD_NAME_STYLES = {
   regular: {
     fontFamily: "Matrix Regular Small Caps",

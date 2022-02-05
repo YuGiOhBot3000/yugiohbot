@@ -1,14 +1,15 @@
 import { Handler } from "aws-lambda";
 import { createCanvas, registerFont } from "canvas";
+
 import { applyAttribute } from "./attribute";
 import { applyBorder } from "./border";
 import { applyCardName } from "./cardName";
 import { CARD_WIDTH, CARD_HEIGHT } from "./constants";
 import { applyImage } from "./image";
+import { applyLevel } from "./level";
+import { Event } from "./types";
 
-import { Event, Layout } from "./types";
-
-export const handler: Handler<Event> = async (event, _context, callback) => {
+export const handler: Handler<Event> = async (event) => {
   registerFont("assets/fonts/MatrixRegularSmallCaps.ttf", {
     family: "Matrix Regular Small Caps",
   });
@@ -40,6 +41,12 @@ export const handler: Handler<Event> = async (event, _context, callback) => {
   await applyAttribute({
     context,
     attribute: event.attribute,
+    layout: event.layout,
+  });
+
+  await applyLevel({
+    context,
+    level: event.level,
     layout: event.layout,
   });
 
