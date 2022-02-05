@@ -47,8 +47,8 @@ export const CARD_NAME_STYLES = {
 };
 
 export const CARD_NAME_COLORS = {
-  default: { highlight: { color: "transparent" }, base: { color: "#000" } },
-  white: { highlight: { color: "transparent" }, base: { color: "#fff" } },
+  default: { highlight: { color: "transparent" }, base: { color: "#000000" } },
+  white: { highlight: { color: "transparent" }, base: { color: "#ffffff" } },
   silver: { highlight: { color: "#b6b6b6" }, base: { color: "#1e1e1e" } },
   gold: { highlight: { color: "#d3b146" }, base: { color: "#4e3518" } },
 };
