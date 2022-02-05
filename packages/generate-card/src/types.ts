@@ -17,15 +17,16 @@ export type Link = {
 };
 
 export enum Attribute {
-  DARK,
-  DIVINE,
-  EARTH,
-  FIRE,
-  LIGHT,
-  WATER,
-  WIND,
-  SPELL,
-  TRAP,
+  NONE = "None",
+  DARK = "Dark",
+  DIVINE = "Divine",
+  EARTH = "Earth",
+  FIRE = "Fire",
+  LIGHT = "Light",
+  WATER = "Water",
+  WIND = "Wind",
+  SPELL = "Spell",
+  TRAP = "Trap",
 }
 
 export enum Layout {
@@ -61,7 +62,7 @@ export type Event = {
   def?: number;
   serial?: string;
   copyright?: "© 1993 YEMACHU";
-  attribute?: Attribute;
+  attribute: Attribute;
   id?: string;
   pendulum: Pendulum;
   link?: Link;

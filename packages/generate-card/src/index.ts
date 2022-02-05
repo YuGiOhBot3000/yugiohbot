@@ -1,5 +1,6 @@
 import { Handler } from "aws-lambda";
 import { createCanvas, registerFont } from "canvas";
+import { applyAttribute } from "./attribute";
 import { applyBorder } from "./border";
 import { applyCardName } from "./cardName";
 import { CARD_WIDTH, CARD_HEIGHT } from "./constants";
@@ -29,11 +30,16 @@ export const handler: Handler<Event> = async (event, _context, callback) => {
     rarity: event.rarity,
   });
 
-  await applyCardName({
+  applyCardName({
     context,
     name: event.name,
     type: event.layout === Layout.SKILL ? "skill" : "regular",
     rarity: event.rarity,
+  });
+
+  await applyAttribute({
+    context,
+    attribute: event.attribute,
   });
 
   return canvas.toBuffer();

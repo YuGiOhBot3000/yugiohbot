@@ -17,6 +17,13 @@ export const STYLES = {
   },
 };
 
+export const ATTRIBUTE_STYLE = {
+  left: 350,
+  top: 28,
+  width: 40,
+  height: 40,
+};
+
 export const CARD_NAME_STYLES = {
   regular: {
     fontFamily: "Matrix Regular Small Caps",
