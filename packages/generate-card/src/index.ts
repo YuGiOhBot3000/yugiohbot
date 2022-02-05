@@ -1,12 +1,18 @@
 import { Handler } from "aws-lambda";
-import { createCanvas } from "canvas";
+import { createCanvas, registerFont } from "canvas";
 import { applyBorder } from "./border";
+import { applyCardName } from "./cardName";
 import { CARD_WIDTH, CARD_HEIGHT } from "./constants";
 import { applyImage } from "./image";
 
-import { Event } from "./types";
+import { Event, Layout } from "./types";
 
 export const handler: Handler<Event> = async (event, _context, callback) => {
+  registerFont("assets/fonts/MatrixRegularSmallCaps.ttf", {
+    family: "Matrix Regular Small Caps",
+  });
+  registerFont("assets/fonts/Heebo.ttf", { family: "Heebo" });
+
   const canvas = createCanvas(CARD_WIDTH, CARD_HEIGHT);
   const context = canvas.getContext("2d");
 
@@ -20,6 +26,13 @@ export const handler: Handler<Event> = async (event, _context, callback) => {
     context,
     filename: event.image,
     pendulum: event.pendulum.enabled,
+    rarity: event.rarity,
+  });
+
+  await applyCardName({
+    context,
+    name: event.name,
+    type: event.layout === Layout.SKILL ? "skill" : "regular",
     rarity: event.rarity,
   });
 

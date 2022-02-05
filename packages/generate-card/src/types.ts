@@ -52,7 +52,7 @@ export enum Rarities {
 }
 
 export type Event = {
-  name?: string;
+  name: string;
   image: string;
   level?: number;
   type?: string;

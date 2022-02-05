@@ -1,7 +1,7 @@
 import canvas, { createCanvas, Image } from "canvas";
 
 import { CARD_WIDTH, CARD_HEIGHT, STYLES } from "../src/constants";
-import { Layout, Rarities } from "../src/types";
+import { Rarities } from "../src/types";
 
 import { applyImage } from "../src/image";
 
