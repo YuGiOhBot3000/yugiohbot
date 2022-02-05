@@ -165,3 +165,13 @@ export const EFFECT_STYLES = {
     height: 95,
   },
 };
+
+export const STAT_STYLES = {
+  fontFamily: "Crimson Text",
+  fontSize: 18,
+
+  atkLeft: 300,
+  defLeft: 385,
+  top: 551,
+  width: 40,
+};

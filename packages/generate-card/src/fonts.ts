@@ -19,4 +19,7 @@ export const registerFonts = () => {
   registerFont("assets/fonts/Spectral-Regular.ttf", {
     family: "Spectral",
   });
+  registerFont("assets/fonts/CrimsonPro.ttf", {
+    family: "Crimson Text",
+  });
 };

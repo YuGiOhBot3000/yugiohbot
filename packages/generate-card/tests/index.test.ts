@@ -8,6 +8,8 @@ describe("Handler", () => {
   const event = {
     name: "Cardy McCardface",
     level: 12,
+    atk: 1240,
+    def: 1899,
     image:
       "https://static.wikia.nocookie.net/vsbattles/images/d/d4/Blue_Eyes.png",
     layout: Layout.NORMAL,

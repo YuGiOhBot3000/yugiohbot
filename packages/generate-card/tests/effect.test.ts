@@ -1,12 +1,7 @@
-import canvas, { createCanvas, Image } from "canvas";
+import { createCanvas } from "canvas";
 
-import {
-  CARD_HEIGHT,
-  CARD_WIDTH,
-  ATTRIBUTE_STYLE,
-  EFFECT_STYLES,
-} from "../src/constants";
-import { Attribute, Layout } from "../src/types";
+import { CARD_HEIGHT, CARD_WIDTH, EFFECT_STYLES } from "../src/constants";
+import { Layout } from "../src/types";
 
 import { applyEffect } from "../src/effect";
 

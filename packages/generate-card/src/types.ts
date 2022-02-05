@@ -69,8 +69,8 @@ export type Event = {
   type: string;
   icon: Icon;
   effect: string;
-  atk?: number;
-  def?: number;
+  atk: number;
+  def: number;
   serial?: string;
   copyright?: "© 1993 YEMACHU";
   attribute: Attribute;
