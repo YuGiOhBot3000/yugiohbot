@@ -2,6 +2,7 @@ import { Handler } from "aws-lambda";
 import { createCanvas } from "canvas";
 import { applyBorder } from "./border";
 import { CARD_WIDTH, CARD_HEIGHT } from "./constants";
+import { applyImage } from "./image";
 
 import { Event } from "./types";
 
@@ -13,6 +14,13 @@ export const handler: Handler<Event> = async (event, _context, callback) => {
     context,
     layout: event.layout,
     pendulum: event.pendulum.enabled,
+  });
+
+  await applyImage({
+    context,
+    filename: event.image,
+    pendulum: event.pendulum.enabled,
+    rarity: event.rarity,
   });
 
   return canvas.toBuffer();

@@ -44,8 +44,16 @@ export enum Layout {
   UNITY = "Unity",
 }
 
+export enum Rarities {
+  COMMON = "Common",
+  RARE = "Rare",
+  ULTRA = "Ultra",
+  SECRET = "Secret",
+}
+
 export type Event = {
   name?: string;
+  image: string;
   level?: number;
   type?: string;
   effect?: string;
@@ -58,4 +66,5 @@ export type Event = {
   pendulum: Pendulum;
   link?: Link;
   layout: Layout;
+  rarity: Rarities;
 };

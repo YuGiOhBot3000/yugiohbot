@@ -1,7 +1,9 @@
 import canvas, { createCanvas, Image } from "canvas";
-import { applyBorder } from "../src/border";
+
 import { CARD_HEIGHT, CARD_WIDTH } from "../src/constants";
 import { Layout } from "../src/types";
+
+import { applyBorder } from "../src/border";
 
 describe("Border", () => {
   describe("applyBorder", () => {

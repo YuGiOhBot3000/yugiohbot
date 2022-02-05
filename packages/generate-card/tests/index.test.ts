@@ -2,12 +2,14 @@ import { Context } from "aws-lambda";
 import fs from "fs";
 
 import { handler } from "../src/index";
-import { Event, Layout } from "../src/types";
+import { Event, Layout, Rarities } from "../src/types";
 
 describe("Handler", () => {
   const event = {
-    layout: Layout.SPELL,
+    image: "https://ygoprodeck.com/pics/89631139.jpg",
+    layout: Layout.NORMAL,
     pendulum: { enabled: false },
+    rarity: Rarities.ULTRA,
   } as Event;
   const context = {} as Context;
   const callback = jest.fn();
