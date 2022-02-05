@@ -7,6 +7,7 @@ import { applyCardName } from "./cardName";
 import { CARD_WIDTH, CARD_HEIGHT } from "./constants";
 import { applyImage } from "./image";
 import { applyLevel } from "./level";
+import { applyType } from "./type";
 import { Event } from "./types";
 
 export const handler: Handler<Event> = async (event) => {
@@ -14,6 +15,18 @@ export const handler: Handler<Event> = async (event) => {
     family: "Matrix Regular Small Caps",
   });
   registerFont("assets/fonts/Heebo.ttf", { family: "Heebo" });
+  registerFont("assets/fonts/SpectralSC-Regular.ttf", {
+    family: "Spectral SC",
+    weight: "regular",
+  });
+  registerFont("assets/fonts/SpectralSC-Bold.ttf", {
+    family: "Spectral SC",
+    weight: "bold",
+  });
+  registerFont("assets/fonts/SpectralSC-ExtraBold.ttf", {
+    family: "Spectral SC",
+    weight: "800",
+  });
 
   const canvas = createCanvas(CARD_WIDTH, CARD_HEIGHT);
   const context = canvas.getContext("2d");
@@ -48,6 +61,13 @@ export const handler: Handler<Event> = async (event) => {
     context,
     level: event.level,
     layout: event.layout,
+  });
+
+  await applyType({
+    context,
+    layout: event.layout,
+    text: event.type,
+    icon: event.icon,
   });
 
   return canvas.toBuffer();

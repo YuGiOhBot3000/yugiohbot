@@ -52,11 +52,22 @@ export enum Rarities {
   SECRET = "Secret",
 }
 
+export enum Icon {
+  NONE = "None",
+  CONTINUOUS = "Continuous",
+  COUNTER = "Counter",
+  EQUIP = "Equip",
+  FIELD = "Field",
+  QUICK_PLAY = "Quick-play",
+  RITUAL = "Ritual",
+}
+
 export type Event = {
   name: string;
   image: string;
   level: number;
-  type?: string;
+  type: string;
+  icon: Icon;
   effect?: string;
   atk?: number;
   def?: number;

@@ -51,26 +51,20 @@ export const CARD_NAME_STYLES = {
     fontSize: 48,
     fontStyle: "normal",
     fontWeight: 600,
-    textAlign: "left",
-    whitespace: "nowrap",
 
     left: 32,
     top: 28,
     width: 315,
-    height: 48,
   },
   skill: {
     fontFamily: "Heebo",
     fontSize: 32,
     fontStyle: "normal",
     fontWeight: 500,
-    textAlign: "left",
-    whitespace: "nowrap",
 
     left: 32,
     top: 22,
     width: 315,
-    height: 48,
   },
 };
 
@@ -79,4 +73,52 @@ export const CARD_NAME_COLORS = {
   white: { highlight: { color: "transparent" }, base: { color: "#ffffff" } },
   silver: { highlight: { color: "#b6b6b6" }, base: { color: "#1e1e1e" } },
   gold: { highlight: { color: "#d3b146" }, base: { color: "#4e3518" } },
+};
+
+export const TYPE_STYLES = {
+  monster: {
+    fontFamily: "Spectral SC",
+    fontSize: 16,
+    fontWeight: 800,
+
+    left: 35,
+    top: 458,
+    width: 350,
+  },
+  backrow: {
+    Icon: {
+      left: 420 - 24 - 50,
+      top: 74,
+      width: 24,
+      height: 24,
+    },
+    Type: {
+      fontFamily: "Spectral SC",
+      fontSize: 16,
+      fontWeight: 800,
+
+      left: 40,
+      top: 75,
+      width: 340,
+      height: 20,
+    },
+    TypeWithIcon: {
+      fontFamily: "Spectral SC",
+      fontSize: 16,
+      fontWeight: 800,
+
+      left: 420 - 24 /*width of icon*/ - 55,
+      top: 75,
+      width: 420 - 24 /*width of icon*/ - 50 /**/ - 40,
+    },
+    TypeWithIconClosing: {
+      fontFamily: "Spectral SC",
+      fontSize: 16,
+      fontWeight: 800,
+
+      left: 420 - 50,
+      top: 75,
+      width: 10,
+    },
+  },
 };
