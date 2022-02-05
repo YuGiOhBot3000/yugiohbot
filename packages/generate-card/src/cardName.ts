@@ -1,18 +1,30 @@
 import { CanvasRenderingContext2D } from "canvas";
 
 import { CARD_NAME_STYLES, CARD_NAME_COLORS } from "./constants";
-import { Rarities } from "./types";
+import { Layout, Rarities } from "./types";
 
 type Props = {
   context: CanvasRenderingContext2D;
   name: string;
-  type: "regular" | "skill";
+  layout: Layout;
   rarity: Rarities;
 };
 
-export const applyCardName = ({ context, name, type, rarity }: Props) => {
+export const applyCardName = ({ context, name, layout, rarity }: Props) => {
+  const type = layout === Layout.SKILL ? "skill" : "regular";
   const style = CARD_NAME_STYLES[type];
-  let color: "silver" | "gold" | undefined = undefined;
+
+  let color: "white" | "silver" | "gold" | undefined = undefined;
+
+  const darkLayouts = [
+    Layout.DARK_SYNCHRO,
+    Layout.LINK,
+    Layout.SKILL,
+    Layout.SPELL,
+    Layout.TRAP,
+    Layout.XYZ,
+  ];
+  if (darkLayouts.includes(layout)) color = "white";
   if (rarity === Rarities.RARE || rarity === Rarities.SECRET) color = "silver";
   if (rarity === Rarities.ULTRA) color = "gold";
 

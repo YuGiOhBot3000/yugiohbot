@@ -9,9 +9,9 @@ describe("Handler", () => {
     name: "Cardy McCardface",
     image:
       "https://static.wikia.nocookie.net/vsbattles/images/d/d4/Blue_Eyes.png",
-    layout: Layout.NORMAL,
+    layout: Layout.DARK_SYNCHRO,
     pendulum: { enabled: false },
-    rarity: Rarities.COMMON,
+    rarity: Rarities.RARE,
     attribute: Attribute.LIGHT,
   } as Event;
   const context = {} as Context;

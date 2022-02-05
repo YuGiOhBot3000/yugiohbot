@@ -1,14 +1,15 @@
 import { loadImage, CanvasRenderingContext2D } from "canvas";
 import { ATTRIBUTE_STYLE } from "./constants";
-import { Attribute } from "./types";
+import { Attribute, Layout } from "./types";
 
 type Props = {
   context: CanvasRenderingContext2D;
   attribute: Attribute;
+  layout: Layout;
 };
 
-export const applyAttribute = async ({ context, attribute }: Props) => {
-  if (attribute === Attribute.NONE) return;
+export const applyAttribute = async ({ context, attribute, layout }: Props) => {
+  if (layout === Layout.SKILL || attribute === Attribute.NONE) return;
 
   const image = await loadImage(`assets/attribute/${attribute}.png`);
   context.drawImage(

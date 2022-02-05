@@ -33,13 +33,14 @@ export const handler: Handler<Event> = async (event, _context, callback) => {
   applyCardName({
     context,
     name: event.name,
-    type: event.layout === Layout.SKILL ? "skill" : "regular",
+    layout: event.layout,
     rarity: event.rarity,
   });
 
   await applyAttribute({
     context,
     attribute: event.attribute,
+    layout: event.layout,
   });
 
   return canvas.toBuffer();

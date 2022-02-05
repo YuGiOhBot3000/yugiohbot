@@ -3,7 +3,7 @@ import canvas, { createCanvas, Image } from "canvas";
 import { CARD_HEIGHT, CARD_WIDTH, ATTRIBUTE_STYLE } from "../src/constants";
 
 import { applyAttribute } from "../src/attribute";
-import { Attribute } from "../src/types";
+import { Attribute, Layout } from "../src/types";
 
 describe("Attribute", () => {
   describe("applyAttribute", () => {
@@ -20,7 +20,22 @@ describe("Attribute", () => {
     });
 
     it("should not load an image with NONE attribute", async () => {
-      await applyAttribute({ context, attribute: Attribute.NONE });
+      await applyAttribute({
+        context,
+        attribute: Attribute.NONE,
+        layout: Layout.NORMAL,
+      });
+
+      expect(loadImageSpy).not.toBeCalled();
+      expect(drawImageSpy).not.toBeCalled();
+    });
+
+    it("should not load an image with SKILL layout", async () => {
+      await applyAttribute({
+        context,
+        attribute: Attribute.DIVINE,
+        layout: Layout.SKILL,
+      });
 
       expect(loadImageSpy).not.toBeCalled();
       expect(drawImageSpy).not.toBeCalled();
@@ -37,7 +52,7 @@ describe("Attribute", () => {
       [Attribute.SPELL],
       [Attribute.TRAP],
     ])("should load the %s attribute image", async (attribute) => {
-      await applyAttribute({ context, attribute });
+      await applyAttribute({ context, attribute, layout: Layout.NORMAL });
 
       expect(loadImageSpy).toBeCalledWith(`assets/attribute/${attribute}.png`);
       expect(drawImageSpy).toBeCalledWith(
