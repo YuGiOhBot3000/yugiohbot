@@ -122,3 +122,46 @@ export const TYPE_STYLES = {
     },
   },
 };
+
+export const EFFECT_STYLES = {
+  monster: {
+    fontFamily: "Spectral",
+    fontStyle: "",
+    fontSize: 13,
+
+    left: 35,
+    top: 475,
+    width: 350,
+    height: 75,
+  },
+  backrow: {
+    fontFamily: "Spectral",
+    fontStyle: "",
+    fontSize: 13,
+
+    left: 35,
+    top: 460,
+    width: 350,
+    height: 110,
+  },
+  vanilla: {
+    fontFamily: "Amiri",
+    fontStyle: "italic",
+    fontSize: 13,
+
+    left: 35,
+    top: 475,
+    width: 350,
+    height: 75,
+  },
+  skill: {
+    fontFamily: "Spectral",
+    fontStyle: "",
+    fontSize: 13,
+
+    left: 35,
+    top: 475,
+    width: 350,
+    height: 95,
+  },
+};

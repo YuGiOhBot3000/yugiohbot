@@ -10,12 +10,14 @@ describe("Handler", () => {
     level: 12,
     image:
       "https://static.wikia.nocookie.net/vsbattles/images/d/d4/Blue_Eyes.png",
-    layout: Layout.DARK_SYNCHRO,
+    layout: Layout.NORMAL,
     pendulum: { enabled: false },
     rarity: Rarities.COMMON,
     attribute: Attribute.LIGHT,
     type: "Hello World",
     icon: Icon.EQUIP,
+    effect:
+      "A card maker that supports the creation of Normal, Effect, Ritual, Fusion, Synchro, Dark Synchro, Xyz and Link monsters. It also provides support for creating Pendulum versions of some card types. A card maker that supports the creation of Normal, Effect, Ritual, Fusion, Synchro, Dark Synchro, Xyz and Link monsters. It also provides support for creating Pendulum versions of some card types.",
   } as Event;
   const context = {} as Context;
   const callback = jest.fn();

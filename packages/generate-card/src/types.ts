@@ -68,7 +68,7 @@ export type Event = {
   level: number;
   type: string;
   icon: Icon;
-  effect?: string;
+  effect: string;
   atk?: number;
   def?: number;
   serial?: string;

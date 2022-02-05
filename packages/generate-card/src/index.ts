@@ -1,32 +1,19 @@
 import { Handler } from "aws-lambda";
-import { createCanvas, registerFont } from "canvas";
+import { createCanvas } from "canvas";
 
 import { applyAttribute } from "./attribute";
 import { applyBorder } from "./border";
 import { applyCardName } from "./cardName";
 import { CARD_WIDTH, CARD_HEIGHT } from "./constants";
+import { applyEffect } from "./effect";
+import { registerFonts } from "./fonts";
 import { applyImage } from "./image";
 import { applyLevel } from "./level";
 import { applyType } from "./type";
 import { Event } from "./types";
 
 export const handler: Handler<Event> = async (event) => {
-  registerFont("assets/fonts/MatrixRegularSmallCaps.ttf", {
-    family: "Matrix Regular Small Caps",
-  });
-  registerFont("assets/fonts/Heebo.ttf", { family: "Heebo" });
-  registerFont("assets/fonts/SpectralSC-Regular.ttf", {
-    family: "Spectral SC",
-    weight: "regular",
-  });
-  registerFont("assets/fonts/SpectralSC-Bold.ttf", {
-    family: "Spectral SC",
-    weight: "bold",
-  });
-  registerFont("assets/fonts/SpectralSC-ExtraBold.ttf", {
-    family: "Spectral SC",
-    weight: "800",
-  });
+  registerFonts();
 
   const canvas = createCanvas(CARD_WIDTH, CARD_HEIGHT);
   const context = canvas.getContext("2d");
@@ -68,6 +55,12 @@ export const handler: Handler<Event> = async (event) => {
     layout: event.layout,
     text: event.type,
     icon: event.icon,
+  });
+
+  applyEffect({
+    context,
+    layout: event.layout,
+    text: event.effect,
   });
 
   return canvas.toBuffer();
