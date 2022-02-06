@@ -46,11 +46,6 @@ describe("Effect", () => {
           style.left,
           style.top + 26
         );
-        expect(fillTextSpy).toBeCalledWith(
-          expect.any(String),
-          style.left,
-          style.top + 39
-        );
       }
     );
   });
