@@ -4,12 +4,14 @@
   "description": "Generates a Yu-Gi-Oh card from the passed parameters",
   "main": "dist/index.js",
   "devDependencies": {
+    "@aws-sdk/client-s3": "^3.49.0",
     "@babel/preset-env": "7.16.11",
     "@babel/preset-typescript": "7.16.7",
     "@types/aws-lambda": "^8.10.92",
     "@types/jest": "27.4.0",
     "@typescript-eslint/eslint-plugin": "5.10.2",
     "@typescript-eslint/parser": "5.10.2",
+    "aws-sdk-client-mock": "^0.5.6",
     "copy-webpack-plugin": "^10.2.4",
     "eslint": "8.8.0",
     "eslint-config-prettier": "8.3.0",
@@ -41,6 +43,7 @@
   },
   "homepage": "https://github.com/YuGiOhBot3000/yugiohbot#readme",
   "dependencies": {
-    "canvas": "^2.9.0"
+    "canvas": "^2.9.0",
+    "nanoid": "^3.2.0"
   }
 }

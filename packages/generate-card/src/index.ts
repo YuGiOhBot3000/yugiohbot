@@ -1,5 +1,7 @@
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { Handler } from "aws-lambda";
 import { createCanvas } from "canvas";
+import { nanoid } from "nanoid";
 
 import { applyAttribute } from "./attribute";
 import { applyBorder } from "./border";
@@ -113,5 +115,19 @@ export const handler: Handler<Event> = async (event) => {
     value: event.copyright,
   });
 
-  return canvas.toBuffer();
+  const client = new S3Client({
+    region: process.env.AWS_REGION,
+    forcePathStyle: true,
+  });
+  const Key = `${nanoid()}.png`;
+  const command = new PutObjectCommand({
+    Bucket: process.env.S3_BUCKET,
+    Key,
+    Body: canvas.toBuffer(),
+    ContentEncoding: "base64",
+    ContentType: "image/png",
+  });
+  await client.send(command);
+
+  return Key;
 };

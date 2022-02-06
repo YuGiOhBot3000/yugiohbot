@@ -1,8 +1,16 @@
+import {
+  S3Client,
+  PutObjectCommandInput,
+  PutObjectCommand,
+} from "@aws-sdk/client-s3";
 import { Context } from "aws-lambda";
 import fs from "fs";
+import { mockClient } from "aws-sdk-client-mock";
 
 import { handler } from "../src/index";
 import { Attribute, Event, Icon, Layout, Rarities } from "../src/types";
+
+const mockS3Client = mockClient(S3Client);
 
 describe("Handler", () => {
   const event = {
@@ -43,9 +51,27 @@ describe("Handler", () => {
   const context = {} as Context;
   const callback = jest.fn();
 
-  it("should create card", async () => {
-    const stream = await handler(event, context, callback);
+  beforeAll(() => {
+    process.env.S3_BUCKET = "bucket";
+  });
 
-    fs.writeFileSync("test.png", stream);
+  beforeEach(() => {
+    mockS3Client.on(PutObjectCommand).resolves({});
+  });
+
+  it("should create card", async () => {
+    const key = await handler(event, context, callback);
+
+    const input = mockS3Client.call(0).args[0].input as PutObjectCommandInput;
+
+    expect(input).toEqual({
+      Bucket: "bucket",
+      Key: key,
+      Body: expect.any(Buffer),
+      ContentEncoding: "base64",
+      ContentType: "image/png",
+    });
+
+    fs.writeFileSync("test.png", input.Body as Buffer);
   });
 });
