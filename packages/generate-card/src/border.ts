@@ -10,7 +10,9 @@ type Props = {
 
 export const applyBorder = async ({ context, layout, pendulum }: Props) => {
   const filename = `./assets/border/${layout}${
-    pendulum ? ".pendulum" : ""
+    (pendulum && layout !== Layout.SKILL) || layout === Layout.UNITY
+      ? ".pendulum"
+      : ""
   }.png`;
 
   const image = await loadImage(filename);

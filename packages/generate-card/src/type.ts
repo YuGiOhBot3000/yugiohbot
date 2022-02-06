@@ -18,6 +18,7 @@ export const applyType = async ({
   const backrowLayouts = [Layout.SPELL, Layout.TRAP];
   const type = backrowLayouts.includes(layout) ? "backrow" : "monster";
   context.fillStyle = "black";
+  context.textAlign = "left";
 
   if (type === "monster") {
     const style = TYPE_STYLES.monster;
