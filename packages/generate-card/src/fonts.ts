@@ -14,7 +14,7 @@ export const registerFonts = () => {
     weight: "800",
   });
   registerFont("assets/fonts/Amiri-Italic.ttf", {
-    family: "Amiri Italic",
+    family: "Amiri italic",
   });
   registerFont("assets/fonts/Spectral-Regular.ttf", {
     family: "Spectral",

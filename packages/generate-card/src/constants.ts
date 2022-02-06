@@ -175,3 +175,47 @@ export const STAT_STYLES = {
   top: 551,
   width: 40,
 };
+
+export const SERIAL_STYLES = {
+  fontFamily: "Spectral",
+  fontSize: 12,
+
+  left: 20,
+  top: 580,
+  width: 150,
+};
+
+export const ID_STYLES = {
+  shared: {
+    fontFamily: "Spectral",
+    fontSize: 12,
+  },
+  regular: {
+    textAlign: "right",
+    left: 370,
+    top: 435,
+    width: 80,
+  },
+  pendulum: {
+    color: "black",
+    textAlign: "left",
+    left: 35,
+    top: 555,
+    width: 80,
+  },
+  link: {
+    textAlign: "right",
+    left: 265,
+    top: 437,
+    width: 80,
+  },
+};
+
+export const COPYRIGHT_STYLE = {
+  fontFamily: "Spectral",
+  fontSize: 12,
+
+  left: 380,
+  top: 580,
+  width: 150,
+};

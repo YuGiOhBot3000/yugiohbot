@@ -3,6 +3,7 @@ import { createCanvas } from "canvas";
 
 import { applyAttribute } from "./attribute";
 import { applyBorder } from "./border";
+import { applyCopyright, applyId, applySerial } from "./cardInfo";
 import { applyCardName } from "./cardName";
 import { CARD_WIDTH, CARD_HEIGHT } from "./constants";
 import { applyEffect } from "./effect";
@@ -19,17 +20,17 @@ export const handler: Handler<Event> = async (event) => {
   const canvas = createCanvas(CARD_WIDTH, CARD_HEIGHT);
   const context = canvas.getContext("2d");
 
-  await applyBorder({
-    context,
-    layout: event.layout,
-    pendulum: event.pendulum.enabled,
-  });
-
   await applyImage({
     context,
     filename: event.image,
     pendulum: event.pendulum.enabled,
     rarity: event.rarity,
+  });
+
+  await applyBorder({
+    context,
+    layout: event.layout,
+    pendulum: event.pendulum.enabled,
   });
 
   applyCardName({
@@ -67,6 +68,27 @@ export const handler: Handler<Event> = async (event) => {
   applyAtk({ context, layout: event.layout, value: event.atk });
 
   applyDef({ context, layout: event.layout, value: event.def });
+
+  applySerial({
+    context,
+    layout: event.layout,
+    pendulum: event.pendulum.enabled,
+    value: event.serial,
+  });
+
+  applyId({
+    context,
+    layout: event.layout,
+    pendulum: event.pendulum.enabled,
+    value: event.id,
+  });
+
+  applyCopyright({
+    context,
+    layout: event.layout,
+    pendulum: event.pendulum.enabled,
+    value: event.copyright,
+  });
 
   return canvas.toBuffer();
 };

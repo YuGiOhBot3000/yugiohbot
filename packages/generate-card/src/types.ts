@@ -71,10 +71,10 @@ export type Event = {
   effect: string;
   atk: number;
   def: number;
-  serial?: string;
-  copyright?: "© 1993 YEMACHU";
+  serial: string;
+  copyright: string;
   attribute: Attribute;
-  id?: string;
+  id: string;
   pendulum: Pendulum;
   link?: Link;
   layout: Layout;
