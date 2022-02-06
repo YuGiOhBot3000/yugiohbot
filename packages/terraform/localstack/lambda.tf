@@ -21,3 +21,19 @@ module "generate_text_lambda" {
     OPENAI_API_KEY = var.openai_api_key
   }
 }
+
+module "generate_card_lambda" {
+  source = "../lambda"
+
+  app_name             = var.app_name
+  function_name        = "generate-card"
+  runtime              = "nodejs14.x"
+  memory_size          = 512
+  timeout              = 10
+  lambda_iam_role_arn  = aws_iam_role.card_generator_role.arn
+  lambda_iam_role_name = aws_iam_role.card_generator_role.name
+  environment_variables = {
+    S3_BUCKET  = aws_s3_bucket.card_bucket.bucket
+    LD_PRELOAD = var.ld_preload
+  }
+}

@@ -47,6 +47,30 @@ resource "aws_iam_user_policy" "s3backend" {
   })
 }
 
+resource "aws_iam_group_policy" "s3" {
+  name  = "DeployS3Bucket"
+  group = data.aws_iam_group.deployer.group_name
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "s3:CreateBucket",
+          "s3:DeleteBucket",
+          "s3:DeleteBucketPolicy",
+          "s3:Get*",
+          "s3:ListBucket",
+          "s3:PutBucketAcl",
+          "s3:PutBucketPolicy",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
+}
+
 resource "aws_iam_group_policy" "lambda" {
   name  = "DeployLambda"
   group = data.aws_iam_group.deployer.group_name

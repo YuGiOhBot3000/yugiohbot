@@ -3,3 +3,7 @@ variable "app_name" {
 }
 
 variable "openai_api_key" {}
+
+variable "ld_preload" {
+  default = "/var/task/lib/libz.so.1"
+}
