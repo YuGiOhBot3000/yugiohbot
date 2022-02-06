@@ -22,4 +22,7 @@ export const registerFonts = () => {
   registerFont("assets/fonts/CrimsonPro.ttf", {
     family: "Crimson Text",
   });
+  registerFont("assets/fonts/IDroid.otf", {
+    family: "IDroid",
+  });
 };

@@ -5,16 +5,16 @@ export type Pendulum = {
   red: number;
 };
 
-export type Link = {
-  topLeft: boolean;
-  topCenter: boolean;
-  topRight: boolean;
-  middleLeft: boolean;
-  middleRight: boolean;
-  bottomLeft: boolean;
-  bottomCenter: boolean;
-  bottomRight: boolean;
-};
+export interface Link {
+  topLeft?: boolean;
+  topCenter?: boolean;
+  topRight?: boolean;
+  middleLeft?: boolean;
+  middleRight?: boolean;
+  bottomLeft?: boolean;
+  bottomCenter?: boolean;
+  bottomRight?: boolean;
+}
 
 export enum Attribute {
   NONE = "None",
@@ -76,7 +76,7 @@ export type Event = {
   attribute: Attribute;
   id: string;
   pendulum: Pendulum;
-  link?: Link;
+  link: Link;
   layout: Layout;
   rarity: Rarities;
 };

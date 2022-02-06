@@ -205,7 +205,7 @@ export const ID_STYLES = {
   },
   link: {
     textAlign: "right",
-    left: 265,
+    left: 325,
     top: 437,
     width: 80,
   },
@@ -252,5 +252,117 @@ export const PENDULUM_STYLES = {
     top: 410,
     width: 23,
     height: 30,
+  },
+};
+
+export const LINK_STYLE = {
+  fontFamily: "IDroid",
+  fontSize: 16,
+
+  left: 385,
+  top: 552,
+  width: 15,
+};
+
+export const LINK_MARKERS = {
+  regular: {
+    topLeft: {
+      top: 95,
+      left: 32,
+      width: 42,
+      height: 42,
+    },
+    topCenter: {
+      top: 86,
+      left: 420 / 2 - 72 / 2,
+      width: 72,
+      height: 25,
+    },
+    topRight: {
+      top: 95,
+      left: 420 - 32 - 42,
+      width: 42,
+      height: 42,
+    },
+    middleLeft: {
+      top: 235,
+      left: 26,
+      width: 25,
+      height: 72,
+    },
+    middleRight: {
+      top: 235,
+      left: 420 - 26 - 25,
+      width: 25,
+      height: 72,
+    },
+    bottomLeft: {
+      top: 402,
+      left: 32,
+      width: 42,
+      height: 42,
+    },
+    bottomCenter: {
+      top: 428,
+      left: 420 / 2 - 72 / 2,
+      width: 72,
+      height: 25,
+    },
+    bottomRight: {
+      top: 402,
+      left: 420 - 32 - 42,
+      width: 42,
+      height: 42,
+    },
+  },
+  pendulum: {
+    topLeft: {
+      top: 95,
+      left: 16,
+      width: 42,
+      height: 42,
+    },
+    topCenter: {
+      top: 86,
+      left: 420 / 2 - 72 / 2,
+      width: 72,
+      height: 25,
+    },
+    topRight: {
+      top: 95,
+      left: 420 - 16 - 42,
+      width: 42,
+      height: 42,
+    },
+    middleLeft: {
+      top: 302,
+      left: 6,
+      width: 25,
+      height: 72,
+    },
+    middleRight: {
+      top: 302,
+      left: 420 - 6 - 25,
+      width: 25,
+      height: 72,
+    },
+    bottomLeft: {
+      top: 610 - 23 - 42,
+      left: 16,
+      width: 42,
+      height: 42,
+    },
+    bottomCenter: {
+      top: 610 - 13 - 25,
+      left: 420 / 2 - 72 / 2,
+      width: 72,
+      height: 25,
+    },
+    bottomRight: {
+      top: 610 - 23 - 42,
+      left: 420 - 16 - 42,
+      width: 42,
+      height: 42,
+    },
   },
 };

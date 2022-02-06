@@ -10,6 +10,7 @@ import { applyEffect } from "./effect";
 import { registerFonts } from "./fonts";
 import { applyImage } from "./image";
 import { applyLevel } from "./level";
+import { applyLink, applyLinkMarkers } from "./link";
 import { applyPendulum } from "./pendulum";
 import { applyAtk, applyDef } from "./stats";
 import { applyType } from "./type";
@@ -53,6 +54,13 @@ export const handler: Handler<Event> = async (event) => {
     layout: event.layout,
   });
 
+  applyLinkMarkers({
+    context,
+    layout: event.layout,
+    pendulum: event.pendulum.enabled,
+    link: event.link,
+  });
+
   applyPendulum({
     context,
     layout: event.layout,
@@ -73,8 +81,8 @@ export const handler: Handler<Event> = async (event) => {
   });
 
   applyAtk({ context, layout: event.layout, value: event.atk });
-
   applyDef({ context, layout: event.layout, value: event.def });
+  applyLink({ context, layout: event.layout, value: event.def });
 
   applySerial({
     context,
