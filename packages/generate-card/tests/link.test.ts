@@ -10,6 +10,7 @@ describe("Links", () => {
   const fillTextSpy = jest
     .spyOn(context, "fillText")
     .mockImplementation(jest.fn());
+  jest.spyOn(context, "drawImage").mockImplementation(jest.fn());
   const loadImageSpy = jest.spyOn(canvas, "loadImage");
 
   beforeEach(() => {
@@ -65,8 +66,13 @@ describe("Links", () => {
       }
     );
 
-    it("should load all the marker images", () => {
-      applyLinkMarkers({ context, layout: Layout.LINK, pendulum: false, link });
+    it("should load all the marker images", async () => {
+      await applyLinkMarkers({
+        context,
+        layout: Layout.LINK,
+        pendulum: false,
+        link,
+      });
 
       expect(loadImageSpy).toBeCalledWith("assets/marker/topLeft.png");
       expect(loadImageSpy).toBeCalledWith("assets/marker/topCenter.png");

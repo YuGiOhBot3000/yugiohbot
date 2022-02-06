@@ -62,7 +62,7 @@ export const handler: Handler<Event> = async (event) => {
     layout: event.layout,
   });
 
-  applyLinkMarkers({
+  await applyLinkMarkers({
     context,
     layout: event.layout,
     pendulum: event.pendulum.enabled,

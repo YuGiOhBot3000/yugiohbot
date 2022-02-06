@@ -28,7 +28,7 @@ export const applyLink = ({ context, layout, value }: LinkProps) => {
   );
 };
 
-export const applyLinkMarkers = ({
+export const applyLinkMarkers = async ({
   context,
   layout,
   pendulum,
@@ -37,11 +37,15 @@ export const applyLinkMarkers = ({
   if (layout !== Layout.LINK) return;
 
   const positioning = pendulum ? LINK_MARKERS.pendulum : LINK_MARKERS.regular;
-  Object.entries(link).forEach(async ([key, value]) => {
+  const entries = Object.entries(link);
+
+  for (let i = 0; i < entries.length; i++) {
+    const [key, value] = entries[i];
+
     if (value) {
       const pos = positioning[key as keyof Link];
       const image = await loadImage(`assets/marker/${key}.png`);
       context.drawImage(image, pos.left, pos.top, pos.width, pos.height);
     }
-  });
+  }
 };
