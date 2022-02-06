@@ -8,7 +8,7 @@ import fs from "fs";
 import { mockClient } from "aws-sdk-client-mock";
 
 import { handler } from "../src/index";
-import { Attribute, Event, Icon, Layout, Rarities } from "../src/types";
+import { Attribute, Card, Icon, Layout, Rarities } from "@yugiohbot/types";
 
 const mockS3Client = mockClient(S3Client);
 
@@ -47,7 +47,7 @@ describe("Handler", () => {
     copyright: "© 2022 YuGiOhBot",
     effect:
       "A card maker that supports the creation of Normal, Effect, Ritual, Fusion, Synchro, Dark Synchro, Xyz and Link monsters. It also provides support for creating Pendulum versions of some card types. A card maker that supports the creation of Normal, Effect, Ritual, Fusion, Synchro, Dark Synchro, Xyz and Link monsters. It also provides support for creating Pendulum versions of some card types.",
-  } as Event;
+  } as Card;
   const context = {} as Context;
   const callback = jest.fn();
 

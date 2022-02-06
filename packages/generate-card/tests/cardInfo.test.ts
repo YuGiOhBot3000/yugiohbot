@@ -8,7 +8,7 @@ import {
   SERIAL_STYLES,
 } from "../src/constants";
 
-import { Layout } from "../src/types";
+import { Layout } from "@yugiohbot/types";
 import { applySerial, applyId, applyCopyright } from "../src/cardInfo";
 
 describe("Card Info", () => {

@@ -1,7 +1,7 @@
 import canvas, { createCanvas, Image } from "canvas";
 
 import { CARD_HEIGHT, CARD_WIDTH } from "../src/constants";
-import { Layout } from "../src/types";
+import { Layout } from "@yugiohbot/types";
 
 import { applyBorder } from "../src/border";
 

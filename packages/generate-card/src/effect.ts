@@ -1,6 +1,6 @@
 import { CanvasRenderingContext2D } from "canvas";
 import { EFFECT_STYLES } from "./constants";
-import { Layout } from "./types";
+import { Layout } from "@yugiohbot/types";
 import { resizeTextForParagraphs } from "./utils";
 
 type Props = {

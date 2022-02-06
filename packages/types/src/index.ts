@@ -62,7 +62,7 @@ export enum Icon {
   RITUAL = "Ritual",
 }
 
-export type Event = {
+export type Card = {
   name: string;
   image: string;
   level: number;

@@ -1,6 +1,6 @@
 import { loadImage, CanvasRenderingContext2D } from "canvas";
 import { TYPE_STYLES } from "./constants";
-import { Icon, Layout } from "./types";
+import { Icon, Layout } from "@yugiohbot/types";
 
 type Props = {
   context: CanvasRenderingContext2D;

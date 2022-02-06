@@ -1,4 +1,11 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["./src/**/*"]
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@yugiohbot/types": ["../types"]
+    }
+  },
+  "include": ["./src/**/*", "./tests/**/*"],
+  "references": [{ "path": "../types" }]
 }

@@ -1,6 +1,6 @@
 import { loadImage, CanvasRenderingContext2D } from "canvas";
 import { CARD_HEIGHT, CARD_WIDTH } from "./constants";
-import { Layout } from "./types";
+import { Layout } from "@yugiohbot/types";
 
 type Props = {
   context: CanvasRenderingContext2D;

@@ -29,18 +29,14 @@ export const handler: Handler = async (_event, _context, callback) => {
     model: FINE_TUNES.CARDS,
   };
 
-  let cardType = `${selectedCardType} card`;
-
   if (MONSTERS.includes(selectedCardType)) {
     completionRequest.model = FINE_TUNES.MONSTERS;
-    cardType = `${selectedCardType} monster`;
   } else if (EFFECT_MONSTERS.includes(selectedCardType)) {
     completionRequest.model = FINE_TUNES.EFFECTS;
-    cardType = `${selectedCardType} monster`;
   }
 
   const { data } = await openai.createCompletionFromModel(completionRequest);
   const text = data.choices?.[0].text;
 
-  callback(null, { text, cardType });
+  callback(null, { text, cardType: selectedCardType });
 };

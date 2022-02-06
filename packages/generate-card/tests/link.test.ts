@@ -1,7 +1,7 @@
 import canvas, { createCanvas, Image } from "canvas";
 
 import { CARD_HEIGHT, CARD_WIDTH, LINK_STYLE } from "../src/constants";
-import { Layout, Link } from "../src/types";
+import { Layout, Link } from "@yugiohbot/types";
 
 import { applyLink, applyLinkMarkers } from "../src/link";
 

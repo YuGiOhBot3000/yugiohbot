@@ -1,6 +1,6 @@
 import { CanvasRenderingContext2D } from "canvas";
 import { PENDULUM_STYLES } from "./constants";
-import { Layout, Pendulum } from "./types";
+import { Layout, Pendulum } from "@yugiohbot/types";
 import { resizeTextForParagraphs } from "./utils";
 
 type Props = {

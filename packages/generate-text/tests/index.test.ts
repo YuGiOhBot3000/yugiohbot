@@ -43,7 +43,7 @@ describe("Handler", () => {
       });
       expect(callback).toBeCalledWith(null, {
         text: "mockText",
-        cardType: "normal monster",
+        cardType: "normal",
       });
     });
   });
@@ -67,7 +67,7 @@ describe("Handler", () => {
       });
       expect(callback).toBeCalledWith(null, {
         text: "mockText",
-        cardType: "flip effect monster",
+        cardType: "flip effect",
       });
     });
   });
@@ -91,7 +91,7 @@ describe("Handler", () => {
       });
       expect(callback).toBeCalledWith(null, {
         text: "mockText",
-        cardType: "trap card",
+        cardType: "trap",
       });
     });
   });

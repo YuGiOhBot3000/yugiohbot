@@ -3,7 +3,7 @@ import canvas, { createCanvas, Image } from "canvas";
 import { CARD_HEIGHT, CARD_WIDTH, ATTRIBUTE_STYLE } from "../src/constants";
 
 import { applyAttribute } from "../src/attribute";
-import { Attribute, Layout } from "../src/types";
+import { Attribute, Layout } from "@yugiohbot/types";
 
 describe("Attribute", () => {
   describe("applyAttribute", () => {

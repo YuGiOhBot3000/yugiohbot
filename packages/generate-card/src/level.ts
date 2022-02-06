@@ -1,6 +1,6 @@
 import { loadImage, CanvasRenderingContext2D } from "canvas";
 import { STAR_STYLES, MAX_LEVEL } from "./constants";
-import { Layout } from "./types";
+import { Layout } from "@yugiohbot/types";
 
 type Star = "Normal" | "Negative" | "Xyz";
 

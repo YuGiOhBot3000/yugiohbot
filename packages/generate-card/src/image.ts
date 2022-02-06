@@ -1,6 +1,6 @@
 import { loadImage, CanvasRenderingContext2D } from "canvas";
 import { STYLES } from "./constants";
-import { Rarities } from "./types";
+import { Rarities } from "@yugiohbot/types";
 
 type Props = {
   context: CanvasRenderingContext2D;

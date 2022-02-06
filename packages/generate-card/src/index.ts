@@ -1,4 +1,5 @@
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { Card } from "@yugiohbot/types";
 import { Handler } from "aws-lambda";
 import { createCanvas } from "canvas";
 import { nanoid } from "nanoid";
@@ -16,7 +17,6 @@ import { applyLink, applyLinkMarkers } from "./link";
 import { applyPendulum } from "./pendulum";
 import { applyAtk, applyDef } from "./stats";
 import { applyType } from "./type";
-import { Event } from "./types";
 
 // Hack to make Canvas work on Lambda
 if (process.env["LAMBDA_TASK_ROOT"]) {
@@ -26,7 +26,7 @@ if (process.env["LAMBDA_TASK_ROOT"]) {
   process.env["PKG_CONFIG_PATH"] = process.env["LAMBDA_TASK_ROOT"] + "/lib";
 }
 
-export const handler: Handler<Event> = async (event) => {
+export const handler: Handler<Card> = async (event) => {
   registerFonts();
 
   const canvas = createCanvas(CARD_WIDTH, CARD_HEIGHT);
