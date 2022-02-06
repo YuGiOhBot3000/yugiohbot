@@ -11,6 +11,8 @@ on:
 jobs:
   build:
     uses: YuGiOhBot3000/yugiohbot/.github/workflows/build.yml@main
+    with:
+      node-version: "14"
   lint:
     needs: build
     uses: YuGiOhBot3000/yugiohbot/.github/workflows/lint.yml@main
