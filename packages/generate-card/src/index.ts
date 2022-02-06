@@ -10,6 +10,7 @@ import { applyEffect } from "./effect";
 import { registerFonts } from "./fonts";
 import { applyImage } from "./image";
 import { applyLevel } from "./level";
+import { applyPendulum } from "./pendulum";
 import { applyAtk, applyDef } from "./stats";
 import { applyType } from "./type";
 import { Event } from "./types";
@@ -50,6 +51,12 @@ export const handler: Handler<Event> = async (event) => {
     context,
     level: event.level,
     layout: event.layout,
+  });
+
+  applyPendulum({
+    context,
+    layout: event.layout,
+    pendulum: event.pendulum,
   });
 
   await applyType({

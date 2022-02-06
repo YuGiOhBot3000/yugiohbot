@@ -219,3 +219,38 @@ export const COPYRIGHT_STYLE = {
   top: 580,
   width: 150,
 };
+
+export const PENDULUM_STYLES = {
+  effect: {
+    fontFamily: "Spectral",
+    fontStyle: "",
+    fontSize: 13,
+
+    left: 65,
+    top: 385,
+    width: 290,
+    height: 70,
+  },
+  blue: {
+    fontFamily: "Crimson Text",
+    fontStyle: "",
+    fontSize: 28,
+    fontWeight: 600,
+
+    left: 43,
+    top: 410,
+    width: 23,
+    height: 30,
+  },
+  red: {
+    fontFamily: "Crimson Text",
+    fontStyle: "",
+    fontSize: 28,
+    fontWeight: 600,
+
+    left: 375,
+    top: 410,
+    width: 23,
+    height: 30,
+  },
+};
