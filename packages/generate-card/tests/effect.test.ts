@@ -32,22 +32,22 @@ describe("Effect", () => {
         });
 
         expect(fillTextSpy).toBeCalledWith(
-          "A card maker that supports the creation of Normal, Effect,",
+          expect.any(String),
           style.left,
           style.top
         );
         expect(fillTextSpy).toBeCalledWith(
-          "Ritual, Fusion, Synchro, Dark Synchro, Xyz and Link",
+          expect.any(String),
           style.left,
           style.top + 13
         );
         expect(fillTextSpy).toBeCalledWith(
-          "monsters. It also provides support for creating Pendulum",
+          expect.any(String),
           style.left,
           style.top + 26
         );
         expect(fillTextSpy).toBeCalledWith(
-          "versions of some card types.",
+          expect.any(String),
           style.left,
           style.top + 39
         );
