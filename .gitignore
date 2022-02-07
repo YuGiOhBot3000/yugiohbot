@@ -3,6 +3,7 @@ dist
 
 *.csv
 *.jsonl
+*.tsbuildinfo
 test.png
 
 .terraform
