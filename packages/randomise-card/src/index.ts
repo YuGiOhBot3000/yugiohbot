@@ -12,6 +12,7 @@ import { randomBool, randomElement, randomInt } from "./utils";
 import { chooseStats } from "./stats";
 import { createType } from "./type";
 import { chooseCardImage } from "./image";
+import { parseEffect } from "./effect";
 
 type Event = {
   title: string;
@@ -33,10 +34,12 @@ export const handler: Handler<Event, Card> = async ({
   const attribute = randomElement<Attribute>(Object.values(Attribute));
   const id = `YGOBOT${randomInt(0, 99).toString().padStart(2, "0")}`;
 
+  const { pendulumEffect, cardEffect } = parseEffect(cardType, text);
+
   const pendulum: Pendulum = {
     enabled: randomBool(),
     // TODO: Generate pendulum effects too
-    effect: "",
+    effect: pendulumEffect,
     blue: randomInt(0, 9),
     red: randomInt(0, 9),
   };
@@ -63,7 +66,7 @@ export const handler: Handler<Event, Card> = async ({
     image,
     type,
     icon,
-    effect: text,
+    effect: cardEffect,
     atk,
     def,
     serial,
