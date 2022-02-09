@@ -24,6 +24,11 @@ type SPBSource = {
   };
 };
 
+type ImageData = {
+  url: string;
+  name: string;
+};
+
 export const cropImage = async (imageUrl: string) => {
   const image = await loadImage(imageUrl);
   const canvas = createCanvas(SIZE, SIZE);
@@ -38,34 +43,37 @@ export const getRandomOfficialImage = async () => {
   let url = "";
   let id = "";
   let type = "";
+  let name = "";
 
   do {
     const { data } = await axios.get<DBCard>(RANDOM_URL);
 
     url = data.card_images?.[0].image_url;
-    ({ id, type } = data);
+    ({ id, type, name } = data);
   } while (type.includes("pendulum"));
 
-  return { id, url };
+  return { id, url, name };
 };
 
-export const getFromSPB = async () => {
+export const getFromSPB = async (): Promise<ImageData> => {
   const path = "api/randsource";
   const { data } = await axios.get<SPBSource>(SPB_BASE_URL + path);
 
-  return SPB_BASE_URL + data.sub.img.full;
+  return { url: SPB_BASE_URL + data.sub.img.full, name: data.sub.name };
 };
 
-export const chooseCardImage = async () => {
+export const chooseCardImage = async (): Promise<ImageData> => {
   const choice = Math.random();
 
   // 30% chance of a SPB image
   if (choice < 0.3) {
     return await getFromSPB();
   } else {
-    const { url, id } = await getRandomOfficialImage();
+    const { url, id, name } = await getRandomOfficialImage();
     const buffer = await cropImage(url);
-    return await uploadToS3(id, buffer);
+    const s3Url = await uploadToS3(id, buffer);
+
+    return { url: s3Url, name };
   }
 };
 

@@ -20,7 +20,12 @@ type Event = {
   cardType: string;
 };
 
-export const handler: Handler<Event, Card> = async ({
+type Response = {
+  card: Card;
+  imageName: string;
+};
+
+export const handler: Handler<Event, Response> = async ({
   title,
   text,
   cardType,
@@ -58,7 +63,7 @@ export const handler: Handler<Event, Card> = async ({
   const layout = randomElement<Layout>(Object.values(Layout));
   const rarity = randomElement<Rarities>(Object.values(Rarities));
 
-  const image = await chooseCardImage();
+  const { url: image, name: imageName } = await chooseCardImage();
 
   const card: Card = {
     name: title,
@@ -79,5 +84,5 @@ export const handler: Handler<Event, Card> = async ({
     rarity,
   };
 
-  return card;
+  return { card, imageName };
 };

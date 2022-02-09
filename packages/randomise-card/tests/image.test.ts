@@ -26,9 +26,10 @@ describe("Image", () => {
 
   describe("getFromSPB", () => {
     it("should get a random shitpostbot image", async () => {
-      const url = await getFromSPB();
+      const { url, name } = await getFromSPB();
 
       expect(url).toContain("https://www.shitpostbot.com/img/sourceimages");
+      expect(name).toBeDefined();
     });
   });
 
@@ -47,8 +48,9 @@ describe("Image", () => {
       async ({ percentage, expected }) => {
         jest.spyOn(Math, "random").mockReturnValue(percentage);
 
-        const result = await chooseCardImage();
-        expect(result).toContain(expected);
+        const { url, name } = await chooseCardImage();
+        expect(url).toContain(expected);
+        expect(name).toBeDefined();
       }
     );
   });

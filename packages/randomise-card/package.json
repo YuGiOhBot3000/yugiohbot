@@ -29,7 +29,7 @@
   "scripts": {
     "build": "webpack",
     "lint": "eslint ./src/**/*",
-    "test": "jest --watch"
+    "test": "jest"
   },
   "jest": {
     "preset": "ts-jest"
