@@ -1,7 +1,7 @@
 import { createCanvas } from "canvas";
 
 import { CARD_HEIGHT, CARD_WIDTH, PENDULUM_STYLES } from "../src/constants";
-import { Layout, Pendulum } from "../src/types";
+import { Layout, Pendulum } from "@yugiohbot/types";
 
 import { applyPendulum } from "../src/pendulum";
 

@@ -1,6 +1,6 @@
 import { CanvasRenderingContext2D } from "canvas";
 import { COPYRIGHT_STYLE, ID_STYLES, SERIAL_STYLES } from "./constants";
-import { Layout } from "./types";
+import { Layout } from "@yugiohbot/types";
 
 type Props = {
   context: CanvasRenderingContext2D;

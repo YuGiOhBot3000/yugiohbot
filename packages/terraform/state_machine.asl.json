@@ -26,7 +26,7 @@
           }
         }
       ],
-      "Next": "Combine Data",
+      "Next": "Randomise Card",
       "Catch": [
         {
           "ErrorEquals": ["States.ALL"],
@@ -34,13 +34,25 @@
         }
       ]
     },
-    "Combine Data": {
-      "Type": "Pass",
+    "Randomise Card": {
+      "Type": "Task",
+      "Resource": "${randomiseCardArn}",
       "Parameters": {
         "title.$": "$[0].title",
         "text.$": "$[1].text",
         "cardType.$": "$[1].cardType"
       },
+      "ResultSelector": {
+        "card.$": "$.card",
+        "imageName.$": "$.imageName"
+      },
+      "Next": "Generate Card"
+    },
+    "Generate Card": {
+      "Type": "Task",
+      "InputPath": "$.card",
+      "Resource": "${generateCardArn}",
+      "ResultPath": "$.cardKey",
       "End": true
     },
     "Failure": {

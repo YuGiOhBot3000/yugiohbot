@@ -62,7 +62,33 @@ export enum Icon {
   RITUAL = "Ritual",
 }
 
-export type Event = {
+export enum Race {
+  AQUA = "Aqua",
+  BEAST = "Beast",
+  BEAST_WARROR = "Beast-Warrior",
+  CREATOR_GOD = "Creator-God",
+  CYBERSE = "Cyberse",
+  DINOSAUR = "Dinosaur",
+  DIVINE_BEAST = "Divine-Beast",
+  DRAGON = "Dragon",
+  FAIRY = "Fairy",
+  FIEND = "Fiend",
+  FISH = "Fish",
+  INSECT = "Insect",
+  MACHINE = "Machine",
+  PLANT = "Plant",
+  PSYCHIC = "Psychic",
+  PYRO = "Pyro",
+  REPTILE = "Reptile",
+  ROCK = "Rock",
+  SEA_SERPENT = "Sea Serpent",
+  SPELLCASTER = "Spellcaster",
+  THUNDER = "Thunder",
+  WARRIOR = "Warrior",
+  WINGED_BEAST = "Winged Beast",
+}
+
+export type Card = {
   name: string;
   image: string;
   level: number;

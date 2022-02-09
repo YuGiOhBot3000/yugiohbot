@@ -22,6 +22,22 @@ module "generate_text_lambda" {
   }
 }
 
+module "randomise_card_lambda" {
+  source = "../lambda"
+
+  app_name             = var.app_name
+  function_name        = "randomise-card"
+  runtime              = "nodejs14.x"
+  memory_size          = 256
+  timeout              = 10
+  lambda_iam_role_arn  = aws_iam_role.card_randomiser_role.arn
+  lambda_iam_role_name = aws_iam_role.card_randomiser_role.name
+  environment_variables = {
+    S3_BUCKET  = aws_s3_bucket.card_image_bucket.bucket
+    LD_PRELOAD = var.ld_preload
+  }
+}
+
 module "generate_card_lambda" {
   source = "../lambda"
 

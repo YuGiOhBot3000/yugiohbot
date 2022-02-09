@@ -6,7 +6,7 @@ import {
   CARD_NAME_STYLES,
   CARD_NAME_COLORS,
 } from "../src/constants";
-import { Layout, Rarities } from "../src/types";
+import { Layout, Rarities } from "@yugiohbot/types";
 
 import { applyCardName } from "../src/cardName";
 
@@ -44,7 +44,9 @@ describe("Card Name", () => {
           expect(context.font).toBe(
             `${CARD_NAME_STYLES[cardType].fontStyle} ${CARD_NAME_STYLES[cardType].fontWeight} ${CARD_NAME_STYLES[cardType].fontSize}px ${CARD_NAME_STYLES[cardType].fontFamily}`
           );
-          expect(context.fillStyle).toBe(CARD_NAME_COLORS[color].base.color);
+          expect(context.fillStyle).toBe(
+            CARD_NAME_COLORS[color as keyof typeof CARD_NAME_COLORS].base.color
+          );
 
           expect(fillTextSpy).toBeCalledTimes(2);
           expect(fillTextSpy).toBeCalledWith(
@@ -86,7 +88,9 @@ describe("Card Name", () => {
           expect(context.font).toBe(
             `${CARD_NAME_STYLES[cardType].fontStyle} ${CARD_NAME_STYLES[cardType].fontWeight} ${CARD_NAME_STYLES[cardType].fontSize}px ${CARD_NAME_STYLES[cardType].fontFamily}`
           );
-          expect(context.fillStyle).toBe(CARD_NAME_COLORS[color].base.color);
+          expect(context.fillStyle).toBe(
+            CARD_NAME_COLORS[color as keyof typeof CARD_NAME_COLORS].base.color
+          );
 
           expect(fillTextSpy).toBeCalledTimes(2);
           expect(fillTextSpy).toBeCalledWith(

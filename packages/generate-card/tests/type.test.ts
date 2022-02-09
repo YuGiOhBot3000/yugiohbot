@@ -2,7 +2,7 @@ import canvas, { createCanvas, Image } from "canvas";
 
 import { CARD_HEIGHT, CARD_WIDTH, TYPE_STYLES } from "../src/constants";
 
-import { Icon, Layout } from "../src/types";
+import { Icon, Layout } from "@yugiohbot/types";
 import { applyType } from "../src/type";
 
 describe("Type", () => {

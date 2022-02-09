@@ -1,7 +1,7 @@
 import canvas, { createCanvas, Image } from "canvas";
 
 import { CARD_WIDTH, CARD_HEIGHT, STYLES } from "../src/constants";
-import { Rarities } from "../src/types";
+import { Rarities } from "@yugiohbot/types";
 
 import { applyImage } from "../src/image";
 
@@ -38,10 +38,10 @@ describe("Image", () => {
         expect(drawImageSpy).toBeCalledTimes(1);
         expect(drawImageSpy).toBeCalledWith(
           { image: true },
-          STYLES[style].left,
-          STYLES[style].top,
-          STYLES[style].width,
-          STYLES[style].height
+          STYLES[style as keyof typeof STYLES].left,
+          STYLES[style as keyof typeof STYLES].top,
+          STYLES[style as keyof typeof STYLES].width,
+          STYLES[style as keyof typeof STYLES].height
         );
       }
     );
@@ -66,10 +66,10 @@ describe("Image", () => {
         expect(drawImageSpy).toBeCalledTimes(2);
         expect(drawImageSpy).toBeCalledWith(
           { image: true },
-          STYLES[style].left,
-          STYLES[style].top,
-          STYLES[style].width,
-          STYLES[style].height
+          STYLES[style as keyof typeof STYLES].left,
+          STYLES[style as keyof typeof STYLES].top,
+          STYLES[style as keyof typeof STYLES].width,
+          STYLES[style as keyof typeof STYLES].height
         );
       }
     );

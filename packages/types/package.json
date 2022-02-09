@@ -1,0 +1,22 @@
+{
+  "name": "@yugiohbot/types",
+  "version": "1.0.0",
+  "description": "Shared types for Yu-Gi-Oh Bot packages",
+  "main": "dist/index.js",
+  "devDependencies": {
+    "typescript": "^4.5.5"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YuGiOhBot3000/yugiohbot.git"
+  },
+  "author": "Miles Bardon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YuGiOhBot3000/yugiohbot/issues"
+  },
+  "homepage": "https://github.com/YuGiOhBot3000/yugiohbot#readme"
+}

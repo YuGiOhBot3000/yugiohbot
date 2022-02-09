@@ -1,7 +1,7 @@
 import { createCanvas } from "canvas";
 
 import { CARD_HEIGHT, CARD_WIDTH, STAT_STYLES } from "../src/constants";
-import { Layout } from "../src/types";
+import { Layout } from "@yugiohbot/types";
 
 import { applyAtk, applyDef } from "../src/stats";
 

@@ -1,6 +1,6 @@
 import { loadImage, CanvasRenderingContext2D } from "canvas";
 import { LINK_MARKERS, LINK_STYLE } from "./constants";
-import { Layout, Link } from "./types";
+import { Layout, Link } from "@yugiohbot/types";
 
 type LinkProps = {
   context: CanvasRenderingContext2D;

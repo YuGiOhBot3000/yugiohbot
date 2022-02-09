@@ -1,7 +1,7 @@
 import { CanvasRenderingContext2D } from "canvas";
 
 import { CARD_NAME_STYLES, CARD_NAME_COLORS } from "./constants";
-import { Layout, Rarities } from "./types";
+import { Layout, Rarities } from "@yugiohbot/types";
 
 type Props = {
   context: CanvasRenderingContext2D;
