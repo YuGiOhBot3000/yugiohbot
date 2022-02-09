@@ -15,6 +15,12 @@ resource "aws_iam_role" "lambda_role" {
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
+resource "aws_iam_role" "card_randomiser_role" {
+  name = "card_randomiser_role"
+
+  assume_role_policy = data.aws_iam_policy_document.assume_role.json
+}
+
 resource "aws_iam_role" "card_generator_role" {
   name = "card_generator_role"
 
@@ -39,7 +45,9 @@ resource "aws_iam_policy" "access_s3" {
         Effect = "Allow"
         Resource = [
           "${aws_s3_bucket.card_bucket.arn}",
-          "${aws_s3_bucket.card_bucket.arn}/*"
+          "${aws_s3_bucket.card_bucket.arn}/*",
+          "${aws_s3_bucket.card_image_bucket.arn}",
+          "${aws_s3_bucket.card_image_bucket.arn}/*",
         ]
       }
     ]
@@ -49,6 +57,7 @@ resource "aws_iam_policy" "access_s3" {
 resource "aws_iam_policy_attachment" "s3_attach" {
   name = "${var.app_name}-s3-attachment"
   roles = [
+    aws_iam_role.card_randomiser_role.name,
     aws_iam_role.card_generator_role.name,
   ]
   policy_arn = aws_iam_policy.access_s3.arn
