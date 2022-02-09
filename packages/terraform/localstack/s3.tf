@@ -1,6 +1,14 @@
 resource "aws_s3_bucket" "card_bucket" {
   bucket = "${var.app_name}-cards"
   acl    = "private"
+
+  lifecycle_rule {
+    enabled = true
+
+    expiration {
+      days = 1
+    }
+  }
 }
 
 resource "aws_s3_bucket" "card_image_bucket" {
@@ -8,7 +16,6 @@ resource "aws_s3_bucket" "card_image_bucket" {
   acl    = "public-read"
 
   lifecycle_rule {
-    id      = "delete after 1 day"
     enabled = true
 
     expiration {
