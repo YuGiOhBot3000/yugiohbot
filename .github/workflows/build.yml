@@ -43,6 +43,7 @@ jobs:
         run: |
           id=$(docker create canvas-libs)
           docker cp $id:/root/dist ./packages/generate-card
+          docker cp $id:/root/dist ./packages/randomise-card
           docker rm -v $id
 
       - name: Upload packages
