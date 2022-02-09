@@ -38,7 +38,7 @@ describe("Handler", () => {
         prompt: `normal ->`,
         stop: "\n",
         max_tokens: 100,
-        temperature: 0.7,
+        temperature: 0.9,
         model: FINE_TUNES.MONSTERS,
       });
       expect(callback).toBeCalledWith(null, {
@@ -62,7 +62,7 @@ describe("Handler", () => {
         prompt: `flip effect ->`,
         stop: "\n",
         max_tokens: 100,
-        temperature: 0.7,
+        temperature: 0.9,
         model: FINE_TUNES.EFFECTS,
       });
       expect(callback).toBeCalledWith(null, {
@@ -86,7 +86,7 @@ describe("Handler", () => {
         prompt: `trap ->`,
         stop: "\n",
         max_tokens: 100,
-        temperature: 0.7,
+        temperature: 0.9,
         model: FINE_TUNES.CARDS,
       });
       expect(callback).toBeCalledWith(null, {

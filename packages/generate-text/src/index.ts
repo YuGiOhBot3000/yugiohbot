@@ -25,7 +25,7 @@ export const handler: Handler = async (_event, _context, callback) => {
     prompt: `${selectedCardType} ->`,
     stop: "\n",
     max_tokens: 100,
-    temperature: 0.7,
+    temperature: 0.9,
     model: FINE_TUNES.CARDS,
   };
 
