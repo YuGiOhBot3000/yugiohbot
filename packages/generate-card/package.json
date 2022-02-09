@@ -4,7 +4,6 @@
   "description": "Generates a Yu-Gi-Oh card from the passed parameters",
   "main": "dist/index.js",
   "devDependencies": {
-    "@aws-sdk/client-s3": "^3.50.0",
     "@babel/preset-env": "7.16.11",
     "@babel/preset-typescript": "7.16.7",
     "@types/aws-lambda": "^8.10.92",
@@ -43,6 +42,7 @@
   },
   "homepage": "https://github.com/YuGiOhBot3000/yugiohbot#readme",
   "dependencies": {
+    "@aws-sdk/client-s3": "3.49.0",
     "canvas": "^2.9.0",
     "nanoid": "^3.2.0"
   }

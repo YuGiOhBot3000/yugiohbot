@@ -6,6 +6,6 @@
       "@yugiohbot/types": ["../types"]
     }
   },
-  "include": ["./src/**/*", "./tests/**/*"],
+  "include": ["./src/**/*"],
   "references": [{ "path": "../types" }]
 }
