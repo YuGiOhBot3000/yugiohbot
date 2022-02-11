@@ -1,6 +1,7 @@
 import { ReadableStream } from "stream/web";
 
 import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { SSMClient, GetParameterCommand } from "@aws-sdk/client-ssm";
 import { Card } from "@yugiohbot/types";
 
 import { mockClient } from "aws-sdk-client-mock";
@@ -20,6 +21,7 @@ const mockUploadToFacebook = uploadToFacebook as jest.MockedFunction<
 >;
 
 const mockS3Client = mockClient(S3Client);
+const mockSSMClient = mockClient(SSMClient);
 
 jest.spyOn(console, "log").mockImplementation(jest.fn());
 
@@ -32,10 +34,16 @@ describe("Handler", () => {
   beforeAll(() => {
     process.env.AWS_REGION = "eu-central-1";
     process.env.S3_BUCKET = "bucket";
+    process.env.SSM_NAME = "/production/fb-token";
   });
 
   beforeEach(() => {
+    jest.clearAllMocks();
+
     mockS3Client.on(GetObjectCommand).resolves({ Body: buffer });
+    mockSSMClient
+      .on(GetParameterCommand)
+      .resolves({ Parameter: { Value: "mockToken" } });
     mockUploadToFacebook.mockResolvedValue({
       post_id: "1234_5678",
       id: "5678",
@@ -55,14 +63,40 @@ describe("Handler", () => {
       Key: "1234.png",
     });
 
+    expect(mockSSMClient.call(0).args[0].input).toEqual({
+      Name: "/production/fb-token",
+      WithDecryption: true,
+    });
+
     expect(mockUploadToFacebook).toBeCalledWith({
       fileStream: buffer,
       message: expect.any(String),
+      token: "mockToken",
     });
 
     expect(mockCommentOnPost).toBeCalledWith({
       post_id: "1234_5678",
       message: "Card name: Cardy McCardface\nCard image: Card Image",
+      token: "mockToken",
+    });
+  });
+
+  describe("given the SSM parameter can't be found", () => {
+    beforeEach(() => {
+      mockSSMClient.on(GetParameterCommand).resolves({});
+    });
+
+    it("should throw an error", async () => {
+      await expect(
+        handler(
+          { card, cardKey: "1234.png", imageName: "Card Image" },
+          {} as Context,
+          jest.fn()
+        )
+      ).rejects.toThrow("Facebook token not found");
+
+      expect(mockUploadToFacebook).not.toBeCalled();
+      expect(mockCommentOnPost).not.toBeCalled();
     });
   });
 });

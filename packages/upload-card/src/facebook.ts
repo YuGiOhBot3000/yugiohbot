@@ -7,11 +7,13 @@ const FACEBOOK_BASE_URL = "https://graph.facebook.com";
 type UploadProps = {
   fileStream: Readable;
   message: string;
+  token: string;
 };
 
 type CommentProps = {
   post_id: string;
   message: string;
+  token: string;
 };
 
 type UploadResponse = {
@@ -26,6 +28,7 @@ type CommentResponse = {
 export const uploadToFacebook = async ({
   fileStream,
   message,
+  token,
 }: UploadProps) => {
   const bodyFormData = new FormData();
   bodyFormData.append("source", fileStream);
@@ -35,7 +38,7 @@ export const uploadToFacebook = async ({
     bodyFormData,
     {
       params: {
-        access_token: process.env.FACEBOOK_TOKEN,
+        access_token: token,
         message,
       },
       headers: bodyFormData.getHeaders(),
@@ -45,13 +48,17 @@ export const uploadToFacebook = async ({
   return data;
 };
 
-export const commentOnPost = async ({ post_id, message }: CommentProps) => {
+export const commentOnPost = async ({
+  post_id,
+  message,
+  token,
+}: CommentProps) => {
   const { data } = await axios.post<CommentResponse>(
     `${FACEBOOK_BASE_URL}/${post_id}/comments`,
     { message },
     {
       params: {
-        access_token: process.env.FACEBOOK_TOKEN,
+        access_token: token,
       },
     }
   );

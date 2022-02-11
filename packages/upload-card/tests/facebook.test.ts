@@ -9,10 +9,6 @@ jest.mock("axios");
 const mockPost = axios.post as jest.MockedFunction<typeof axios.post>;
 
 describe("Upload", () => {
-  beforeAll(() => {
-    process.env.FACEBOOK_TOKEN = "mockToken";
-  });
-
   beforeEach(() => {
     jest.clearAllMocks();
 
@@ -34,6 +30,7 @@ describe("Upload", () => {
       const result = await uploadToFacebook({
         fileStream: fs.createReadStream(file),
         message: "Hello, World",
+        token: "mockToken",
       });
 
       expect(mockPost).toBeCalledWith(
@@ -55,6 +52,7 @@ describe("Upload", () => {
       const result = await commentOnPost({
         post_id: "1234_5678",
         message: "Hello, World",
+        token: "mockToken",
       });
 
       expect(mockPost).toBeCalledWith(
