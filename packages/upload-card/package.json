@@ -43,8 +43,8 @@
   },
   "homepage": "https://github.com/YuGiOhBot3000/yugiohbot#readme",
   "dependencies": {
-    "@aws-sdk/client-s3": "3.49.0",
-    "@aws-sdk/client-ssm": "^3.49.0",
+    "@aws-sdk/client-s3": "3.50.0",
+    "@aws-sdk/client-ssm": "^3.50.0",
     "axios": "^0.25.0",
     "form-data": "^4.0.0"
   }
