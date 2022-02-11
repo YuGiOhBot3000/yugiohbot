@@ -60,6 +60,26 @@ resource "aws_iam_policy" "access_s3" {
   })
 }
 
+resource "aws_iam_policy" "read_ssm" {
+  name        = "${var.app_name}-read-ssm"
+  description = "Read secret values from SSM"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = [
+          "ssm:GetParameter"
+        ]
+        Effect = "Allow"
+        Resource = [
+          "${aws_ssm_parameter.facebook_token.arn}"
+        ]
+      }
+    ]
+  })
+}
+
 resource "aws_iam_policy_attachment" "s3_attach" {
   name = "${var.app_name}-s3-attachment"
   roles = [
@@ -68,4 +88,12 @@ resource "aws_iam_policy_attachment" "s3_attach" {
     aws_iam_role.upload_card_role.name,
   ]
   policy_arn = aws_iam_policy.access_s3.arn
+}
+
+resource "aws_iam_policy_attachment" "ssm_attach" {
+  name = "${var.app_name}-ssm-attachment"
+  roles = [
+    aws_iam_role.upload_card_role.name,
+  ]
+  policy_arn = aws_iam_policy.read_ssm.arn
 }

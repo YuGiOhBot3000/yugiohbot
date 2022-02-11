@@ -30,6 +30,7 @@ resource "aws_iam_role" "iam_for_sfn" {
             "${module.generate_text_lambda.lambda_arn}",
             "${module.randomise_card_lambda.lambda_arn}",
             "${module.generate_card_lambda.lambda_arn}",
+            "${module.upload_card_lambda.lambda_arn}",
           ]
         },
       ]
@@ -44,6 +45,7 @@ data "template_file" "definition" {
     generateTextArn  = module.generate_text_lambda.lambda_arn
     randomiseCardArn = module.randomise_card_lambda.lambda_arn
     generateCardArn  = module.generate_card_lambda.lambda_arn
+    uploadCardArn    = module.upload_card_lambda.lambda_arn
   }
 }
 
