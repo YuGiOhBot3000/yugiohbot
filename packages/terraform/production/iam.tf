@@ -27,6 +27,12 @@ resource "aws_iam_role" "card_generator_role" {
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
+resource "aws_iam_role" "upload_card_role" {
+  name = "upload_card_role"
+
+  assume_role_policy = data.aws_iam_policy_document.assume_role.json
+}
+
 resource "aws_iam_policy" "access_s3" {
   name        = "${var.app_name}-access-s3"
   description = "Access required commands on specific S3 buckets"
@@ -59,6 +65,7 @@ resource "aws_iam_policy_attachment" "s3_attach" {
   roles = [
     aws_iam_role.card_randomiser_role.name,
     aws_iam_role.card_generator_role.name,
+    aws_iam_role.upload_card_role.name,
   ]
   policy_arn = aws_iam_policy.access_s3.arn
 }
