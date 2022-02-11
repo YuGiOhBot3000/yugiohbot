@@ -53,6 +53,11 @@
       "InputPath": "$.card",
       "Resource": "${generateCardArn}",
       "ResultPath": "$.cardKey",
+      "Next": "Upload Card"
+    },
+    "Upload Card": {
+      "Type": "Task",
+      "Resource": "${uploadCardArn}",
       "End": true
     },
     "Failure": {

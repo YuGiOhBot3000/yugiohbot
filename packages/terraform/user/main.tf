@@ -72,6 +72,28 @@ resource "aws_iam_group_policy" "s3" {
   })
 }
 
+resource "aws_iam_group_policy" "ssm" {
+  name  = "DeploySSMParameters"
+  group = data.aws_iam_group.deployer.group_name
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "ssm:DescribeParameters",
+          "ssm:GetParameter*",
+          "ssm:PutParameter",
+          "ssm:List*",
+          "ssm:DeleteParameter"
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
+}
+
 resource "aws_iam_group_policy" "lambda" {
   name  = "DeployLambda"
   group = data.aws_iam_group.deployer.group_name
