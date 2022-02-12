@@ -1,5 +1,4 @@
-const randomElement = <T>(arr: T[]) =>
-  arr[Math.floor(Math.random() * arr.length)];
+import { randomElement } from "@yugiohbot/utils";
 
 export const createCaption = (title: string) => {
   const options = [

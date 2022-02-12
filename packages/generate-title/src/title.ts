@@ -1,19 +1,9 @@
+import { randomInt, randomElement } from "@yugiohbot/utils";
+
 type TitleParts = {
   nouns: string[];
   adjectives: string[];
 };
-
-/**
- * Generates a random integer between min and max inclusive
- * @param min Start of the range
- * @param max End of the range
- * @returns Random integer
- */
-const randomInt = (min: number, max: number) =>
-  Math.floor(Math.random() * (max - min + 1) + min);
-
-const randomElement = (arr: string[]) =>
-  arr[Math.floor(Math.random() * arr.length)];
 
 export const createTitle = ({ nouns, adjectives }: TitleParts) => {
   if (!nouns.length && !adjectives.length) {
