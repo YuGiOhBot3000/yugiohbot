@@ -60,6 +60,8 @@ resource "aws_lambda_function" "function" {
   timeout     = var.timeout
   memory_size = var.memory_size
 
+  layers = var.layers
+
   environment {
     variables = var.environment_variables
   }
