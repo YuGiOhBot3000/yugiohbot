@@ -21,6 +21,7 @@ export const applyImage = async ({
   context.drawImage(image, style.left, style.top, style.width, style.height);
 
   if (rarity === Rarities.SECRET || rarity === Rarities.ULTRA) {
+    context.save();
     context.globalCompositeOperation = "color-dodge";
     const foilImage = await loadImage("assets/foil/Secret.png");
     context.drawImage(
@@ -30,5 +31,6 @@ export const applyImage = async ({
       style.width,
       style.height
     );
+    context.restore();
   }
 };
