@@ -1,5 +1,5 @@
 import { Race } from "@yugiohbot/types";
-import { capitalizeFirstLetter, randomElement } from "./utils";
+import { capitalizeFirstLetter, randomElement } from "@yugiohbot/utils";
 
 export const createType = (base: string) => {
   const race = randomElement<Race>(Object.values(Race));

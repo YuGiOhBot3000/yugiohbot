@@ -3,9 +3,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@yugiohbot/types": ["../types"]
+      "@yugiohbot/types": ["../types"],
+      "@yugiohbot/utils": ["../utils"]
     }
   },
   "include": ["./src/**/*"],
-  "references": [{ "path": "../types" }]
+  "references": [{ "path": "../types" }, { "path": "../utils" }]
 }

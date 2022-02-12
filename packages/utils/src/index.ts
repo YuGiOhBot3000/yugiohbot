@@ -20,5 +20,18 @@ export const randomElement = <T>(arr: T[]) =>
  */
 export const randomBool = () => Math.random() < 0.5;
 
+/**
+ * Rounds a number up to the nearest value
+ * @param n Number to round up
+ * @param to Division to round up to. E.g. 100 for the nearest 100
+ * @returns Rounded number. E.g. `roundUp(245, 100) === 300`
+ */
+export const roundUp = (n: number, to: number) => Math.ceil(n / to) * to;
+
+/**
+ * Capitalizes the first letter of any string
+ * @param s String to be capitalized
+ * @returns `capitalizeFirstLetter('hello world') === 'Hello world'`
+ */
 export const capitalizeFirstLetter = (s: string) =>
   s.charAt(0).toUpperCase() + s.slice(1);

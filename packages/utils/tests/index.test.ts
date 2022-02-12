@@ -3,7 +3,8 @@ import {
   randomElement,
   randomBool,
   capitalizeFirstLetter,
-} from "../src/utils";
+  roundUp,
+} from "../src/index";
 
 describe("Utils", () => {
   beforeEach(() => {
@@ -31,6 +32,12 @@ describe("Utils", () => {
     it("should return a random boolean", () => {
       expect(randomBool()).toBe(true);
       expect(randomBool()).toBe(false);
+    });
+  });
+
+  describe("roundUp", () => {
+    it("should round up to the nearest 100", () => {
+      expect(roundUp(150, 100)).toBe(200);
     });
   });
 

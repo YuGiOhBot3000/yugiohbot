@@ -10,7 +10,7 @@ describe("Stats", () => {
       { level: 0, expected: 0 },
       { level: 1, expected: 500 },
       { level: 2, expected: 1000 },
-      { level: 3, expected: 1750 },
+      { level: 3, expected: 1800 },
       { level: 4, expected: 2000 },
       { level: 5, expected: 2600 },
       { level: 6, expected: 2600 },

@@ -4,15 +4,8 @@ import {
   CreateCompletionFromModelRequest,
   OpenAIApi,
 } from "openai";
+import { randomElement } from "@yugiohbot/utils";
 import { CARD_TYPES, EFFECT_MONSTERS, FINE_TUNES, MONSTERS } from "./constants";
-
-/**
- * Selects a random element from the array
- * @param arr The array to select the element from
- * @returns The random element
- */
-const randomElement = (arr: string[]) =>
-  arr[Math.floor(Math.random() * arr.length)];
 
 export const handler: Handler = async (_event, _context, callback) => {
   const configuration = new Configuration({
