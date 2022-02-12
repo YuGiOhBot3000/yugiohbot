@@ -9,6 +9,17 @@ data "aws_iam_policy_document" "assume_role" {
   }
 }
 
+data "aws_iam_policy_document" "assume_events_role" {
+  statement {
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["events.amazonaws.com"]
+    }
+  }
+}
+
 resource "aws_iam_role" "lambda_role" {
   name = "lambda_role"
 
@@ -31,6 +42,12 @@ resource "aws_iam_role" "upload_card_role" {
   name = "upload_card_role"
 
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
+}
+
+resource "aws_iam_role" "invoke_sfn_role" {
+  name = "invoke_sfn_role"
+
+  assume_role_policy = data.aws_iam_policy_document.assume_events_role.json
 }
 
 resource "aws_iam_policy" "access_s3" {
@@ -80,6 +97,26 @@ resource "aws_iam_policy" "read_ssm" {
   })
 }
 
+resource "aws_iam_policy" "invoke_sfn" {
+  name        = "${var.app_name}-invoke-sfn"
+  description = "Invoke Step Functions workflow"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = [
+          "states:StartExecution"
+        ]
+        Effect = "Allow"
+        Resource = [
+          "${aws_sfn_state_machine.state_machine.arn}"
+        ]
+      }
+    ]
+  })
+}
+
 resource "aws_iam_policy_attachment" "s3_attach" {
   name = "${var.app_name}-s3-attachment"
   roles = [
@@ -96,4 +133,12 @@ resource "aws_iam_policy_attachment" "ssm_attach" {
     aws_iam_role.upload_card_role.name,
   ]
   policy_arn = aws_iam_policy.read_ssm.arn
+}
+
+resource "aws_iam_policy_attachment" "sfn_attach" {
+  name = "${var.app_name}-sfn-attachment"
+  roles = [
+    aws_iam_role.invoke_sfn_role.name,
+  ]
+  policy_arn = aws_iam_policy.invoke_sfn.arn
 }
