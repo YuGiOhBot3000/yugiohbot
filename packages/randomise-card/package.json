@@ -31,9 +31,6 @@
     "lint": "eslint ./src/**/*",
     "test": "jest"
   },
-  "jest": {
-    "preset": "ts-jest"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/YuGiOhBot3000/yugiohbot.git"
