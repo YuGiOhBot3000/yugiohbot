@@ -46,6 +46,12 @@
         "card.$": "$.card",
         "imageName.$": "$.imageName"
       },
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "Failure"
+        }
+      ],
       "Next": "Generate Card"
     },
     "Generate Card": {
@@ -53,16 +59,27 @@
       "InputPath": "$.card",
       "Resource": "${generateCardArn}",
       "ResultPath": "$.cardKey",
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "Failure"
+        }
+      ],
       "Next": "Upload Card"
     },
     "Upload Card": {
       "Type": "Task",
       "Resource": "${uploadCardArn}",
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "Failure"
+        }
+      ],
       "End": true
     },
     "Failure": {
-      "Type": "Fail",
-      "Cause": "An invalid command was entered"
+      "Type": "Fail"
     }
   }
 }
