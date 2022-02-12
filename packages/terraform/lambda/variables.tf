@@ -30,6 +30,13 @@ variable "environment_variables" {
   }
 }
 
+variable "layers" {
+  type        = list(string)
+  description = "List of up to 5 layers to apply to the function"
+
+  default = []
+}
+
 variable "lambda_iam_role_arn" {
   description = "Lambda IAM role ARN"
 }

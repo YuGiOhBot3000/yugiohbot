@@ -25,8 +25,12 @@ RUN cp $LIBS/libblkid.so.1 . \
 && cp $LIBS/libfontconfig.so.1 . \
 && cp $LIBS/libpixman-1.so.0 .
 
-WORKDIR $OUT/dist/lib
+WORKDIR $OUT/layers/lib
 
 # copy prebuilt and missing libs
 RUN cp -r $OUT/nodejs/node_modules/canvas/build/Release/. . \
 && cp -a $OUT/lib/. .
+
+WORKDIR $OUT/layers
+
+RUN zip -r -9 layer.zip *
