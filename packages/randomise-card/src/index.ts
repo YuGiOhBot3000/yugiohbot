@@ -50,8 +50,7 @@ export const handler: Handler<Event, Response> = async ({
   const { pendulumEffect, cardEffect } = parseEffect(cardType, text);
 
   const pendulum: Pendulum = {
-    enabled: randomBool(),
-    // TODO: Generate pendulum effects too
+    enabled: cardType.includes("pendulum"),
     effect: pendulumEffect,
     blue: randomInt(0, 9),
     red: randomInt(0, 9),
