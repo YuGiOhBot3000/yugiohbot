@@ -127,6 +127,14 @@ resource "aws_iam_group_policy" "lambda" {
         Resource = "arn:aws:lambda:*:*:function:yugiohbot-*"
       },
       {
+        Sid    = "DevelopLayers"
+        Effect = "Allow"
+        Action = [
+          "lambda:*Layer*"
+        ]
+        Resource = "arn:aws:lambda:*:*:layer:yugiohbot-*"
+      },
+      {
         Sid    = "DevelopEventSourceMappings"
         Effect = "Allow"
         Action = [
