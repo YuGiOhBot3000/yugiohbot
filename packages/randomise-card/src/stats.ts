@@ -1,4 +1,4 @@
-import { randomInt, roundUp } from "./utils";
+import { randomInt, roundUp } from "@yugiohbot/utils";
 
 export const chooseStats = (level: number) => {
   const choose = () => {

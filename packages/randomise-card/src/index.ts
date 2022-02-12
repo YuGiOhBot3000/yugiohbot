@@ -8,7 +8,7 @@ import {
   Pendulum,
   Rarities,
 } from "@yugiohbot/types";
-import { randomBool, randomElement, randomInt } from "./utils";
+import { randomBool, randomElement, randomInt } from "@yugiohbot/utils";
 import { chooseStats } from "./stats";
 import { createType } from "./type";
 import { chooseCardImage } from "./image";
