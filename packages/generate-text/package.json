@@ -2,11 +2,34 @@
   "name": "@yugiohbot/generate-text",
   "version": "1.0.0",
   "description": "Uses OpenAI's GPT-3 API to generate card text",
+  "keywords": [
+    "gpt3",
+    "openai",
+    "yugioh"
+  ],
+  "homepage": "https://github.com/YuGiOhBot3000/yugiohbot#readme",
+  "bugs": {
+    "url": "https://github.com/YuGiOhBot3000/yugiohbot/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YuGiOhBot3000/yugiohbot.git"
+  },
+  "license": "MIT",
+  "author": "Miles Bardon",
   "main": "dist/index.js",
+  "scripts": {
+    "build": "webpack",
+    "lint": "eslint ./src/**/*",
+    "test": "jest"
+  },
+  "dependencies": {
+    "openai": "2.0.2"
+  },
   "devDependencies": {
     "@babel/preset-env": "7.16.11",
     "@babel/preset-typescript": "7.16.7",
-    "@types/aws-lambda": "^8.10.92",
+    "@types/aws-lambda": "8.10.92",
     "@types/jest": "27.4.0",
     "@typescript-eslint/eslint-plugin": "5.11.0",
     "@typescript-eslint/parser": "5.11.0",
@@ -22,28 +45,5 @@
     "webpack": "5.68.0",
     "webpack-cli": "4.9.2",
     "webpack-merge": "5.8.0"
-  },
-  "scripts": {
-    "build": "webpack",
-    "lint": "eslint ./src/**/*",
-    "test": "jest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/YuGiOhBot3000/yugiohbot.git"
-  },
-  "keywords": [
-    "gpt3",
-    "openai",
-    "yugioh"
-  ],
-  "author": "Miles Bardon",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/YuGiOhBot3000/yugiohbot/issues"
-  },
-  "homepage": "https://github.com/YuGiOhBot3000/yugiohbot#readme",
-  "dependencies": {
-    "openai": "^2.0.2"
   }
 }

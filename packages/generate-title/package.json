@@ -2,30 +2,30 @@
   "name": "@yugiohbot/generate-title",
   "version": "1.0.0",
   "description": "Generates a random card title",
+  "homepage": "https://github.com/YuGiOhBot3000/yugiohbot#readme",
+  "bugs": {
+    "url": "https://github.com/YuGiOhBot3000/yugiohbot/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YuGiOhBot3000/yugiohbot.git"
+  },
+  "license": "MIT",
+  "author": "Miles Bardon",
   "main": "dist/index.js",
   "scripts": {
     "build": "webpack",
     "lint": "eslint ./src/**/*",
     "test": "jest"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/YuGiOhBot3000/yugiohbot.git"
-  },
-  "author": "Miles Bardon",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/YuGiOhBot3000/yugiohbot/issues"
-  },
-  "homepage": "https://github.com/YuGiOhBot3000/yugiohbot#readme",
   "devDependencies": {
     "@babel/preset-env": "7.16.11",
     "@babel/preset-typescript": "7.16.7",
-    "@types/aws-lambda": "^8.10.92",
+    "@types/aws-lambda": "8.10.92",
     "@types/jest": "27.4.0",
     "@typescript-eslint/eslint-plugin": "5.11.0",
     "@typescript-eslint/parser": "5.11.0",
-    "copy-webpack-plugin": "^10.2.4",
+    "copy-webpack-plugin": "10.2.4",
     "eslint": "8.9.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-import": "2.25.4",
