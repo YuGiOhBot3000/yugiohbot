@@ -39,7 +39,11 @@ export const handler: Handler<Event, Response> = async ({
   const attribute = randomElement<Attribute>(Object.values(Attribute));
   const id = `YGOBOT${randomInt(0, 99).toString().padStart(2, "0")}`;
 
-  const { pendulumEffect, cardEffect } = parseEffect(cardType, text);
+  const { pendulumEffect, cardEffect } = parseEffect({
+    cardName: title,
+    cardType,
+    effect: text,
+  });
 
   const pendulum: Pendulum = {
     enabled: cardType.includes("pendulum"),

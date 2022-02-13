@@ -1,11 +1,22 @@
-export const parseEffect = (cardType: string, effect: string) => {
+type Props = {
+  cardName: string;
+  cardType: string;
+  effect: string;
+};
+
+export const parseEffect = ({ cardName, cardType, effect }: Props) => {
+  const cardEffect = effect.replace(
+    /effect of '.*?'/gm,
+    `effect of '${cardName}'`
+  );
+
   const result = {
     pendulumEffect: "",
-    cardEffect: effect,
+    cardEffect,
   };
 
   if (cardType.includes("pendulum")) {
-    const parts = effect
+    const parts = cardEffect
       .replace("\n", "")
       .replace(/-{2,}/gm, "")
       .replace("[ Pendulum Effect ]", "")
