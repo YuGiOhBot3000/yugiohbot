@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "3.51.0",
-    "axios": "0.25.0",
+    "axios": "0.26.0",
     "canvas": "2.9.0"
   },
   "devDependencies": {
