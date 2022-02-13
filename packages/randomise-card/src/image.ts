@@ -50,7 +50,7 @@ export const getRandomOfficialImage = async () => {
 
     url = data.card_images?.[0].image_url;
     ({ id, type, name } = data);
-  } while (type.includes("pendulum"));
+  } while (type.toLowerCase().includes("pendulum"));
 
   return { id, url, name };
 };
