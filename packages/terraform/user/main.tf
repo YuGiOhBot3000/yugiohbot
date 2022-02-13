@@ -1,27 +1,31 @@
+variable "app_name" {
+  default = "yugiohbot"
+}
+
 resource "aws_iam_user" "terraform" {
-  name = "yugiohbot-terraform"
+  name = "${var.app_name}-terraform"
 }
 
 resource "aws_iam_access_key" "key" {
   user = aws_iam_user.terraform.name
 }
 
-data "aws_iam_group" "deployer" {
-  group_name = "deployer"
+resource "aws_iam_group" "deployer" {
+  name = "${var.app_name}-deployer"
 }
 
 resource "aws_iam_group_membership" "deployers" {
-  name = "deployer-group-membership"
+  name = "${var.app_name}-deployer-group-membership"
 
   users = [
     aws_iam_user.terraform.name
   ]
 
-  group = data.aws_iam_group.deployer.group_name
+  group = aws_iam_group.deployer.name
 }
 
 resource "aws_iam_user_policy" "s3backend" {
-  name = "TerraformBackendAccess"
+  name = "${var.app_name}-TerraformBackendAccess"
   user = aws_iam_user.terraform.name
 
   policy = jsonencode({
@@ -48,8 +52,8 @@ resource "aws_iam_user_policy" "s3backend" {
 }
 
 resource "aws_iam_group_policy" "s3" {
-  name  = "DeployS3Bucket"
-  group = data.aws_iam_group.deployer.group_name
+  name  = "${var.app_name}-DeployS3Bucket"
+  group = aws_iam_group.deployer.name
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -73,8 +77,8 @@ resource "aws_iam_group_policy" "s3" {
 }
 
 resource "aws_iam_group_policy" "ssm" {
-  name  = "DeploySSMParameters"
-  group = data.aws_iam_group.deployer.group_name
+  name  = "${var.app_name}-DeploySSMParameters"
+  group = aws_iam_group.deployer.name
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -95,8 +99,8 @@ resource "aws_iam_group_policy" "ssm" {
 }
 
 resource "aws_iam_group_policy" "lambda" {
-  name  = "DeployLambda"
-  group = data.aws_iam_group.deployer.group_name
+  name  = "${var.app_name}-DeployLambda"
+  group = aws_iam_group.deployer.name
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -177,8 +181,8 @@ resource "aws_iam_group_policy" "lambda" {
 }
 
 resource "aws_iam_group_policy" "cloudwatch" {
-  name  = "CreateCloudwatchLogGroups"
-  group = data.aws_iam_group.deployer.group_name
+  name  = "${var.app_name}-CreateCloudwatchLogGroups"
+  group = aws_iam_group.deployer.name
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -199,8 +203,8 @@ resource "aws_iam_group_policy" "cloudwatch" {
 }
 
 resource "aws_iam_group_policy" "iam" {
-  name  = "ManageIAMRoles"
-  group = data.aws_iam_group.deployer.group_name
+  name  = "${var.app_name}-ManageIAMRoles"
+  group = aws_iam_group.deployer.name
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -230,8 +234,8 @@ resource "aws_iam_group_policy" "iam" {
 }
 
 resource "aws_iam_group_policy" "stepfunctions" {
-  name  = "DeployStepFunctions"
-  group = data.aws_iam_group.deployer.group_name
+  name  = "${var.app_name}-DeployStepFunctions"
+  group = aws_iam_group.deployer.name
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -261,8 +265,8 @@ resource "aws_iam_group_policy" "stepfunctions" {
 }
 
 resource "aws_iam_group_policy" "events" {
-  name  = "ManageCloudwatchEvents"
-  group = data.aws_iam_group.deployer.group_name
+  name  = "${var.app_name}-ManageCloudwatchEvents"
+  group = aws_iam_group.deployer.name
 
   policy = jsonencode({
     Version = "2012-10-17"
