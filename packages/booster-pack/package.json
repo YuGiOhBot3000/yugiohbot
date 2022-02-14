@@ -25,6 +25,8 @@
     "webpack-merge": "5.8.0"
   },
   "scripts": {
+    "build": "webpack",
+    "lint": "eslint ./src/**/*",
     "test": "jest"
   },
   "repository": {
