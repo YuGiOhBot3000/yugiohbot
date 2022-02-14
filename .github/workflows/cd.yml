@@ -27,3 +27,4 @@ jobs:
       aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       openai_api_key: ${{ secrets.OPENAI_API_KEY }}
       facebook_token: ${{ secrets.FACEBOOK_TOKEN }}
+      facebook_album_id: ${{ secrets.FACEBOOK_ALBUM_ID }}

@@ -16,6 +16,8 @@ on:
         required: true
       facebook_token:
         required: true
+      facebook_album_id:
+        required: true
 
 jobs:
   deploy:
@@ -59,4 +61,5 @@ jobs:
           terraform apply \
             -var="openai_api_key=${{ secrets.openai_api_key }}" \
             -var="facebook_token=${{ secrets.facebook_token }}" \
+            -var="facebook_album_id=${{ secrets.facebook_album_id }}" \
             -auto-approve

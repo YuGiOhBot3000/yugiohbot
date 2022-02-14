@@ -50,6 +50,12 @@ resource "aws_iam_role" "invoke_sfn_role" {
   assume_role_policy = data.aws_iam_policy_document.assume_events_role.json
 }
 
+resource "aws_iam_role" "invoke_booster_role" {
+  name = "invoke_booster_role"
+
+  assume_role_policy = data.aws_iam_policy_document.assume_role.json
+}
+
 resource "aws_iam_policy" "access_s3" {
   name        = "${var.app_name}-access-s3"
   description = "Access required commands on specific S3 buckets"
@@ -117,6 +123,26 @@ resource "aws_iam_policy" "invoke_sfn" {
   })
 }
 
+resource "aws_iam_policy" "invoke_booster_pack" {
+  name        = "${var.app_name}-invoke-booster"
+  description = "Invoke booster-pack lambda"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = [
+          "lambda:InvokeFunction"
+        ]
+        Effect = "Allow"
+        Resource = [
+          "${module.booster_pack_lambda.lambda_arn}"
+        ]
+      }
+    ]
+  })
+}
+
 resource "aws_iam_policy_attachment" "s3_attach" {
   name = "${var.app_name}-s3-attachment"
   roles = [
@@ -141,4 +167,12 @@ resource "aws_iam_policy_attachment" "sfn_attach" {
     aws_iam_role.invoke_sfn_role.name,
   ]
   policy_arn = aws_iam_policy.invoke_sfn.arn
+}
+
+resource "aws_iam_policy_attachment" "booster_attach" {
+  name = "${var.app_name}-sfn-attachment"
+  roles = [
+    aws_iam_role.invoke_booster_role.name,
+  ]
+  policy_arn = aws_iam_policy.invoke_booster_pack.arn
 }
