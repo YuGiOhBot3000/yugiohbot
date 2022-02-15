@@ -13,7 +13,7 @@ resource "aws_cloudwatch_event_target" "run_bot_every_hour" {
 resource "aws_cloudwatch_event_rule" "every_week" {
   name                = "booster-pack-every-week"
   description         = "Fires once a week"
-  schedule_expression = "cron(23 0 * * 6)"
+  schedule_expression = "cron(23 0 * * 6 *)"
 }
 
 resource "aws_cloudwatch_event_target" "run_booster_pack_every_week" {
