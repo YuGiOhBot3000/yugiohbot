@@ -17,7 +17,15 @@ resource "aws_cloudwatch_event_rule" "every_week" {
 }
 
 resource "aws_cloudwatch_event_target" "run_booster_pack_every_week" {
-  rule     = aws_cloudwatch_event_rule.every_week.name
-  arn      = module.booster_pack_lambda.lambda_arn
-  role_arn = aws_iam_role.invoke_sfn_role.arn
+  rule      = aws_cloudwatch_event_rule.every_week.name
+  target_id = "lambda"
+  arn       = module.booster_pack_lambda.lambda_arn
+}
+
+resource "aws_lambda_permission" "allow_cloudwatch_to_call_booster_pack" {
+  statement_id  = "AllowBoosterPackExecutionFromCloudWatch"
+  action        = "lambda:InvokeFunction"
+  function_name = module.booster_pack_lambda.lambda_function_name
+  principal     = "events.amazonaws.com"
+  source_arn    = aws_cloudwatch_event_rule.every_week.arn
 }
