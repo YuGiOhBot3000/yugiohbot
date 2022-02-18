@@ -56,6 +56,12 @@ resource "aws_iam_role" "invoke_booster_role" {
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
+resource "aws_iam_role" "signed_url_role" {
+  name = "signed_url_role"
+
+  assume_role_policy = data.aws_iam_policy_document.assume_role.json
+}
+
 resource "aws_iam_policy" "access_s3" {
   name        = "${var.app_name}-access-s3"
   description = "Access required commands on specific S3 buckets"
@@ -77,6 +83,27 @@ resource "aws_iam_policy" "access_s3" {
           "${aws_s3_bucket.card_bucket.arn}/*",
           "${aws_s3_bucket.card_image_bucket.arn}",
           "${aws_s3_bucket.card_image_bucket.arn}/*",
+        ]
+      }
+    ]
+  })
+}
+
+resource "aws_iam_policy" "sign_s3_uploads" {
+  name        = "${var.app_name}-sign-s3-uploads"
+  description = "Allow signed uploads to specific S3 buckets"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = [
+          "s3:PutObject"
+        ]
+        Effect = "Allow"
+        Resource = [
+          "${aws_s3_bucket.public_submission_bucket.arn}",
+          "${aws_s3_bucket.public_submission_bucket.arn}/*",
         ]
       }
     ]
@@ -151,6 +178,14 @@ resource "aws_iam_policy_attachment" "s3_attach" {
     aws_iam_role.upload_card_role.name,
   ]
   policy_arn = aws_iam_policy.access_s3.arn
+}
+
+resource "aws_iam_policy_attachment" "s3_upload_attach" {
+  name = "${var.app_name}-s3-upload-attachment"
+  roles = [
+    aws_iam_role.signed_url_role.name,
+  ]
+  policy_arn = aws_iam_policy.sign_s3_uploads.arn
 }
 
 resource "aws_iam_policy_attachment" "ssm_attach" {
