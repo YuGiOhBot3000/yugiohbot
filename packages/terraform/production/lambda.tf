@@ -82,7 +82,33 @@ module "booster_pack_lambda" {
   lambda_iam_role_name = aws_iam_role.lambda_role.name
   environment_variables = {
     FACEBOOK_ALBUM_ID = var.facebook_album_id
-    SSM_NAME  = aws_ssm_parameter.facebook_token.name
+    SSM_NAME          = aws_ssm_parameter.facebook_token.name
+  }
+}
+
+module "signed_url_lambda" {
+  source = "../lambda"
+
+  app_name             = var.app_name
+  function_name        = "signed-url"
+  runtime              = "nodejs14.x"
+  lambda_iam_role_arn  = aws_iam_role.signed_url_role.arn
+  lambda_iam_role_name = aws_iam_role.signed_url_role.name
+  environment_variables = {
+    S3_BUCKET = aws_s3_bucket.public_submission_bucket.bucket
+  }
+}
+
+module "moderate_image_lambda" {
+  source = "../lambda"
+
+  app_name             = var.app_name
+  function_name        = "moderate-image"
+  runtime              = "nodejs14.x"
+  lambda_iam_role_arn  = aws_iam_role.moderate_image_role.arn
+  lambda_iam_role_name = aws_iam_role.moderate_image_role.name
+  environment_variables = {
+    S3_PRIVATE_BUCKET = aws_s3_bucket.private_submission_bucket.bucket
   }
 }
 
