@@ -98,6 +98,38 @@ resource "aws_iam_group_policy" "ssm" {
   })
 }
 
+resource "aws_iam_group_policy" "apigateway" {
+  name  = "${var.app_name}-DeployAPIGateway"
+  group = aws_iam_group.deployer.name
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid = "APIGatewayAdmin"
+        Action = [
+          "apigateway:GET",
+          "apigateway:PATCH",
+          "apigateway:POST",
+          "apigateway:DELETE"
+        ]
+        Effect   = "Allow"
+        Resource = "arn:aws:apigateway:*::/*"
+      },
+      {
+        Sid = "Logs"
+        Action = [
+          "logs:CreateLogDelivery",
+          "logs:ListLogDeliveries",
+          "logs:DeleteLogDelivery"
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      }
+    ]
+  })
+}
+
 resource "aws_iam_group_policy" "lambda" {
   name  = "${var.app_name}-DeployLambda"
   group = aws_iam_group.deployer.name
