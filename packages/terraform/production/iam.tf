@@ -62,6 +62,12 @@ resource "aws_iam_role" "signed_url_role" {
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
+resource "aws_iam_role" "moderate_image_role" {
+  name = "moderate_image_role"
+
+  assume_role_policy = data.aws_iam_policy_document.assume_role.json
+}
+
 resource "aws_iam_policy" "access_s3" {
   name        = "${var.app_name}-access-s3"
   description = "Access required commands on specific S3 buckets"
@@ -104,6 +110,55 @@ resource "aws_iam_policy" "sign_s3_uploads" {
         Resource = [
           "${aws_s3_bucket.public_submission_bucket.arn}",
           "${aws_s3_bucket.public_submission_bucket.arn}/*",
+        ]
+      }
+    ]
+  })
+}
+
+resource "aws_iam_policy" "transfer_s3_objects" {
+  name        = "${var.app_name}-transfer-s3-objects"
+  description = "Allow Objects to be moved from one bucket to another"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = [
+          "s3:PutObject",
+        ]
+        Effect = "Allow"
+        Resource = [
+          "${aws_s3_bucket.private_submission_bucket.arn}/*",
+        ]
+      },
+      {
+        Action = [
+          "s3:GetObject",
+        ]
+        Effect = "Allow"
+        Resource = [
+          "${aws_s3_bucket.public_submission_bucket.arn}/*",
+        ]
+      }
+    ]
+  })
+}
+
+resource "aws_iam_policy" "moderate_images" {
+  name        = "${var.app_name}-moderate-images"
+  description = "Allow Images to be moderated with AWS Rekognition"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = [
+          "rekognition:DetectModerationLabels"
+        ]
+        Effect = "Allow"
+        Resource = [
+          "*",
         ]
       }
     ]
@@ -210,4 +265,20 @@ resource "aws_iam_policy_attachment" "booster_attach" {
     aws_iam_role.invoke_booster_role.name,
   ]
   policy_arn = aws_iam_policy.invoke_booster_pack.arn
+}
+
+resource "aws_iam_policy_attachment" "transfer_attach" {
+  name = "${var.app_name}-transfer-attachment"
+  roles = [
+    aws_iam_role.moderate_image_role.name,
+  ]
+  policy_arn = aws_iam_policy.transfer_s3_objects.arn
+}
+
+resource "aws_iam_policy_attachment" "moderate_attach" {
+  name = "${var.app_name}-moderation-attachment"
+  roles = [
+    aws_iam_role.moderate_image_role.name,
+  ]
+  policy_arn = aws_iam_policy.moderate_images.arn
 }

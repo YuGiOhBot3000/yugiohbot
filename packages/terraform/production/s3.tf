@@ -45,8 +45,9 @@ resource "aws_s3_bucket_policy" "object_public_by_default" {
 }
 
 resource "aws_s3_bucket" "public_submission_bucket" {
-  bucket = "${var.app_name}-public-submissions"
-  acl    = "private"
+  bucket        = "${var.app_name}-public-submissions"
+  acl           = "private"
+  force_destroy = true
 
   lifecycle_rule {
     enabled = true
