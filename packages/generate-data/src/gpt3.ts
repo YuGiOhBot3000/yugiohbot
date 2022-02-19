@@ -49,6 +49,8 @@ export const createFineTune = async (uploadFilename: string) => {
     "fine-tune"
   );
 
+  if (!filename) return;
+
   return openai.createFineTune({
     training_file: filename,
     model: "ada",
