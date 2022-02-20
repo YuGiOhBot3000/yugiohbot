@@ -29,6 +29,7 @@ export const handler: Handler<Card> = async (event) => {
     filename: event.image,
     pendulum: event.pendulum.enabled,
     rarity: event.rarity,
+    layout: event.layout,
   });
 
   await applyBorder({

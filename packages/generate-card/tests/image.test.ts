@@ -1,7 +1,7 @@
 import canvas, { createCanvas, Image } from "canvas";
 
 import { CARD_WIDTH, CARD_HEIGHT, STYLES } from "../src/constants";
-import { Rarities } from "@yugiohbot/types";
+import { Layout, Rarity } from "@yugiohbot/types";
 
 import { applyImage } from "../src/image";
 
@@ -20,16 +20,18 @@ describe("Image", () => {
     });
 
     it.each([
-      ["normal", false],
-      ["pendulum", true],
+      ["normal", Layout.NORMAL, false],
+      ["pendulum", Layout.NORMAL, true],
+      ["pendulum", Layout.UNITY, false],
     ])(
       "should draw a common image with a %s style",
-      async (style, pendulum) => {
+      async (style, layout, pendulum) => {
         await applyImage({
           context,
           filename: "image.png",
           pendulum,
-          rarity: Rarities.COMMON,
+          rarity: Rarity.COMMON,
+          layout,
         });
 
         expect(loadImageSpy).toBeCalledTimes(1);
@@ -47,8 +49,8 @@ describe("Image", () => {
     );
 
     it.each([
-      [Rarities.SECRET, "normal", false],
-      [Rarities.ULTRA, "pendulum", true],
+      [Rarity.SECRET, "normal", false],
+      [Rarity.ULTRA, "pendulum", true],
     ])(
       "should draw a foil image with a %s rarity",
       async (rarity, style, pendulum) => {
@@ -57,6 +59,7 @@ describe("Image", () => {
           filename: "image.png",
           pendulum,
           rarity,
+          layout: Layout.NORMAL,
         });
 
         expect(loadImageSpy).toBeCalledTimes(2);

@@ -97,7 +97,7 @@ export const TYPE_STYLES = {
       fontSize: 16,
       fontWeight: 800,
 
-      left: 40,
+      left: 420 - 40,
       top: 75,
       width: 340,
       height: 20,
