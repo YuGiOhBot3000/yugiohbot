@@ -1,6 +1,6 @@
 provider "aws" {
-  region  = "eu-central-1"
-  profile = "yugiohbot"
+  region = "eu-central-1"
+  # profile = "yugiohbot"
 }
 
 terraform {
