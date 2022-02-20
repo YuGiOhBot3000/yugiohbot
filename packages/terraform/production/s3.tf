@@ -58,6 +58,17 @@ resource "aws_s3_bucket" "public_submission_bucket" {
   }
 }
 
+resource "aws_s3_bucket_cors_configuration" "public_cors" {
+  bucket = aws_s3_bucket.public_submission_bucket.bucket
+
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_methods = ["PUT"]
+    allowed_origins = ["*"]
+    max_age_seconds = 3000
+  }
+}
+
 resource "aws_s3_bucket" "private_submission_bucket" {
   bucket = "${var.app_name}-private-submissions"
   acl    = "private"
