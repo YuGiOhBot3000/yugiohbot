@@ -24,88 +24,107 @@ export const handler: Handler<Card> = async (event) => {
   const canvas = createCanvas(CARD_WIDTH, CARD_HEIGHT);
   const context = canvas.getContext("2d");
 
+  const {
+    atk,
+    attribute,
+    copyright,
+    def,
+    effect,
+    icon,
+    id,
+    image,
+    layout,
+    level,
+    link,
+    name,
+    pendulum,
+    rarity,
+    serial,
+    type,
+  } = event;
+
   await applyImage({
     context,
-    filename: event.image,
-    pendulum: event.pendulum.enabled,
-    rarity: event.rarity,
-    layout: event.layout,
+    filename: image,
+    pendulum: pendulum.enabled,
+    rarity,
+    layout,
   });
 
   await applyBorder({
     context,
-    layout: event.layout,
-    pendulum: event.pendulum.enabled,
+    layout,
+    pendulum: pendulum.enabled,
   });
 
   applyCardName({
     context,
-    name: event.name,
-    layout: event.layout,
-    rarity: event.rarity,
+    name,
+    layout,
+    rarity,
   });
 
   await applyAttribute({
     context,
-    attribute: event.attribute,
-    layout: event.layout,
+    attribute,
+    layout,
   });
 
   await applyLevel({
     context,
-    level: event.level,
-    layout: event.layout,
+    level,
+    layout,
   });
 
   await applyLinkMarkers({
     context,
-    layout: event.layout,
-    pendulum: event.pendulum.enabled,
-    link: event.link,
+    layout,
+    pendulum: pendulum.enabled,
+    link,
   });
 
   applyPendulum({
     context,
-    layout: event.layout,
-    pendulum: event.pendulum,
+    layout,
+    pendulum,
   });
 
   await applyType({
     context,
-    layout: event.layout,
-    text: event.type,
-    icon: event.icon,
+    layout,
+    text: type,
+    icon,
   });
 
   applyEffect({
     context,
-    layout: event.layout,
-    text: event.effect,
+    layout,
+    text: effect,
   });
 
-  applyAtk({ context, layout: event.layout, value: event.atk });
-  applyDef({ context, layout: event.layout, value: event.def });
-  applyLink({ context, layout: event.layout, value: event.def });
+  applyAtk({ context, layout, value: atk });
+  applyDef({ context, layout, value: def });
+  applyLink({ context, layout, value: def });
 
   applySerial({
     context,
-    layout: event.layout,
-    pendulum: event.pendulum.enabled,
-    value: event.serial,
+    layout,
+    pendulum: pendulum.enabled,
+    value: serial,
   });
 
   applyId({
     context,
-    layout: event.layout,
-    pendulum: event.pendulum.enabled,
-    value: event.id,
+    layout,
+    pendulum: pendulum.enabled,
+    value: id,
   });
 
   applyCopyright({
     context,
-    layout: event.layout,
-    pendulum: event.pendulum.enabled,
-    value: event.copyright,
+    layout,
+    pendulum: pendulum.enabled,
+    value: copyright,
   });
 
   const client = new S3Client({
