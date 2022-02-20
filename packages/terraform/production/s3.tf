@@ -1,9 +1,19 @@
 resource "aws_s3_bucket" "card_bucket" {
   bucket = "${var.app_name}-cards"
-  acl    = "private"
+}
 
-  lifecycle_rule {
-    enabled = true
+resource "aws_s3_bucket_acl" "card_bucket_acl" {
+  bucket = aws_s3_bucket.card_bucket.id
+  acl    = "private"
+}
+
+resource "aws_s3_bucket_lifecycle_configuration" "card_bucket_lifecycle" {
+  bucket = aws_s3_bucket.card_bucket.bucket
+
+  rule {
+    id = "${var.app_name}-${aws_s3_bucket.card_bucket.bucket}-lifecycle"
+
+    status = "Enabled"
 
     expiration {
       days = 1
@@ -13,10 +23,20 @@ resource "aws_s3_bucket" "card_bucket" {
 
 resource "aws_s3_bucket" "card_image_bucket" {
   bucket = "${var.app_name}-images"
-  acl    = "public-read"
+}
 
-  lifecycle_rule {
-    enabled = true
+resource "aws_s3_bucket_acl" "card_image_bucket_acl" {
+  bucket = aws_s3_bucket.card_image_bucket.id
+  acl    = "public-read"
+}
+
+resource "aws_s3_bucket_lifecycle_configuration" "card_image_bucket_lifecycle" {
+  bucket = aws_s3_bucket.card_image_bucket.bucket
+
+  rule {
+    id = "${var.app_name}-${aws_s3_bucket.card_image_bucket.bucket}-lifecycle"
+
+    status = "Enabled"
 
     expiration {
       days = 1
@@ -46,11 +66,21 @@ resource "aws_s3_bucket_policy" "object_public_by_default" {
 
 resource "aws_s3_bucket" "public_submission_bucket" {
   bucket        = "${var.app_name}-public-submissions"
-  acl           = "private"
   force_destroy = true
+}
 
-  lifecycle_rule {
-    enabled = true
+resource "aws_s3_bucket_acl" "public_submission_bucket_acl" {
+  bucket = aws_s3_bucket.public_submission_bucket.id
+  acl    = "private"
+}
+
+resource "aws_s3_bucket_lifecycle_configuration" "public_submission_bucket_lifecycle" {
+  bucket = aws_s3_bucket.public_submission_bucket.bucket
+
+  rule {
+    id = "${var.app_name}-${aws_s3_bucket.public_submission_bucket.bucket}-lifecycle"
+
+    status = "Enabled"
 
     expiration {
       days = 1
@@ -71,6 +101,10 @@ resource "aws_s3_bucket_cors_configuration" "public_cors" {
 
 resource "aws_s3_bucket" "private_submission_bucket" {
   bucket = "${var.app_name}-private-submissions"
+}
+
+resource "aws_s3_bucket_acl" "private_submission_bucket_acl" {
+  bucket = aws_s3_bucket.private_submission_bucket.id
   acl    = "private"
 }
 
