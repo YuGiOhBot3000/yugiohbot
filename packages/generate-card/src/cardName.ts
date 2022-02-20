@@ -1,13 +1,13 @@
 import { CanvasRenderingContext2D } from "canvas";
 
 import { CARD_NAME_STYLES, CARD_NAME_COLORS } from "./constants";
-import { Layout, Rarities } from "@yugiohbot/types";
+import { Layout, Rarity } from "@yugiohbot/types";
 
 type Props = {
   context: CanvasRenderingContext2D;
   name: string;
   layout: Layout;
-  rarity: Rarities;
+  rarity: Rarity;
 };
 
 export const applyCardName = ({ context, name, layout, rarity }: Props) => {
@@ -25,8 +25,8 @@ export const applyCardName = ({ context, name, layout, rarity }: Props) => {
     Layout.XYZ,
   ];
   if (darkLayouts.includes(layout)) color = "white";
-  if (rarity === Rarities.RARE || rarity === Rarities.SECRET) color = "silver";
-  if (rarity === Rarities.ULTRA) color = "gold";
+  if (rarity === Rarity.RARE || rarity === Rarity.SECRET) color = "silver";
+  if (rarity === Rarity.ULTRA) color = "gold";
 
   const { highlight, base } = color
     ? CARD_NAME_COLORS[color]

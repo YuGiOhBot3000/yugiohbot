@@ -8,7 +8,7 @@ import fs from "fs";
 import { mockClient } from "aws-sdk-client-mock";
 
 import { handler } from "../src/index";
-import { Attribute, Card, Icon, Layout, Rarities } from "@yugiohbot/types";
+import { Attribute, Card, Icon, Layout, Rarity } from "@yugiohbot/types";
 
 const mockS3Client = mockClient(S3Client);
 
@@ -38,7 +38,7 @@ describe("Handler", () => {
       bottomCenter: true,
       bottomRight: true,
     },
-    rarity: Rarities.COMMON,
+    rarity: Rarity.COMMON,
     attribute: Attribute.NONE,
     type: "Hello World",
     icon: Icon.NONE,

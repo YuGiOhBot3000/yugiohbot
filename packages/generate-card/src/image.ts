@@ -1,12 +1,13 @@
 import { loadImage, CanvasRenderingContext2D } from "canvas";
 import { STYLES } from "./constants";
-import { Rarities } from "@yugiohbot/types";
+import { Layout, Rarity } from "@yugiohbot/types";
 
 type Props = {
   context: CanvasRenderingContext2D;
   filename: string;
   pendulum: boolean;
-  rarity: Rarities;
+  rarity: Rarity;
+  layout: Layout;
 };
 
 export const applyImage = async ({
@@ -14,13 +15,15 @@ export const applyImage = async ({
   filename,
   pendulum,
   rarity,
+  layout,
 }: Props) => {
   const image = await loadImage(filename);
-  const style = pendulum ? STYLES.pendulum : STYLES.normal;
+  const style =
+    pendulum || layout === Layout.UNITY ? STYLES.pendulum : STYLES.normal;
 
   context.drawImage(image, style.left, style.top, style.width, style.height);
 
-  if (rarity === Rarities.SECRET || rarity === Rarities.ULTRA) {
+  if (rarity === Rarity.SECRET || rarity === Rarity.ULTRA) {
     context.save();
     context.globalCompositeOperation = "color-dodge";
     const foilImage = await loadImage("assets/foil/Secret.png");

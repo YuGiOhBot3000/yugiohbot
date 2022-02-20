@@ -6,7 +6,7 @@ import {
   CARD_NAME_STYLES,
   CARD_NAME_COLORS,
 } from "../src/constants";
-import { Layout, Rarities } from "@yugiohbot/types";
+import { Layout, Rarity } from "@yugiohbot/types";
 
 import { applyCardName } from "../src/cardName";
 
@@ -23,10 +23,10 @@ describe("Card Name", () => {
 
     describe("given a regular card is made", () => {
       it.each([
-        [Rarities.COMMON, "default"],
-        [Rarities.RARE, "silver"],
-        [Rarities.SECRET, "silver"],
-        [Rarities.ULTRA, "gold"],
+        [Rarity.COMMON, "default"],
+        [Rarity.RARE, "silver"],
+        [Rarity.SECRET, "silver"],
+        [Rarity.ULTRA, "gold"],
       ])(
         "should fillText for a %s rarity with %s color and style",
         (rarity, color) => {
@@ -67,10 +67,10 @@ describe("Card Name", () => {
 
     describe("given a skill card is made", () => {
       it.each([
-        [Rarities.COMMON, "white"],
-        [Rarities.RARE, "silver"],
-        [Rarities.SECRET, "silver"],
-        [Rarities.ULTRA, "gold"],
+        [Rarity.COMMON, "white"],
+        [Rarity.RARE, "silver"],
+        [Rarity.SECRET, "silver"],
+        [Rarity.ULTRA, "gold"],
       ])(
         "should fillText for a %s rarity with %s color and style",
         (rarity, color) => {

@@ -6,7 +6,7 @@ import {
   Layout,
   Link,
   Pendulum,
-  Rarities,
+  Rarity,
 } from "@yugiohbot/types";
 import { randomBool, randomElement, randomInt } from "@yugiohbot/utils";
 import { chooseStats } from "./stats";
@@ -64,7 +64,7 @@ export const handler: Handler<Event, Response> = async ({
   };
 
   const layout = randomElement<Layout>(Object.values(Layout));
-  const rarity = randomElement<Rarities>(Object.values(Rarities));
+  const rarity = randomElement<Rarity>(Object.values(Rarity));
 
   const { url: image, name: imageName } = await chooseCardImage();
 

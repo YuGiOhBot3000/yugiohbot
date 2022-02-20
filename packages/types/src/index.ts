@@ -45,7 +45,7 @@ export enum Layout {
   UNITY = "Unity",
 }
 
-export enum Rarities {
+export enum Rarity {
   COMMON = "Common",
   RARE = "Rare",
   ULTRA = "Ultra",
@@ -104,5 +104,5 @@ export type Card = {
   pendulum: Pendulum;
   link: Link;
   layout: Layout;
-  rarity: Rarities;
+  rarity: Rarity;
 };
