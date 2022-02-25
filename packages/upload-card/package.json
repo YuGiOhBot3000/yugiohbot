@@ -19,8 +19,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "3.52.0",
-    "@aws-sdk/client-ssm": "3.52.0",
+    "@aws-sdk/client-s3": "3.53.0",
+    "@aws-sdk/client-ssm": "3.53.0",
     "axios": "0.26.0",
     "form-data": "4.0.0"
   },
