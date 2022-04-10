@@ -13,7 +13,7 @@ RUN yum -y update \
 # will be created and become working dir
 WORKDIR $OUT/nodejs
 
-RUN npm install canvas@next
+RUN npm install canvas
 
 # will be created and become working dir
 WORKDIR $OUT/lib
