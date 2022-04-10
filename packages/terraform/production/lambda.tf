@@ -99,6 +99,18 @@ module "signed_url_lambda" {
   }
 }
 
+resource "aws_lambda_function_url" "signed_url" {
+  function_name      = module.signed_url_lambda.lambda_function_name
+  authorization_type = "NONE"
+
+  cors {
+    allow_origins = ["*"]
+    allow_methods = ["POST"]
+    allow_headers = ["*"]
+    max_age       = 300
+  }
+}
+
 module "moderate_image_lambda" {
   source = "../lambda"
 
