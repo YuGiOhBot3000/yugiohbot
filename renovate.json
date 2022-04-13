@@ -1,7 +1,5 @@
 {
-  "extends": [
-    "config:base"
-  ],
+  "extends": ["config:base"],
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
@@ -10,5 +8,6 @@
       "automergeStrategy": "squash"
     }
   ],
-  "rangeStrategy": "bump"
+  "rangeStrategy": "bump",
+  "ignoreDeps": ["canvas"]
 }
