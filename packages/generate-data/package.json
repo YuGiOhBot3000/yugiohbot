@@ -21,7 +21,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "axios": "0.27.0",
+    "axios": "0.27.1",
     "natural": "5.1.13",
     "openai": "2.0.5"
   },
