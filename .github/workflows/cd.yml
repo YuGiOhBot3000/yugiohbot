@@ -10,16 +10,18 @@ on:
 
 jobs:
   build:
-    uses: ./.github/workflows/build.yml
+    uses: YuGiOhBot3000/yugiohbot/.github/workflows/build.yml@main
+    with:
+      node-version: "14"
   lint:
     needs: build
-    uses: ./.github/workflows/lint.yml
+    uses: YuGiOhBot3000/yugiohbot/.github/workflows/lint.yml@main
   unit:
     needs: build
-    uses: ./.github/workflows/unit-test.yml
+    uses: YuGiOhBot3000/yugiohbot/.github/workflows/unit-test.yml@main
   deploy:
     needs: [lint, unit]
-    uses: ./.github/workflows/deploy.yml
+    uses: YuGiOhBot3000/yugiohbot/.github/workflows/deploy.yml@main
     secrets:
       aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
       aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
