@@ -17,7 +17,7 @@
     "eslint-plugin-jest": "26.2.2",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "6.0.0",
-    "jest": "27.5.1",
+    "jest": "28.1.0",
     "ts-loader": "9.3.0",
     "typescript": "4.6.4",
     "webpack": "5.72.1",
