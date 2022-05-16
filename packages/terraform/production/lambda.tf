@@ -3,7 +3,7 @@ module "generate_title_lambda" {
 
   app_name             = var.app_name
   function_name        = "generate-title"
-  runtime              = "nodejs16.x"
+  runtime              = "nodejs14.x"
   lambda_iam_role_arn  = aws_iam_role.lambda_role.arn
   lambda_iam_role_name = aws_iam_role.lambda_role.name
 }
@@ -13,7 +13,7 @@ module "generate_text_lambda" {
 
   app_name             = var.app_name
   function_name        = "generate-text"
-  runtime              = "nodejs16.x"
+  runtime              = "nodejs14.x"
   timeout              = 20
   lambda_iam_role_arn  = aws_iam_role.lambda_role.arn
   lambda_iam_role_name = aws_iam_role.lambda_role.name
@@ -27,7 +27,7 @@ module "randomise_card_lambda" {
 
   app_name             = var.app_name
   function_name        = "randomise-card"
-  runtime              = "nodejs16.x"
+  runtime              = "nodejs14.x"
   memory_size          = 256
   timeout              = 10
   layers               = [aws_lambda_layer_version.node_canvas_layer.arn]
@@ -44,7 +44,7 @@ module "generate_card_lambda" {
 
   app_name             = var.app_name
   function_name        = "generate-card"
-  runtime              = "nodejs16.x"
+  runtime              = "nodejs14.x"
   memory_size          = 512
   timeout              = 10
   layers               = [aws_lambda_layer_version.node_canvas_layer.arn]
@@ -61,7 +61,7 @@ module "upload_card_lambda" {
 
   app_name             = var.app_name
   function_name        = "upload-card"
-  runtime              = "nodejs16.x"
+  runtime              = "nodejs14.x"
   timeout              = 30
   lambda_iam_role_arn  = aws_iam_role.upload_card_role.arn
   lambda_iam_role_name = aws_iam_role.upload_card_role.name
@@ -76,7 +76,7 @@ module "booster_pack_lambda" {
 
   app_name             = var.app_name
   function_name        = "booster-pack"
-  runtime              = "nodejs16.x"
+  runtime              = "nodejs14.x"
   timeout              = 60
   lambda_iam_role_arn  = aws_iam_role.lambda_role.arn
   lambda_iam_role_name = aws_iam_role.lambda_role.name
@@ -91,7 +91,7 @@ module "signed_url_lambda" {
 
   app_name             = var.app_name
   function_name        = "signed-url"
-  runtime              = "nodejs16.x"
+  runtime              = "nodejs14.x"
   lambda_iam_role_arn  = aws_iam_role.signed_url_role.arn
   lambda_iam_role_name = aws_iam_role.signed_url_role.name
   environment_variables = {
@@ -116,7 +116,7 @@ module "moderate_image_lambda" {
 
   app_name             = var.app_name
   function_name        = "moderate-image"
-  runtime              = "nodejs16.x"
+  runtime              = "nodejs14.x"
   lambda_iam_role_arn  = aws_iam_role.moderate_image_role.arn
   lambda_iam_role_name = aws_iam_role.moderate_image_role.name
   environment_variables = {
@@ -129,5 +129,5 @@ resource "aws_lambda_layer_version" "node_canvas_layer" {
   source_code_hash = filebase64sha256("../../../layer.zip")
   layer_name       = "${var.app_name}-node-canvas"
 
-  compatible_runtimes = ["nodejs16.x"]
+  compatible_runtimes = ["nodejs14.x"]
 }

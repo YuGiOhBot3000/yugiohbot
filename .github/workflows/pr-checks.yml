@@ -4,10 +4,10 @@ on: pull_request
 
 jobs:
   build:
-    uses: ./.github/workflows/build.yml
+    uses: YuGiOhBot3000/yugiohbot/.github/workflows/build.yml@main
   lint:
     needs: build
-    uses: ./.github/workflows/lint.yml
+    uses: YuGiOhBot3000/yugiohbot/.github/workflows/lint.yml@main
   unit:
     needs: build
-    uses: ./.github/workflows/unit-test.yml
+    uses: YuGiOhBot3000/yugiohbot/.github/workflows/unit-test.yml@main

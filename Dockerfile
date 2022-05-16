@@ -2,7 +2,7 @@ FROM amazonlinux:latest
 
 ARG LIBS=/usr/lib64
 ARG OUT=/root
-ARG NODE_VERSION=16
+ARG NODE_VERSION=14
 
 # set up container
 RUN yum -y update \
