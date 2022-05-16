@@ -20,11 +20,6 @@ jobs:
           node-version: ${{ inputs.node-version }}
           cache: npm
 
-      # Needed to get Workspaces in Node 14
-      - name: Upgrade NPM
-        if: ${{ github.events.inputs.node-version != 16 }}
-        run: npm i -g npm
-
       - name: Install dependencies
         run: npm ci
 
