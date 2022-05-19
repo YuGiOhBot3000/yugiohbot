@@ -27,7 +27,7 @@
     "openai": "2.0.5"
   },
   "devDependencies": {
-    "@babel/preset-env": "7.17.12",
+    "@babel/preset-env": "7.18.0",
     "@babel/preset-typescript": "7.17.12",
     "@types/aws-lambda": "8.10.97",
     "@types/jest": "27.5.1",
