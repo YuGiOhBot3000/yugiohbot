@@ -1,4 +1,10 @@
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import {
+  CopyObjectCommand,
+  ListObjectsV2Command,
+  PutObjectCommand,
+  S3Client,
+} from "@aws-sdk/client-s3";
+import { randomElement } from "@yugiohbot/utils";
 
 import axios from "axios";
 import { createCanvas, loadImage } from "canvas";
@@ -28,6 +34,9 @@ type ImageData = {
   url: string;
   name: string;
 };
+
+const SUBMISSION_THRESHOLD = 0.01;
+const SPB_THRESHOLD = 0.3;
 
 export const cropImage = async (imageUrl: string) => {
   const image = await loadImage(imageUrl);
@@ -62,11 +71,43 @@ export const getFromSPB = async (): Promise<ImageData> => {
   return { url: SPB_BASE_URL + data.sub.img.full, name: data.sub.name };
 };
 
+export const getFromSubmissions = async (): Promise<string | undefined> => {
+  const sourceBucket = process.env.PRIVATE_SUBMISSION_BUCKET;
+
+  const client = new S3Client({ region: process.env.AWS_REGION });
+  const command = new ListObjectsV2Command({
+    Bucket: sourceBucket,
+  });
+
+  const objectsInBucket = await client.send(command);
+
+  if (!objectsInBucket.Contents) {
+    return;
+  }
+
+  const randomObject = randomElement(objectsInBucket.Contents);
+
+  return randomObject.Key;
+};
+
 export const chooseCardImage = async (): Promise<ImageData> => {
   const choice = Math.random();
+  const userSubmission = await getFromSubmissions();
+
+  const shouldUseSubmission = choice <= SUBMISSION_THRESHOLD && userSubmission;
 
   // 30% chance of a SPB image
-  if (choice < 0.3) {
+  const shouldGetFromSPB =
+    (choice < SPB_THRESHOLD && choice > SUBMISSION_THRESHOLD) ||
+    (choice <= SUBMISSION_THRESHOLD && !userSubmission);
+
+  if (shouldUseSubmission) {
+    const url = await copyAcrossS3(userSubmission);
+    return {
+      url,
+      name: "Submission from a fan. Submit yours at yugiohbot3000.github.io/submission/",
+    };
+  } else if (shouldGetFromSPB) {
     return await getFromSPB();
   } else {
     const { url, id, name } = await getRandomOfficialImage();
@@ -79,9 +120,10 @@ export const chooseCardImage = async (): Promise<ImageData> => {
 
 export const uploadToS3 = async (id: string, buffer: Buffer) => {
   const Key = `${id}.png`;
+  const Bucket = process.env.CARD_IMAGE_BUCKET;
   const client = new S3Client({ region: process.env.AWS_REGION });
   const command = new PutObjectCommand({
-    Bucket: process.env.S3_BUCKET,
+    Bucket,
     Key,
     Body: buffer,
     ContentEncoding: "base64",
@@ -90,5 +132,22 @@ export const uploadToS3 = async (id: string, buffer: Buffer) => {
 
   await client.send(command);
 
-  return `https://${process.env.S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${Key}`;
+  return `https://${Bucket}.s3.${process.env.AWS_REGION}.amazonaws.com/${Key}`;
+};
+
+export const copyAcrossS3 = async (Key: string) => {
+  const sourceBucket = process.env.PRIVATE_SUBMISSION_BUCKET;
+  const destinationBucket = process.env.CARD_IMAGE_BUCKET;
+
+  const client = new S3Client({ region: process.env.AWS_REGION });
+
+  // Copy selected object across
+  const copyCommand = new CopyObjectCommand({
+    Bucket: destinationBucket,
+    CopySource: `${sourceBucket}/${Key}`,
+    Key,
+  });
+  await client.send(copyCommand);
+
+  return `https://${destinationBucket}.s3.${process.env.AWS_REGION}.amazonaws.com/${Key}`;
 };

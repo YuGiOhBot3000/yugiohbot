@@ -95,6 +95,28 @@ resource "aws_iam_policy" "access_s3" {
   })
 }
 
+resource "aws_iam_policy" "copy_from_private_submission_bucket" {
+  name        = "${var.app_name}-copy-submissions-s3"
+  description = "Allow copying of objects from the private submissions bucket"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = [
+          "s3:GetObject",
+          "s3:GetObjectAcl",
+        ]
+        Effect = "Allow"
+        Resource = [
+          "${aws_s3_bucket.private_submission_bucket.arn}",
+          "${aws_s3_bucket.private_submission_bucket.arn}/*",
+        ]
+      }
+    ]
+  })
+}
+
 resource "aws_iam_policy" "sign_s3_uploads" {
   name        = "${var.app_name}-sign-s3-uploads"
   description = "Allow signed uploads to specific S3 buckets"
@@ -233,6 +255,14 @@ resource "aws_iam_policy_attachment" "s3_attach" {
     aws_iam_role.upload_card_role.name,
   ]
   policy_arn = aws_iam_policy.access_s3.arn
+}
+
+resource "aws_iam_policy_attachment" "private_s3_attach" {
+  name = "${var.app_name}-private-s3-attachment"
+  roles = [
+    aws_iam_role.card_randomiser_role.name,
+  ]
+  policy_arn = aws_iam_policy.copy_from_private_submission_bucket.arn
 }
 
 resource "aws_iam_policy_attachment" "s3_upload_attach" {
