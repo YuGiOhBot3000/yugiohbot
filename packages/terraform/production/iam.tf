@@ -109,8 +109,16 @@ resource "aws_iam_policy" "copy_from_private_submission_bucket" {
         ]
         Effect = "Allow"
         Resource = [
-          "${aws_s3_bucket.private_submission_bucket.arn}",
           "${aws_s3_bucket.private_submission_bucket.arn}/*",
+        ]
+      },
+      {
+        Action = [
+          "s3:ListBucket"
+        ]
+        Effect = "Allow"
+        Resource = [
+          "${aws_s3_bucket.private_submission_bucket.arn}",
         ]
       }
     ]
