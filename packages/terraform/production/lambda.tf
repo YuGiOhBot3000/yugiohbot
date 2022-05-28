@@ -34,8 +34,9 @@ module "randomise_card_lambda" {
   lambda_iam_role_arn  = aws_iam_role.card_randomiser_role.arn
   lambda_iam_role_name = aws_iam_role.card_randomiser_role.name
   environment_variables = {
-    S3_BUCKET  = aws_s3_bucket.card_image_bucket.bucket
-    LD_PRELOAD = var.ld_preload
+    CARD_IMAGE_BUCKET         = aws_s3_bucket.card_image_bucket.bucket
+    PRIVATE_SUBMISSION_BUCKET = aws_s3_bucket.private_submission_bucket.bucket
+    LD_PRELOAD                = var.ld_preload
   }
 }
 
