@@ -7,7 +7,7 @@
     "@babel/preset-env": "7.18.2",
     "@babel/preset-typescript": "7.17.12",
     "@types/aws-lambda": "8.10.100",
-    "@types/jest": "27.5.2",
+    "@types/jest": "28.1.1",
     "@typescript-eslint/eslint-plugin": "5.27.1",
     "@typescript-eslint/parser": "5.27.1",
     "aws-sdk-client-mock": "0.6.2",
