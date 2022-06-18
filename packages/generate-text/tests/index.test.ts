@@ -16,7 +16,7 @@ describe("Handler", () => {
     mockOpenAI.mockImplementation(
       () =>
         ({
-          createCompletionFromModel: mockCreateCompletion,
+          createCompletion: mockCreateCompletion,
         } as unknown as OpenAIApi)
     );
     mockCreateCompletion.mockResolvedValue({
