@@ -6,7 +6,7 @@
   "devDependencies": {
     "@babel/preset-env": "7.19.0",
     "@babel/preset-typescript": "7.18.6",
-    "@types/aws-lambda": "8.10.103",
+    "@types/aws-lambda": "8.10.104",
     "@types/jest": "28.1.8",
     "@typescript-eslint/eslint-plugin": "5.37.0",
     "@typescript-eslint/parser": "5.37.0",
