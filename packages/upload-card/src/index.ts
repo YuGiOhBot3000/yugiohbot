@@ -1,8 +1,9 @@
-import { Handler } from "aws-lambda";
+import type { Handler } from "aws-lambda";
+import type { Readable } from "stream";
 
 import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { SSMClient, GetParameterCommand } from "@aws-sdk/client-ssm";
-import { Card } from "@yugiohbot/types";
+import type { Card } from "@yugiohbot/types";
 
 import { createCaption } from "./captions";
 import { commentOnPost, uploadToFacebook } from "./facebook";
@@ -38,12 +39,17 @@ export const handler: Handler<Event> = async ({ card, cardKey, imageName }) => {
   }
 
   const { Body } = await s3Client.send(getObjectCommand);
-  const { post_id } = await uploadToFacebook({
-    fileStream: Body,
-    message,
-    token,
-  });
-  const { id } = await commentOnPost({ post_id, message: comment, token });
 
-  console.log({ post_id, comment_id: id });
+  if (Body) {
+    const { post_id } = await uploadToFacebook({
+      fileStream: Body as Readable,
+      message,
+      token,
+    });
+    const { id } = await commentOnPost({ post_id, message: comment, token });
+
+    console.log({ post_id, comment_id: id });
+  } else {
+    console.warn("Object not found, cannot upload to Facebook");
+  }
 };
