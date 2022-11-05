@@ -29,7 +29,7 @@ module "randomise_card_lambda" {
   function_name        = "randomise-card"
   runtime              = "nodejs16.x"
   memory_size          = 256
-  timeout              = 10
+  timeout              = 30
   layers               = [aws_lambda_layer_version.node_canvas_layer.arn]
   lambda_iam_role_arn  = aws_iam_role.card_randomiser_role.arn
   lambda_iam_role_name = aws_iam_role.card_randomiser_role.name
@@ -37,6 +37,7 @@ module "randomise_card_lambda" {
     CARD_IMAGE_BUCKET         = aws_s3_bucket.card_image_bucket.bucket
     PRIVATE_SUBMISSION_BUCKET = aws_s3_bucket.private_submission_bucket.bucket
     LD_PRELOAD                = var.ld_preload
+    OPENAI_API_KEY            = var.openai_api_key
   }
 }
 
