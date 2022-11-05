@@ -1,13 +1,8 @@
-import {
-  CopyObjectCommand,
-  ListObjectsV2Command,
-  PutObjectCommand,
-  S3Client,
-} from "@aws-sdk/client-s3";
-import { randomElement } from "@yugiohbot/utils";
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
 import axios from "axios";
 import { createCanvas, loadImage } from "canvas";
+import { Configuration, OpenAIApi } from "openai";
 
 const SIZE = 324;
 const RANDOM_URL = "https://db.ygoprodeck.com/api/v7/randomcard.php";
@@ -35,7 +30,7 @@ type ImageData = {
   name: string;
 };
 
-const SUBMISSION_THRESHOLD = 0.01;
+const DALLE_THRESHOLD = 0.05;
 const SPB_THRESHOLD = 0.3;
 
 export const cropImage = async (imageUrl: string) => {
@@ -71,51 +66,58 @@ export const getFromSPB = async (): Promise<ImageData> => {
   return { url: SPB_BASE_URL + data.sub.img.full, name: data.sub.name };
 };
 
-export const getFromSubmissions = async (): Promise<string | undefined> => {
-  const sourceBucket = process.env.PRIVATE_SUBMISSION_BUCKET;
-
-  const client = new S3Client({ region: process.env.AWS_REGION });
-  const command = new ListObjectsV2Command({
-    Bucket: sourceBucket,
+export const getFromDALLE = async (
+  title: string
+): Promise<ImageData | null> => {
+  const configuration = new Configuration({
+    apiKey: process.env.OPENAI_API_KEY,
   });
+  const openai = new OpenAIApi(configuration);
 
-  const objectsInBucket = await client.send(command);
+  const prompt = `${title} yugioh card art`;
+  try {
+    const response = await openai.createImage({
+      prompt,
+      n: 1,
+      size: "512x512",
+      response_format: "url",
+    });
 
-  if (!objectsInBucket.Contents) {
-    return;
-  }
+    const { url } = response.data.data[0];
 
-  const randomObject = randomElement(objectsInBucket.Contents);
+    if (!url) return null;
 
-  return randomObject.Key;
-};
-
-export const chooseCardImage = async (): Promise<ImageData> => {
-  const choice = Math.random();
-  const userSubmission = await getFromSubmissions();
-
-  const shouldUseSubmission = choice <= SUBMISSION_THRESHOLD && userSubmission;
-
-  // 30% chance of a SPB image
-  const shouldGetFromSPB =
-    (choice < SPB_THRESHOLD && choice > SUBMISSION_THRESHOLD) ||
-    (choice <= SUBMISSION_THRESHOLD && !userSubmission);
-
-  if (shouldUseSubmission) {
-    const url = await copyAcrossS3(userSubmission);
     return {
       url,
-      name: "Submission from a fan. Submit yours at yugiohbot3000.github.io/submission/",
+      name: `DALL-E creation from prompt: "${prompt}"`,
     };
-  } else if (shouldGetFromSPB) {
-    return await getFromSPB();
-  } else {
-    const { url, id, name } = await getRandomOfficialImage();
-    const buffer = await cropImage(url);
-    const s3Url = await uploadToS3(id, buffer);
-
-    return { url: s3Url, name };
+  } catch (e) {
+    console.warn(e);
+    return null;
   }
+};
+
+export const chooseCardImage = async (title: string): Promise<ImageData> => {
+  const choice = Math.random();
+
+  const shouldGetFromSPB = choice < SPB_THRESHOLD && choice > DALLE_THRESHOLD;
+  const shouldUseDALLE = choice <= DALLE_THRESHOLD;
+
+  if (shouldGetFromSPB) {
+    return await getFromSPB();
+  }
+
+  if (shouldUseDALLE) {
+    const image = await getFromDALLE(title);
+
+    if (image) return image;
+  }
+
+  const { url, id, name } = await getRandomOfficialImage();
+  const buffer = await cropImage(url);
+  const s3Url = await uploadToS3(id, buffer);
+
+  return { url: s3Url, name };
 };
 
 export const uploadToS3 = async (id: string, buffer: Buffer) => {
@@ -133,21 +135,4 @@ export const uploadToS3 = async (id: string, buffer: Buffer) => {
   await client.send(command);
 
   return `https://${Bucket}.s3.${process.env.AWS_REGION}.amazonaws.com/${Key}`;
-};
-
-export const copyAcrossS3 = async (Key: string) => {
-  const sourceBucket = process.env.PRIVATE_SUBMISSION_BUCKET;
-  const destinationBucket = process.env.CARD_IMAGE_BUCKET;
-
-  const client = new S3Client({ region: process.env.AWS_REGION });
-
-  // Copy selected object across
-  const copyCommand = new CopyObjectCommand({
-    Bucket: destinationBucket,
-    CopySource: `${sourceBucket}/${Key}`,
-    Key,
-  });
-  await client.send(copyCommand);
-
-  return `https://${destinationBucket}.s3.${process.env.AWS_REGION}.amazonaws.com/${Key}`;
 };

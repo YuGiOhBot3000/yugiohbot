@@ -1,38 +1,36 @@
 import fs from "fs";
 
+import { OpenAIApi } from "openai";
+
 import {
   ListObjectsV2Command,
   PutObjectCommand,
   S3Client,
-  _Object,
 } from "@aws-sdk/client-s3";
 import { mockClient } from "aws-sdk-client-mock";
 
-import { randomElement } from "@yugiohbot/utils";
-
 import {
   chooseCardImage,
-  copyAcrossS3,
   cropImage,
+  getFromDALLE,
   getFromSPB,
-  getFromSubmissions,
   getRandomOfficialImage,
   uploadToS3,
 } from "../src/image";
 
-jest.mock("@yugiohbot/utils");
+jest.mock("openai");
 
-const mockRandomElement = randomElement as jest.MockedFunction<
-  typeof randomElement
->;
+const mockOpenAI = OpenAIApi as jest.MockedClass<typeof OpenAIApi>;
 
 describe("Image", () => {
   const mockS3Client = mockClient(S3Client);
+  const mockCreateImage = jest.fn();
 
   beforeAll(() => {
     process.env.CARD_IMAGE_BUCKET = "card-image-bucket";
     process.env.PRIVATE_SUBMISSION_BUCKET = "private-submission-bucket";
     process.env.AWS_REGION = "eu-central-1";
+    process.env.OPENAI_API_KEY = "open-ai-private-key";
   });
 
   beforeEach(() => {
@@ -41,8 +39,16 @@ describe("Image", () => {
     mockS3Client.on(ListObjectsV2Command).resolves({
       Contents: [{ Key: "key1" }, { Key: "key2" }, { Key: "key3" }],
     });
-    // Select the 2nd element
-    mockRandomElement.mockImplementation((arr: _Object[]) => arr[1]);
+
+    mockOpenAI.mockImplementation(
+      () =>
+        ({
+          createImage: mockCreateImage,
+        } as unknown as OpenAIApi)
+    );
+    mockCreateImage.mockResolvedValue({
+      data: { data: [{ url: "https://dalle.url" }] },
+    });
   });
 
   it("should crop a random image", async () => {
@@ -61,34 +67,43 @@ describe("Image", () => {
     });
   });
 
-  describe("getFromSubmissions", () => {
-    it("should get a random image from the submissions bucket", async () => {
-      const key = await getFromSubmissions();
+  describe("getFromDALLE", () => {
+    it("should get an image from DALL-E", async () => {
+      const result = await getFromDALLE("title");
 
-      expect(key).toEqual("key2");
+      expect(result).toEqual({
+        url: "https://dalle.url",
+        name: 'DALL-E creation from prompt: "title yugioh card art"',
+      });
     });
 
-    describe("given there are no objects in the bucket", () => {
-      beforeEach(() => {
-        mockS3Client.on(ListObjectsV2Command).resolves({});
+    it("should return null if an error is thrown", async () => {
+      mockCreateImage.mockRejectedValue("Error");
+
+      const result = await getFromDALLE("title");
+
+      expect(result).toBeNull();
+    });
+
+    it("should return null if no URL is returned", async () => {
+      mockCreateImage.mockResolvedValue({
+        data: { data: [{}] },
       });
 
-      it("should return undefined", async () => {
-        const key = await getFromSubmissions();
+      const result = await getFromDALLE("title");
 
-        expect(key).toBeUndefined();
-      });
+      expect(result).toBeNull();
     });
   });
 
   describe("chooseCardImage", () => {
     it.each([
       {
-        percentage: 0.01,
-        expected: "https://card-image-bucket.s3.eu-central-1.amazonaws.com",
+        percentage: 0.05,
+        expected: "https://dalle.url",
       },
       {
-        percentage: 0.02,
+        percentage: 0.2,
         expected: "https://www.shitpostbot.com/img/sourceimages",
       },
       {
@@ -100,25 +115,11 @@ describe("Image", () => {
       async ({ percentage, expected }) => {
         jest.spyOn(Math, "random").mockReturnValue(percentage);
 
-        const { url, name } = await chooseCardImage();
+        const { url, name } = await chooseCardImage("title");
         expect(url).toContain(expected);
         expect(name).toBeDefined();
       }
     );
-
-    describe("given no user submission is found", () => {
-      beforeEach(() => {
-        mockS3Client.on(ListObjectsV2Command).resolves({});
-      });
-
-      it("should choose a SPB image", async () => {
-        jest.spyOn(Math, "random").mockReturnValue(0.01);
-
-        const { url, name } = await chooseCardImage();
-        expect(url).toContain("https://www.shitpostbot.com/img/sourceimages");
-        expect(name).toBeDefined();
-      });
-    });
   });
 
   describe("uploadToS3", () => {
@@ -140,21 +141,6 @@ describe("Image", () => {
         Body: buffer,
         ContentEncoding: "base64",
         ContentType: "image/png",
-      });
-    });
-  });
-
-  describe("copyAcrossS3", () => {
-    it("should copy a key from one bucket to another", async () => {
-      const result = await copyAcrossS3("1234.png");
-
-      expect(result).toBe(
-        "https://card-image-bucket.s3.eu-central-1.amazonaws.com/1234.png"
-      );
-      expect(mockS3Client.call(0).args[0].input).toEqual({
-        Bucket: process.env.CARD_IMAGE_BUCKET,
-        CopySource: "private-submission-bucket/1234.png",
-        Key: "1234.png",
       });
     });
   });

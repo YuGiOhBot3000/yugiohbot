@@ -66,7 +66,7 @@ export const handler: Handler<Event, Response> = async ({
   const layout = randomElement<Layout>(Object.values(Layout));
   const rarity = randomElement<Rarity>(Object.values(Rarity));
 
-  const { url: image, name: imageName } = await chooseCardImage();
+  const { url: image, name: imageName } = await chooseCardImage(title);
 
   const card: Card = {
     name: title,
