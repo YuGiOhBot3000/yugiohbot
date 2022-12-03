@@ -50,7 +50,9 @@ export const getRandomOfficialImage = async () => {
   let name = "";
 
   do {
-    const { data } = await axios.get<DBCard>(RANDOM_URL);
+    const { data } = await axios.get<DBCard>(RANDOM_URL, {
+      headers: { Accept: "application/json", "Accept-Encoding": "identity" },
+    });
 
     url = data.card_images?.[0].image_url;
     ({ id, type, name } = data);
@@ -61,7 +63,9 @@ export const getRandomOfficialImage = async () => {
 
 export const getFromSPB = async (): Promise<ImageData> => {
   const path = "api/randsource";
-  const { data } = await axios.get<SPBSource>(SPB_BASE_URL + path);
+  const { data } = await axios.get<SPBSource>(SPB_BASE_URL + path, {
+    headers: { Accept: "application/json", "Accept-Encoding": "identity" },
+  });
 
   return { url: SPB_BASE_URL + data.sub.img.full, name: data.sub.name };
 };

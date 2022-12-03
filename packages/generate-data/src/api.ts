@@ -26,13 +26,13 @@ export const sendRequest = async (params: Parameters = {}) => {
     url.searchParams.append(key, value)
   );
 
-  const { data } = await axios
-    .get<ApiResponse>(url.toString())
-    .then((res) => res.data)
-    .catch((e) => {
-      console.warn(e);
-      return { data: [] as Card[] };
+  try {
+    const { data } = await axios.get<ApiResponse>(url.toString(), {
+      headers: { Accept: "application/json", "Accept-Encoding": "identity" },
     });
-
-  return data;
+    return data.data;
+  } catch (error) {
+    console.warn(error);
+    return [];
+  }
 };

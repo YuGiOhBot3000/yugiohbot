@@ -32,7 +32,8 @@ describe("API", () => {
     const result = await sendRequest(params);
 
     expect(mockGet).toBeCalledWith(
-      "https://db.ygoprodeck.com/api/v7/cardinfo.php?type=monster"
+      "https://db.ygoprodeck.com/api/v7/cardinfo.php?type=monster",
+      { headers: { Accept: "application/json", "Accept-Encoding": "identity" } }
     );
     expect(result).toEqual(data);
   });
