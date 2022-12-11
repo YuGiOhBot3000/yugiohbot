@@ -17,12 +17,13 @@ jobs:
   unit:
     needs: build
     uses: ./.github/workflows/unit-test.yml
-  deploy:
-    needs: [lint, unit]
-    uses: ./.github/workflows/deploy.yml
-    secrets:
-      aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      openai_api_key: ${{ secrets.OPENAI_API_KEY }}
-      facebook_token: ${{ secrets.FACEBOOK_TOKEN }}
-      facebook_album_id: ${{ secrets.FACEBOOK_ALBUM_ID }}
+  # Prevent deployment while the bot is unable to post
+  # deploy:
+  #   needs: [lint, unit]
+  #   uses: ./.github/workflows/deploy.yml
+  #   secrets:
+  #     aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #     aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #     openai_api_key: ${{ secrets.OPENAI_API_KEY }}
+  #     facebook_token: ${{ secrets.FACEBOOK_TOKEN }}
+  #     facebook_album_id: ${{ secrets.FACEBOOK_ALBUM_ID }}
