@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "3.241.0",
-    "@aws-sdk/client-ssm": "3.241.0",
+    "@aws-sdk/client-ssm": "3.244.0",
     "axios": "1.2.2",
     "form-data": "4.0.0"
   },
