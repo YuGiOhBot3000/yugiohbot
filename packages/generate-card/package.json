@@ -19,7 +19,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "3.257.0",
+    "@aws-sdk/client-s3": "3.258.0",
     "canvas": "2.10.2",
     "nanoid": "4.0.0"
   },
