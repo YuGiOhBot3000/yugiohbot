@@ -21,7 +21,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "3.259.0",
     "@aws-sdk/client-ssm": "3.259.0",
-    "axios": "1.2.5",
+    "axios": "1.2.6",
     "form-data": "4.0.0"
   },
   "devDependencies": {
