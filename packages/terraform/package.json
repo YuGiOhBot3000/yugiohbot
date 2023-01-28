@@ -16,6 +16,6 @@
     "lint": "asl-validator --json-path state_machine.asl.json"
   },
   "devDependencies": {
-    "asl-validator": "3.1.0"
+    "asl-validator": "3.1.1"
   }
 }
