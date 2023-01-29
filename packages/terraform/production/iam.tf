@@ -50,11 +50,11 @@ resource "aws_iam_role" "invoke_sfn_role" {
   assume_role_policy = data.aws_iam_policy_document.assume_events_role.json
 }
 
-resource "aws_iam_role" "invoke_booster_role" {
-  name = "invoke_booster_role"
+# resource "aws_iam_role" "invoke_booster_role" {
+#   name = "invoke_booster_role"
 
-  assume_role_policy = data.aws_iam_policy_document.assume_role.json
-}
+#   assume_role_policy = data.aws_iam_policy_document.assume_role.json
+# }
 
 resource "aws_iam_policy" "access_s3" {
   name        = "${var.app_name}-access-s3"
@@ -83,26 +83,6 @@ resource "aws_iam_policy" "access_s3" {
   })
 }
 
-resource "aws_iam_policy" "read_ssm" {
-  name        = "${var.app_name}-read-ssm"
-  description = "Read secret values from SSM"
-
-  policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Action = [
-          "ssm:GetParameter"
-        ]
-        Effect = "Allow"
-        Resource = [
-          "${aws_ssm_parameter.facebook_token.arn}"
-        ]
-      }
-    ]
-  })
-}
-
 resource "aws_iam_policy" "invoke_sfn" {
   name        = "${var.app_name}-invoke-sfn"
   description = "Invoke Step Functions workflow"
@@ -123,25 +103,25 @@ resource "aws_iam_policy" "invoke_sfn" {
   })
 }
 
-resource "aws_iam_policy" "invoke_booster_pack" {
-  name        = "${var.app_name}-invoke-booster"
-  description = "Invoke booster-pack lambda"
+# resource "aws_iam_policy" "invoke_booster_pack" {
+#   name        = "${var.app_name}-invoke-booster"
+#   description = "Invoke booster-pack lambda"
 
-  policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Action = [
-          "lambda:InvokeFunction"
-        ]
-        Effect = "Allow"
-        Resource = [
-          "${module.booster_pack_lambda.lambda_arn}"
-        ]
-      }
-    ]
-  })
-}
+#   policy = jsonencode({
+#     Version = "2012-10-17",
+#     Statement = [
+#       {
+#         Action = [
+#           "lambda:InvokeFunction"
+#         ]
+#         Effect = "Allow"
+#         Resource = [
+#           "${module.booster_pack_lambda.lambda_arn}"
+#         ]
+#       }
+#     ]
+#   })
+# }
 
 resource "aws_iam_policy_attachment" "s3_attach" {
   name = "${var.app_name}-s3-attachment"
@@ -153,14 +133,6 @@ resource "aws_iam_policy_attachment" "s3_attach" {
   policy_arn = aws_iam_policy.access_s3.arn
 }
 
-resource "aws_iam_policy_attachment" "ssm_attach" {
-  name = "${var.app_name}-ssm-attachment"
-  roles = [
-    aws_iam_role.upload_card_role.name,
-  ]
-  policy_arn = aws_iam_policy.read_ssm.arn
-}
-
 resource "aws_iam_policy_attachment" "sfn_attach" {
   name = "${var.app_name}-sfn-attachment"
   roles = [
@@ -169,10 +141,10 @@ resource "aws_iam_policy_attachment" "sfn_attach" {
   policy_arn = aws_iam_policy.invoke_sfn.arn
 }
 
-resource "aws_iam_policy_attachment" "booster_attach" {
-  name = "${var.app_name}-sfn-attachment"
-  roles = [
-    aws_iam_role.invoke_booster_role.name,
-  ]
-  policy_arn = aws_iam_policy.invoke_booster_pack.arn
-}
+# resource "aws_iam_policy_attachment" "booster_attach" {
+#   name = "${var.app_name}-sfn-attachment"
+#   roles = [
+#     aws_iam_role.invoke_booster_role.name,
+#   ]
+#   policy_arn = aws_iam_policy.invoke_booster_pack.arn
+# }
