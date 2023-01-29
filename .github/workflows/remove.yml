@@ -42,6 +42,8 @@ jobs:
           terraform init
           terraform destroy \
             -var="openai_api_key=na" \
-            -var="facebook_token=na" \
-            -var="facebook_album_id=na" \
+            -var="twitter_consumer_key=na" \
+            -var="twitter_consumer_secret=na" \
+             -var="twitter_access_token=na" \
+            -var="twitter_access_secret=na" \
             -auto-approve

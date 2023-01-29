@@ -3,7 +3,7 @@ module "generate_title_lambda" {
 
   app_name             = var.app_name
   function_name        = "generate-title"
-  runtime              = "nodejs16.x"
+  runtime              = "nodejs18.x"
   lambda_iam_role_arn  = aws_iam_role.lambda_role.arn
   lambda_iam_role_name = aws_iam_role.lambda_role.name
 }
@@ -27,7 +27,7 @@ module "randomise_card_lambda" {
 
   app_name             = var.app_name
   function_name        = "randomise-card"
-  runtime              = "nodejs18.x"
+  runtime              = "nodejs16.x"
   memory_size          = 256
   timeout              = 30
   layers               = [aws_lambda_layer_version.node_canvas_layer.arn]
@@ -45,7 +45,7 @@ module "generate_card_lambda" {
 
   app_name             = var.app_name
   function_name        = "generate-card"
-  runtime              = "nodejs18.x"
+  runtime              = "nodejs16.x"
   memory_size          = 512
   timeout              = 10
   layers               = [aws_lambda_layer_version.node_canvas_layer.arn]
@@ -67,30 +67,34 @@ module "upload_card_lambda" {
   lambda_iam_role_arn  = aws_iam_role.upload_card_role.arn
   lambda_iam_role_name = aws_iam_role.upload_card_role.name
   environment_variables = {
-    S3_BUCKET = aws_s3_bucket.card_bucket.bucket
-    SSM_NAME  = aws_ssm_parameter.facebook_token.name
+    S3_BUCKET               = aws_s3_bucket.card_bucket.bucket
+    TWITTER_CONSUMER_KEY    = var.twitter_consumer_key
+    TWITTER_CONSUMER_SECRET = var.twitter_consumer_secret
+    TWITTER_ACCESS_TOKEN    = var.twitter_access_token
+    TWITTER_ACCESS_SECRET   = var.twitter_access_secret
   }
 }
 
-module "booster_pack_lambda" {
-  source = "../lambda"
+# Leaving this for now, as it's not ready yet
+# module "booster_pack_lambda" {
+#   source = "../lambda"
 
-  app_name             = var.app_name
-  function_name        = "booster-pack"
-  runtime              = "nodejs18.x"
-  timeout              = 60
-  lambda_iam_role_arn  = aws_iam_role.lambda_role.arn
-  lambda_iam_role_name = aws_iam_role.lambda_role.name
-  environment_variables = {
-    FACEBOOK_ALBUM_ID = var.facebook_album_id
-    SSM_NAME          = aws_ssm_parameter.facebook_token.name
-  }
-}
+#   app_name             = var.app_name
+#   function_name        = "booster-pack"
+#   runtime              = "nodejs18.x"
+#   timeout              = 60
+#   lambda_iam_role_arn  = aws_iam_role.lambda_role.arn
+#   lambda_iam_role_name = aws_iam_role.lambda_role.name
+#   environment_variables = {
+#     FACEBOOK_ALBUM_ID = var.facebook_album_id
+#     SSM_NAME          = aws_ssm_parameter.facebook_token.name
+#   }
+# }
 
 resource "aws_lambda_layer_version" "node_canvas_layer" {
   filename         = "../../../layer.zip"
   source_code_hash = filebase64sha256("../../../layer.zip")
   layer_name       = "${var.app_name}-node-canvas"
 
-  compatible_runtimes = ["nodejs18.x"]
+  compatible_runtimes = ["nodejs16.x"]
 }
