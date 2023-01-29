@@ -21,7 +21,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "3.259.0",
     "axios": "1.2.6",
-    "canvas": "2.10.2",
+    "canvas": "2.9.3",
     "openai": "^3.1.0"
   },
   "devDependencies": {

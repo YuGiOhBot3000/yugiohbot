@@ -13,7 +13,7 @@ RUN yum -y update \
 # will be created and become working dir
 WORKDIR $OUT/nodejs
 
-RUN npm install canvas
+RUN npm install canvas@2.9.3
 
 # will be created and become working dir
 WORKDIR $OUT/lib

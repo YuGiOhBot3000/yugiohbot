@@ -9,5 +9,5 @@
     }
   ],
   "rangeStrategy": "bump",
-  "ignoreDeps": ["canvas"]
+  "ignoreDeps": ["canvas", "node-canvas"]
 }
