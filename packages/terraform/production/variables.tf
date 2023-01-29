@@ -8,6 +8,10 @@ variable "ld_preload" {
 
 variable "openai_api_key" {}
 
-variable "facebook_token" {}
+variable "twitter_consumer_key" {}
 
-variable "facebook_album_id" {}
+variable "twitter_consumer_secret" {}
+
+variable "twitter_access_token" {}
+
+variable "twitter_access_secret" {}

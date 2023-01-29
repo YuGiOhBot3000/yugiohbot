@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       node-version:
-        default: "18"
+        default: "16"
         required: false
         type: string
     secrets:
@@ -14,9 +14,13 @@ on:
         required: true
       openai_api_key:
         required: true
-      facebook_token:
+      twitter_consumer_key:
         required: true
-      facebook_album_id:
+      twitter_consumer_secret:
+        required: true
+      twitter_access_token:
+        required: true
+      twitter_access_secret:
         required: true
 
 jobs:
@@ -60,6 +64,8 @@ jobs:
           terraform init
           terraform apply \
             -var="openai_api_key=${{ secrets.openai_api_key }}" \
-            -var="facebook_token=${{ secrets.facebook_token }}" \
-            -var="facebook_album_id=${{ secrets.facebook_album_id }}" \
+            -var="twitter_consumer_key=${{ secrets.twitter_consumer_key }}" \
+            -var="twitter_consumer_secret=${{ secrets.twitter_consumer_secret }}" \
+            -var="twitter_access_token=${{ secrets.twitter_access_token }}" \
+            -var="twitter_access_secret=${{ secrets.twitter_access_secret }}" \
             -auto-approve
