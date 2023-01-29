@@ -47,7 +47,9 @@ describe("uploadToTwitter", () => {
       comment: "comment",
     });
 
-    expect(mockUploadMedia).toBeCalledWith(expect.any(Buffer));
+    expect(mockUploadMedia).toBeCalledWith(expect.any(Buffer), {
+      mimeType: "png",
+    });
     expect(mockTweet).not.toBeCalled();
     expect(mockReply).not.toBeCalled();
   });

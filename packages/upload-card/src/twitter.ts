@@ -28,7 +28,8 @@ export const uploadToTwitter = async ({
   });
 
   const mediaId = await client.readWrite.v1.uploadMedia(
-    await streamToBuffer(fileStream)
+    await streamToBuffer(fileStream),
+    { mimeType: "png" }
   );
 
   if (!mediaId) {
