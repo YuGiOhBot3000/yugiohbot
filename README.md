@@ -2,9 +2,9 @@
     <img src="docs/logo.png">
 </p>
 
-[![Follow on Facebook](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white#)](https://www.facebook.com/yugiohbot3000/)
+[![Follow on Twitter](https://img.shields.io/twitter/follow/yugiohbot3000?style=social)](https://www.twitter.com/yugiohbot3000/)
 
-The Yu-Gi-Oh Bot 3000 posts randomly generated Yu-Gi-Oh cards to Facebook every hour.
+The Yu-Gi-Oh Bot 3000 posts randomly generated Yu-Gi-Oh cards to Twitter every hour.
 
 ---
 
