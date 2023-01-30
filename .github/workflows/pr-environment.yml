@@ -49,7 +49,7 @@ jobs:
           docker rm -v $id
 
       - name: Apply terraform
-        working-directory: packages/terraform/production
+        working-directory: packages/terraform/development
         run: |
           terraform init
           terraform apply \
