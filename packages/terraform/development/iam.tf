@@ -21,31 +21,31 @@ data "aws_iam_policy_document" "assume_events_role" {
 }
 
 resource "aws_iam_role" "lambda_role" {
-  name = "lambda_role"
+  name = "${var.app_name}-lambda_role"
 
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
 resource "aws_iam_role" "card_randomiser_role" {
-  name = "card_randomiser_role"
+  name = "${var.app_name}-card_randomiser_role"
 
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
 resource "aws_iam_role" "card_generator_role" {
-  name = "card_generator_role"
+  name = "${var.app_name}-card_generator_role"
 
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
 resource "aws_iam_role" "upload_card_role" {
-  name = "upload_card_role"
+  name = "${var.app_name}-upload_card_role"
 
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
 resource "aws_iam_role" "invoke_sfn_role" {
-  name = "invoke_sfn_role"
+  name = "${var.app_name}-invoke_sfn_role"
 
   assume_role_policy = data.aws_iam_policy_document.assume_events_role.json
 }
