@@ -11,3 +11,6 @@ jobs:
   unit:
     needs: build
     uses: ./.github/workflows/unit-test.yml
+  deploy:
+    needs: build
+    uses: ./.github/workflows/pr-environment.yml

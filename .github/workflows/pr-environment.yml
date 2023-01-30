@@ -1,0 +1,57 @@
+name: Deploy PR Environment
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        default: "16"
+        required: false
+        type: string
+    secrets:
+      aws_access_key_id:
+        required: true
+      aws_secret_access_key:
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.aws_access_key_id }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.aws_secret_access_key }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: hashicorp/setup-terraform@v2
+
+      - name: Set up Node.JS
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: npm
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Download packages
+        uses: actions/download-artifact@v3
+        with:
+          name: packages
+          path: packages
+
+      - name: Build node-canvas layer
+        run: docker build -t canvas-libs .
+
+      - name: Copy layer out of container
+        run: |
+          id=$(docker create canvas-libs)
+          docker cp $id:/root/layers/layer.zip ./
+          docker rm -v $id
+
+      - name: Apply terraform
+        working-directory: packages/terraform/production
+        run: |
+          terraform init
+          terraform apply \
+            -var="app_name=yugiohbot-pr${{ github.event.pull_request.number }}" \
+            -auto-approve
