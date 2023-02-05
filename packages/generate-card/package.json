@@ -21,7 +21,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "3.264.0",
     "canvas": "^2.9.0",
-    "nanoid": "4.0.0"
+    "nanoid": "4.0.1"
   },
   "devDependencies": {
     "@babel/preset-env": "7.20.2",
