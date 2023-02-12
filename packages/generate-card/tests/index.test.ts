@@ -67,7 +67,7 @@ describe("Handler", () => {
     expect(input).toEqual({
       Bucket: "bucket",
       Key: key,
-      Body: expect.any(Buffer),
+      Body: expect.any(String),
       ContentEncoding: "base64",
       ContentType: "image/png",
     });

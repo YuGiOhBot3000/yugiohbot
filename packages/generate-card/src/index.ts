@@ -134,7 +134,7 @@ export const handler: Handler<Card> = async (event) => {
   const command = new PutObjectCommand({
     Bucket: process.env.S3_BUCKET,
     Key,
-    Body: canvas.toBuffer(),
+    Body: canvas.toDataURL(),
     ContentEncoding: "base64",
     ContentType: "image/png",
   });
