@@ -27,10 +27,10 @@ module "randomise_card_lambda" {
 
   app_name             = var.app_name
   function_name        = "randomise-card"
-  runtime              = "nodejs16.x"
+  runtime              = "nodejs18.x"
   memory_size          = 256
   timeout              = 30
-  layers               = [aws_lambda_layer_version.node_canvas_layer.arn]
+  layers               = [var.layer_arn]
   lambda_iam_role_arn  = aws_iam_role.card_randomiser_role.arn
   lambda_iam_role_name = aws_iam_role.card_randomiser_role.name
   environment_variables = {
@@ -45,10 +45,10 @@ module "generate_card_lambda" {
 
   app_name             = var.app_name
   function_name        = "generate-card"
-  runtime              = "nodejs16.x"
+  runtime              = "nodejs18.x"
   memory_size          = 512
   timeout              = 10
-  layers               = [aws_lambda_layer_version.node_canvas_layer.arn]
+  layers               = [var.layer_arn]
   lambda_iam_role_arn  = aws_iam_role.card_generator_role.arn
   lambda_iam_role_name = aws_iam_role.card_generator_role.name
   environment_variables = {
@@ -90,11 +90,3 @@ module "upload_card_lambda" {
 #     SSM_NAME          = aws_ssm_parameter.facebook_token.name
 #   }
 # }
-
-resource "aws_lambda_layer_version" "node_canvas_layer" {
-  filename         = "../../../layer.zip"
-  source_code_hash = filebase64sha256("../../../layer.zip")
-  layer_name       = "${var.app_name}-node-canvas"
-
-  compatible_runtimes = ["nodejs16.x"]
-}
