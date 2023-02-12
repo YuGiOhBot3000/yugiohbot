@@ -1,5 +1,5 @@
 variable "app_name" {
-  default = "yugiohbot"
+  default = "yugiohbot-dev"
 }
 
 variable "ld_preload" {

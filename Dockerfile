@@ -2,7 +2,7 @@ FROM amazonlinux:latest
 
 ARG LIBS=/usr/lib64
 ARG OUT=/root
-ARG NODE_VERSION=16
+ARG NODE_VERSION=18
 
 # set up container
 RUN yum -y update \
@@ -13,7 +13,7 @@ RUN yum -y update \
 # will be created and become working dir
 WORKDIR $OUT/nodejs
 
-RUN npm install canvas@2.9.0
+RUN npm install canvas
 
 # will be created and become working dir
 WORKDIR $OUT/lib

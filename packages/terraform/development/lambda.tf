@@ -24,7 +24,7 @@ module "randomise_card_lambda" {
 
   app_name             = var.app_name
   function_name        = "randomise-card"
-  runtime              = "nodejs16.x"
+  runtime              = "nodejs18.x"
   memory_size          = 256
   timeout              = 30
   layers               = [aws_lambda_layer_version.node_canvas_layer.arn]
@@ -41,7 +41,7 @@ module "generate_card_lambda" {
 
   app_name             = var.app_name
   function_name        = "generate-card"
-  runtime              = "nodejs16.x"
+  runtime              = "nodejs18.x"
   memory_size          = 512
   timeout              = 10
   layers               = [aws_lambda_layer_version.node_canvas_layer.arn]
@@ -88,5 +88,5 @@ resource "aws_lambda_layer_version" "node_canvas_layer" {
   source_code_hash = filebase64sha256("../../../layer.zip")
   layer_name       = "${var.app_name}-node-canvas"
 
-  compatible_runtimes = ["nodejs16.x"]
+  compatible_runtimes = ["nodejs18.x"]
 }
