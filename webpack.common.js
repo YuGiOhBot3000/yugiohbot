@@ -12,6 +12,7 @@ module.exports = {
   optimization: {
     usedExports: true,
   },
+  externals: ["@aws-sdk/*", "canvas"],
   devtool: "source-map",
   module: {
     rules: [
