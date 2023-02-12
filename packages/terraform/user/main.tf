@@ -45,7 +45,7 @@ resource "aws_iam_user_policy" "s3backend" {
           "s3:DeleteObject"
         ]
         Effect   = "Allow"
-        Resource = "${aws_s3_bucket.backend.arn}/terraform.tfstate"
+        Resource = "${aws_s3_bucket.backend.arn}/*.tfstate"
       },
     ]
   })
