@@ -82,3 +82,8 @@ module "upload_card_lambda" {
 #     SSM_NAME          = aws_ssm_parameter.facebook_token.name
 #   }
 # }
+
+data "aws_lambda_layer_version" "node_canvas" {
+  layer_name         = "canvas-nodejs"
+  compatible_runtime = "nodejs18.x"
+}
