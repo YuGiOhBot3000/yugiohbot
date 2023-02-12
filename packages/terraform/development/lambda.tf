@@ -27,7 +27,7 @@ module "randomise_card_lambda" {
   runtime              = "nodejs18.x"
   memory_size          = 256
   timeout              = 30
-  layers               = [var.layer_arn]
+  layers               = [data.aws_lambda_layer_version.node_canvas.arn]
   lambda_iam_role_arn  = aws_iam_role.card_randomiser_role.arn
   lambda_iam_role_name = aws_iam_role.card_randomiser_role.name
   environment_variables = {
@@ -44,7 +44,7 @@ module "generate_card_lambda" {
   runtime              = "nodejs18.x"
   memory_size          = 512
   timeout              = 10
-  layers               = [var.layer_arn]
+  layers               = [data.aws_lambda_layer_version.node_canvas.arn]
   lambda_iam_role_arn  = aws_iam_role.card_generator_role.arn
   lambda_iam_role_name = aws_iam_role.card_generator_role.name
   environment_variables = {
