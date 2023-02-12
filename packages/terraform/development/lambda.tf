@@ -27,7 +27,7 @@ module "randomise_card_lambda" {
   runtime              = "nodejs18.x"
   memory_size          = 256
   timeout              = 30
-  layers               = [aws_lambda_layer_version.node_canvas_layer.arn]
+  layers               = ["arn:aws:serverlessrepo:us-east-1:990551184979:applications/lambda-layer-canvas-nodejs"]
   lambda_iam_role_arn  = aws_iam_role.card_randomiser_role.arn
   lambda_iam_role_name = aws_iam_role.card_randomiser_role.name
   environment_variables = {
@@ -44,7 +44,7 @@ module "generate_card_lambda" {
   runtime              = "nodejs18.x"
   memory_size          = 512
   timeout              = 10
-  layers               = [aws_lambda_layer_version.node_canvas_layer.arn]
+  layers               = ["arn:aws:serverlessrepo:us-east-1:990551184979:applications/lambda-layer-canvas-nodejs"]
   lambda_iam_role_arn  = aws_iam_role.card_generator_role.arn
   lambda_iam_role_name = aws_iam_role.card_generator_role.name
   environment_variables = {
@@ -83,10 +83,10 @@ module "upload_card_lambda" {
 #   }
 # }
 
-resource "aws_lambda_layer_version" "node_canvas_layer" {
-  filename         = "../../../layer.zip"
-  source_code_hash = filebase64sha256("../../../layer.zip")
-  layer_name       = "${var.app_name}-node-canvas"
+# resource "aws_lambda_layer_version" "node_canvas_layer" {
+#   filename         = "../../../layer.zip"
+#   source_code_hash = filebase64sha256("../../../layer.zip")
+#   layer_name       = "${var.app_name}-node-canvas"
 
-  compatible_runtimes = ["nodejs18.x"]
-}
+#   compatible_runtimes = ["nodejs18.x"]
+# }
