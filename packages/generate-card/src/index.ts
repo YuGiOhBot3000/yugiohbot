@@ -10,7 +10,6 @@ import { applyCopyright, applyId, applySerial } from "./cardInfo";
 import { applyCardName } from "./cardName";
 import { CARD_WIDTH, CARD_HEIGHT } from "./constants";
 import { applyEffect } from "./effect";
-import { registerFonts } from "./fonts";
 import { applyImage } from "./image";
 import { applyLevel } from "./level";
 import { applyLink, applyLinkMarkers } from "./link";
@@ -19,7 +18,7 @@ import { applyAtk, applyDef } from "./stats";
 import { applyType } from "./type";
 
 export const handler: Handler<Card> = async (event) => {
-  registerFonts();
+  // registerFonts();
 
   const canvas = createCanvas(CARD_WIDTH, CARD_HEIGHT);
   const context = canvas.getContext("2d");
