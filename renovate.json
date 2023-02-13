@@ -8,6 +8,5 @@
       "automergeStrategy": "squash"
     }
   ],
-  "rangeStrategy": "bump",
-  "ignoreDeps": ["canvas", "node-canvas"]
+  "rangeStrategy": "bump"
 }
