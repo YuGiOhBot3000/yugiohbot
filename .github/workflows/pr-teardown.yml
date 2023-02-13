@@ -17,7 +17,7 @@ jobs:
       - uses: hashicorp/setup-terraform@v2
 
       - name: Destroy PR environment
-        working-directory: packages/terraform/production
+        working-directory: packages/terraform/development
         run: |
           terraform init \
             -backend-config="bucket=yugiohbot-tf-state" \

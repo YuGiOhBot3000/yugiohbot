@@ -1,5 +1,7 @@
 resource "aws_s3_bucket" "card_bucket" {
   bucket = "${var.app_name}-cards"
+
+  force_destroy = true
 }
 
 resource "aws_s3_bucket_acl" "card_bucket_acl" {
@@ -23,6 +25,8 @@ resource "aws_s3_bucket_lifecycle_configuration" "card_bucket_lifecycle" {
 
 resource "aws_s3_bucket" "card_image_bucket" {
   bucket = "${var.app_name}-images"
+
+  force_destroy = true
 }
 
 resource "aws_s3_bucket_acl" "card_image_bucket_acl" {
