@@ -3,11 +3,11 @@ name: PR Checks
 on: pull_request
 
 jobs:
-  build:
-    uses: ./.github/workflows/build.yml
-  lint:
-    needs: build
-    uses: ./.github/workflows/lint.yml
-  unit:
-    needs: build
-    uses: ./.github/workflows/unit-test.yml
+  checks:
+    uses: ./.github/workflows/checks.yml
+  deploy:
+    needs: checks
+    uses: ./.github/workflows/pr-environment.yml
+    secrets:
+      aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

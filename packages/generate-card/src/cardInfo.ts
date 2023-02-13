@@ -83,7 +83,7 @@ export const applyId = ({ context, layout, pendulum, value }: Props) => {
   }
 
   context.fillStyle = color;
-  context.textAlign = style.textAlign as CanvasTextAlign;
+  context.textAlign = style.textAlign;
   context.font = [style.fontSize + "px", style.fontFamily].join(" ");
   context.fillText(value, style.left, style.top, style.width);
 };

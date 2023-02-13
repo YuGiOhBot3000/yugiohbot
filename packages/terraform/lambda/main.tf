@@ -1,5 +1,5 @@
 resource "aws_iam_policy" "lambda_logging" {
-  name        = "${var.function_name}-lambda-logging"
+  name        = "${var.app_name}-${var.function_name}-lambda-logging"
   path        = "/"
   description = "IAM policy for logging from a lambda"
 

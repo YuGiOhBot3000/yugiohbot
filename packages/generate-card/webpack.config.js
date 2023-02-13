@@ -13,7 +13,10 @@ module.exports = merge(common, {
   },
   plugins: [
     new CopyPlugin({
-      patterns: [{ from: "assets", to: "./assets" }],
+      patterns: [
+        { from: "assets", to: "./assets" },
+        { from: "fonts", to: "./fonts" },
+      ],
     }),
   ],
 });

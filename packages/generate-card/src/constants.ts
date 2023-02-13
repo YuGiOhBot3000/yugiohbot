@@ -1,3 +1,5 @@
+import { CanvasTextAlign } from "canvas";
+
 export const CARD_WIDTH = 420;
 
 export const CARD_HEIGHT = 610;
@@ -185,7 +187,24 @@ export const SERIAL_STYLES = {
   width: 150,
 };
 
-export const ID_STYLES = {
+type Style = {
+  textAlign: CanvasTextAlign;
+  left: number;
+  top: number;
+  width: number;
+};
+
+type IdStyles = {
+  [k in "regular" | "link"]: Style;
+} & {
+  shared: {
+    fontFamily: string;
+    fontSize: number;
+  };
+  pendulum: Style & { color: string };
+};
+
+export const ID_STYLES: IdStyles = {
   shared: {
     fontFamily: "Spectral",
     fontSize: 12,

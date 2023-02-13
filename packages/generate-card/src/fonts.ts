@@ -1,28 +1,28 @@
 import { registerFont } from "canvas";
 
 export const registerFonts = () => {
-  registerFont("assets/fonts/MatrixRegularSmallCaps.ttf", {
+  registerFont("fonts/MatrixRegularSmallCaps.ttf", {
     family: "Matrix Regular Small Caps",
   });
-  registerFont("assets/fonts/Heebo.ttf", { family: "Heebo" });
-  registerFont("assets/fonts/SpectralSC-Regular.ttf", {
+  registerFont("fonts/Heebo.ttf", { family: "Heebo" });
+  registerFont("fonts/SpectralSC-Regular.ttf", {
     family: "Spectral SC",
     weight: "regular",
   });
-  registerFont("assets/fonts/SpectralSC-ExtraBold.ttf", {
+  registerFont("fonts/SpectralSC-ExtraBold.ttf", {
     family: "Spectral SC",
     weight: "800",
   });
-  registerFont("assets/fonts/Amiri-Italic.ttf", {
+  registerFont("fonts/Amiri-Italic.ttf", {
     family: "Amiri italic",
   });
-  registerFont("assets/fonts/Spectral-Regular.ttf", {
+  registerFont("fonts/Spectral-Regular.ttf", {
     family: "Spectral",
   });
-  registerFont("assets/fonts/CrimsonPro.ttf", {
+  registerFont("fonts/CrimsonPro.ttf", {
     family: "Crimson Text",
   });
-  registerFont("assets/fonts/IDroid.otf", {
+  registerFont("fonts/IDroid.otf", {
     family: "IDroid",
   });
 };

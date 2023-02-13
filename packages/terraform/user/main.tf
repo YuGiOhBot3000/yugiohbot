@@ -45,7 +45,7 @@ resource "aws_iam_user_policy" "s3backend" {
           "s3:DeleteObject"
         ]
         Effect   = "Allow"
-        Resource = "${aws_s3_bucket.backend.arn}/terraform.tfstate"
+        Resource = "${aws_s3_bucket.backend.arn}/*.tfstate"
       },
     ]
   })
@@ -318,6 +318,26 @@ resource "aws_iam_group_policy" "events" {
         ]
         Effect   = "Allow"
         Resource = "arn:aws:events:*:*:*"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_group_policy" "layers" {
+  name  = "${var.app_name}-ReadLayers"
+  group = aws_iam_group.deployer.name
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid = "ReadLayers"
+        Action = [
+          "lambda:ListLayer*",
+          "lambda:GetLayer*",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
       }
     ]
   })

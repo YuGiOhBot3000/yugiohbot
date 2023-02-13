@@ -31,11 +31,6 @@ jobs:
           name: packages
           path: packages
 
-      - name: Create fake zip
-        run: |
-          touch file1
-          zip layer.zip file1
-
       - name: Destroy terraform
         working-directory: packages/terraform/production
         run: |
