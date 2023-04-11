@@ -26,8 +26,8 @@
     "openai": "3.2.1"
   },
   "devDependencies": {
-    "@babel/preset-env": "7.20.2",
-    "@babel/preset-typescript": "7.21.0",
+    "@babel/preset-env": "7.21.4",
+    "@babel/preset-typescript": "7.21.4",
     "@types/jest": "29.5.0",
     "@types/natural": "5.1.2",
     "@types/node": "18.15.11",
