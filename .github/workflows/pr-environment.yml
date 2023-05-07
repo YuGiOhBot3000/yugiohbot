@@ -43,7 +43,7 @@ jobs:
         working-directory: packages/terraform/development
         run: |
           terraform init \
-            -backend-config="key=pr-${{ github.event.pull_request.number }}.tfstate" \
+            -backend-config="key=pr-${{ github.event.pull_request.number }}.tfstate"
           terraform apply \
             -var="app_name=yugiohbot-pr${{ github.event.pull_request.number }}" \
             -auto-approve
