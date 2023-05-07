@@ -3,5 +3,8 @@ provider "aws" {
 }
 
 terraform {
-  backend "s3" {}
+  backend "s3" {
+    bucket = "yugiohbot-tf-state"
+    region = "eu-central-1"
+  }
 }
