@@ -28,6 +28,6 @@
   },
   "homepage": "https://github.com/YuGiOhBot3000/yugiohbot#readme",
   "devDependencies": {
-    "@tsconfig/node18": "^2.0.0"
+    "@tsconfig/node18": "^2.0.1"
   }
 }
