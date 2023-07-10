@@ -28,7 +28,7 @@
     "@babel/preset-env": "7.22.7",
     "@babel/preset-typescript": "7.22.5",
     "@types/aws-lambda": "8.10.119",
-    "@types/jest": "29.5.2",
+    "@types/jest": "29.5.3",
     "@types/node": "18.16.19",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
