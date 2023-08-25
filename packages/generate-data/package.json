@@ -30,7 +30,7 @@
     "@babel/preset-typescript": "7.22.11",
     "@types/jest": "29.5.4",
     "@types/natural": "5.1.2",
-    "@types/node": "18.17.9",
+    "@types/node": "18.17.11",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
     "eslint": "8.47.0",
