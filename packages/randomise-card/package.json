@@ -19,7 +19,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "3.438.0",
+    "@aws-sdk/client-s3": "3.537.0",
     "axios": "1.6.8",
     "canvas": "^2.11.2",
     "openai": "^3.3.0"
