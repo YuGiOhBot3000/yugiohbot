@@ -42,7 +42,7 @@
     "node-loader": "2.0.0",
     "ts-loader": "9.5.1",
     "typescript": "5.4.2",
-    "webpack": "5.89.0",
+    "webpack": "5.90.3",
     "webpack-cli": "5.1.4",
     "webpack-merge": "5.10.0"
   }
