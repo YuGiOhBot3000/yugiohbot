@@ -41,6 +41,6 @@
   "homepage": "https://github.com/YuGiOhBot3000/yugiohbot#readme",
   "dependencies": {
     "@aws-sdk/client-ssm": "3.535.0",
-    "axios": "1.6.8"
+    "axios": "1.7.4"
   }
 }
