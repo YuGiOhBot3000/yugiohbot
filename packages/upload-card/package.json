@@ -22,7 +22,7 @@
     "@aws-sdk/client-s3": "3.682.0",
     "axios": "1.7.7",
     "form-data": "4.0.1",
-    "twitter-api-v2": "1.16.1"
+    "twitter-api-v2": "1.18.1"
   },
   "devDependencies": {
     "@babel/preset-env": "7.26.0",
