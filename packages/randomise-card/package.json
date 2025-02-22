@@ -22,7 +22,7 @@
     "@aws-sdk/client-s3": "3.726.1",
     "axios": "1.7.9",
     "canvas": "^2.11.2",
-    "openai": "^3.3.0"
+    "openai": "^4.85.4"
   },
   "devDependencies": {
     "@babel/preset-env": "7.26.0",
