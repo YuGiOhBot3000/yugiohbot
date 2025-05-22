@@ -24,7 +24,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "openai": "3.3.0"
+    "openai": "4.103.0"
   },
   "devDependencies": {
     "@babel/preset-env": "7.26.0",
