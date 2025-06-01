@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "3.821.0",
-    "axios": "1.8.2",
+    "axios": "1.9.0",
     "canvas": "^2.11.2",
     "openai": "^3.3.0"
   },
