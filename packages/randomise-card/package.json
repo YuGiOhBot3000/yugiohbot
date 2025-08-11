@@ -27,7 +27,7 @@
   "devDependencies": {
     "@babel/preset-env": "7.27.2",
     "@babel/preset-typescript": "7.27.1",
-    "@types/aws-lambda": "8.10.149",
+    "@types/aws-lambda": "8.10.152",
     "@types/jest": "29.5.14",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
