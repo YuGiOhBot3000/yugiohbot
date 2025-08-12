@@ -42,7 +42,7 @@
     "jest": "29.7.0",
     "ts-loader": "9.5.2",
     "tsconfig-paths-webpack-plugin": "4.2.0",
-    "typescript": "5.8.3",
+    "typescript": "5.9.2",
     "webpack": "5.99.9",
     "webpack-cli": "5.1.4",
     "webpack-merge": "5.10.0"
