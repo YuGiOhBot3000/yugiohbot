@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "3.919.0",
-    "axios": "1.12.2",
+    "axios": "1.13.1",
     "form-data": "4.0.4",
     "twitter-api-v2": "1.27.0"
   },
