@@ -19,7 +19,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "3.919.0",
+    "@aws-sdk/client-s3": "3.937.0",
     "axios": "1.13.2",
     "form-data": "4.0.5",
     "twitter-api-v2": "1.27.0"
